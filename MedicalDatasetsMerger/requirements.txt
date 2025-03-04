@@ -1,0 +1,6 @@
+openpyxl==3.0.10
+pandas==1.2.3
+PyYAML==6.0
+rdkit_pypi==2022.9.5
+tqdm==4.64.1
+xlrd==2.0.1

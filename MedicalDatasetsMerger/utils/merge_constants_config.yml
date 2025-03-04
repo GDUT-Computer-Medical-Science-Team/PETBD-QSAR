@@ -1,0 +1,315 @@
+# 用于整合的目标器官，保证整合文件中首先包含以下的器官名及数据
+# 列表格式
+target_organ_names:
+  - "blood"
+  - "liver"
+  - "kidney"
+  - "lung"
+  - "heart"
+  - "muscle"
+  - "spleen"
+  - "bone"
+  - "pancreas"
+  - "stomach"
+  - "intestine"
+  - "small intestine"
+  - "fat"
+  - "skin"
+  - "large intestine"
+  - "uterus"
+  - "bladder"
+  - "adrenal"
+  - "testis"
+  - "urine"
+  - "thymus"
+  - "ovary"
+  - "thyroid"
+  - "total brain"
+  - "cerebellum"
+  - "cortex"
+  - "striatum"
+  - "hippocampus"
+  - "hypothalamus"
+  - "thalamus"
+  - "cerebrum"
+# 冗余器官名的替换映射表
+# 1. 替换原始数据集中错误的器官名
+# 2. 合并同一器官的不同叫法，例如文献1中的名字为kidney而文献2中为kidneys
+# 字典格式：{"需要被替换的器官名": "替换后的器官名"}
+# JSON表示为：deprecated_organ_names: {"adrenalgland": "adrenal"}
+deprecated_organ_names:
+  "adrenal gland": "adrenal"
+  "adrenals": "adrenal"
+  "adrenal glad": "adrenal"
+  "urinary bladder": "bladder"
+  "plasma": "blood"
+  " blood": "blood"
+  "blood ": "blood"
+  "femur": "bone"
+  "bones": "bone"
+  "bone ": "bone"
+  "femur ": "bone"
+  "femurs": "bone"
+  "cerebellurn": "cerebellum"
+  "cerebellun": "cerebellum"
+  "cerebellam": "cerebellum"
+  "cerebrum(right)": "cerebrum"
+  "cerebrum(left)": "cerebrum"
+  "cerebeum": "cerebrum"
+  "frontal cortex": "cortex"
+  "cerebral cortex": "cortex"
+  "occipital cortex": "cortex"
+  "cerebralcoex": "cortex"
+  "frontal ccortex": "cortex"
+  "cortex(left)": "cortex"
+  "cortex(right)": "cortex"
+  "cerebellar cortex": "cortex"
+  "caudal cortex": "cortex"
+  "parictal cortex": "cortex"
+  "brown fat": "fat"
+  "white fat": "fat"
+  "wat": "fat"
+  "fat subcutaneous": "fat"
+  "fat,mesentrial": "fat"
+  "fat,subcutan": "fat"
+  "hear": "heart"
+  "heart ": "heart"
+  "hoart": "heart"
+  "duodenum": "intestine"
+  "gut": "intestine"
+  "gi tract": "intestine"
+  "git": "intestine"
+  "intestinal": "intestine"
+  "intestines": "intestine"
+  "kidneys": "kidney"
+  "kidncy": "kidney"
+  "ktdney": "kidney"
+  "kidners": "kidney"
+  "kidney ": "kidney"
+  "kindey": "kidney"
+  "colon": "large intestine"
+  "large": "large intestine"
+  "l.intest": "large intestine"
+  "largeintestine": "large intestine"
+  "l-intestine": "large intestine"
+  "iiver": "liver"
+  "liver ": "liver"
+  "lver": "liver"
+  "lungs": "lung"
+  "lurg": "lung"
+  "lung ": "lung"
+  "muscles": "muscle"
+  "musclo": "muscle"
+  "muscle ": "muscle"
+  "ovaries": "ovary"
+  "ovares": "ovary"
+  "ovar": "ovary"
+  "pancrease": "pancreas"
+  "pancreas ": "pancreas"
+  "skin ": "skin"
+  "caecum": "small intestine"
+  "small": "small intestine"
+  "small intestine ": "small intestine"
+  "small intestines": "small intestine"
+  "smallintestine": "small intestine"
+  "small intestme": "small intestine"
+  "small intertine": "small intestine"
+  "small interstine": "small intestine"
+  "smal lintestine": "small intestine"
+  "si": "small intestine"
+  "s.intest": "small intestine"
+  "s. intestine": "small intestine"
+  "s-intestine": "small intestine"
+  "smal intestine": "small intestine"
+  "splee": "spleen"
+  "spleen ": "spleen"
+  "stomachb": "stomach"
+  "stomach†": "stomach"
+  "striaturn": "striatum"
+  "corpusstriatum": "striatum"
+  "striatam": "striatum"
+  "striatum    ": "striatum"
+  "stratum": "striatum"
+  "stiatum": "striatum"
+  "testes": "testis"
+  "testicle": "testis"
+  "testes **": "testis"
+  "thyroid gland": "thyroid"
+  "thyroidc": "thyroid"
+  "thyrold": "thyroid"
+  "brain": "total brain"
+  "braint": "total brain"
+  "brain ": "total brain"
+  "whole brain": "total brain"
+  "bran": "total brain"
+  " brain": "total brain"
+  "bladder/urine": "urine"
+  "urineb": "urine"
+
+# 无用的器官名，处理过程中遇到即抛弃
+# 列表格式: ["c6tumor", caecum"]
+denied_organ_names:
+  - "tumor"
+  - "salivary gland"
+  - "gallbladder"
+  - "carcass"
+  - "prostate"
+  - "feces"
+  - "pituitary"
+  - "eye"
+  - "brain stem"
+  - "tumour"
+  - "marrow"
+  - "gonad"
+  - "medulla"
+  - "trachea"
+  - " "
+  - "remainder"
+  - "pons"
+  - "tail"
+  - "bile"
+  - "esophagus"
+  - "spine"
+  - "superior colliculus"
+  - "pans"
+  - "coecum"
+  - "amygdala"
+  - "olfactory tubercles"
+  - "olfactory bulb"
+  - "rest of brain"
+  - "bowel"
+  - "xenograft control"
+  - "uterus/muscle"
+  - "uterus/blood"
+  - "tibia"
+  - "aorta"
+  - "caudate"
+  - "bone marrow"
+  - "cartilage"
+  - "erythrocyte"
+  - "xenograft tk+"
+  - "inferior colliculus"
+  - "harderian gland"
+  - "hard."
+  - "submandibular"
+  - "harder gland"
+  - "cervical cord"
+  - "stomachc"
+  - "spleen pancreas"
+  - "hiwocampus"
+  - "intensity"
+  - "endometriotic"
+  - "eyeball"
+  - "faeces"
+  - "diencephalon"
+  - "abdominal aorta"
+  - "abdominalaorta"
+  - "ureter"
+  - "adrenay"
+  - "adrenays"
+  - "fece"
+  - "cranium"
+  - "bat"
+  - "thigh bone"
+  - "thalamas"
+  - "llmg"
+  - "oesophagus"
+  - "lean"
+  - "c6 tumor"
+  - "myocardium"
+  - "li"
+  - "skull"
+  - "modulla"
+  - "midbrain"
+  - "medalla"
+  - "peritoneum"
+  - "bow"
+  - "septum"
+  - "salivary glands"
+  - "ri"
+  - "restbrain"
+  - "region"
+  - "prostate "
+  - "pons-medulla"
+  - "pocs"
+  - "brain/blooda"
+  - "pituitary gland"
+  - "brainstem"
+  - "pineal bod"
+# 指定初始化数据表的时间点，用于保证在此列的时间点数据能按时间升序排列，不在此列的时间点数据会添加到数据表最末端
+time_intervals:
+  - 0.25
+  - 0.5
+  - 1
+  - 2
+  - 5
+  - 7
+  - 10
+  - 12
+  - 13
+  - 15
+  - 20
+  - 30
+  - 40
+  - 45
+  - 55
+  - 60
+  - 70
+  - 75
+  - 80
+  - 90
+  - 100
+  - 105
+  - 110
+  - 120
+  - 125
+  - 150
+  - 180
+  - 220
+  - 240
+  - 300
+  - 330
+  - 360
+  - 440
+  - 480
+  - 550
+  - 720
+  - 1080
+  - 1440
+  - 2120
+  - 2880
+
+# 原始数据集中对于时间间隔一栏名称的叫法不一（通常位于表格左上角）
+# 影响数据的收集，需要记录以进行函数处理
+denied_interval_markers:
+  - ''
+  - 'time'
+  - 'organ'
+  - 'time(min)'
+  - 'tissue'
+  - 'organs'
+  - 'tissues'
+  - '% id/organ'
+  - '%id/organ'
+  - 'organ distribution'
+  - 'organdistribution'
+  - 'regin'
+  - 'organ（body）'
+  - 'organ or tissue'
+  - 'organ/1h'
+  - 'Compound No.'
+  - 'compoundno.'
+
+# 数据中可能存在OCR识别错误而产生的字符错误，修正这些字符
+OCR_error_text:
+  'mim': 'min'
+  'minb': 'min'
+  'minc': 'min'
+  'miu': 'min'
+  'mn': 'min'
+  'meanm': 'mean'
+  'meann': 'mean'
+  'mmean': 'mean'
+  'sem': 'sd'
+  'se': 'sd'
+  '*': ''
