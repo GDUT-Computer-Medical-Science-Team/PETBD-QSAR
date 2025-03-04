@@ -70,7 +70,7 @@ pip install mordred
 ## 💻 使用说明
 
 ### 数据准备
-1. 将数据文件 (pet.xlsx) 放在 data/ 目录下
+1. 将数据文件 (pet.xlsx/logbb.csv) 放在 data/ 目录下
 2. 数据文件必须包含以下列：
    - SMILES: 分子的SMILES表示
    - cbrain: 脑部浓度值
@@ -94,8 +94,7 @@ python MachineLearningModels/CbrainModel/train.py
 
 ### 分子指纹
 - 使用 Pybel 生成分子指纹
-- 1024位二进制指纹
-- 支持多种指纹类型
+
 
 ### Mordred描述符
 - 2D分子描述符
