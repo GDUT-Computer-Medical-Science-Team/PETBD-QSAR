@@ -17,7 +17,6 @@
 - 🧬 **多器官分布数据**: 包含14个典型器官在静脉注射后60分钟的药物浓度数据
 - 🧠 **BBB渗透性预测**: 预测化合物的血脑屏障渗透系数(logBB)和脑部药物浓度
 - 🔄 **数据整合工具**: 用于整合公开文献中的PET示踪剂研究数据
-- ✅ **体内验证**: 使用6个示踪剂的小鼠实验数据进行独立验证
 
 ## 🛠️ 环境配置
 
@@ -27,7 +26,7 @@ conda create -n MDM python=3.8
 conda activate MDM
 
 # 安装基础依赖
-conda install numpy pandas scikit-learn rdkit
+conda install numpy pandas scikit-learn pybel
 
 # 安装机器学习框架
 pip install optuna xgboost lightgbm catboost
@@ -36,7 +35,6 @@ pip install optuna xgboost lightgbm catboost
 pip install openpyxl==3.0.10
 pip install "pandas<2.0.0"
 pip install PyYAML==6.0
-pip install rdkit_pypi==2022.9.5
 pip install tqdm==4.64.1
 pip install xlrd==2.0.1
 pip install mordred
@@ -48,7 +46,7 @@ pip install mordred
 ├── MachineLearningModels/    # 机器学习模型
 │   ├── logBBModel/          # logBB预测模型
 │   ├── CbrainModel/         # 脑部浓度预测模型
-│   └── VivoValidation/      # 体内验证
+│   └── utils/               # 工具类
 ├── MedicalDatasetsMerger/   # PET数据集整合工具
 ├── utils/                   # 工具类
 ├── preprocess/              # 数据预处理
@@ -87,25 +85,17 @@ python MachineLearningModels/logBBModel/train.py
 python MachineLearningModels/CbrainModel/train.py
 ```
 
-### 模型验证
-```bash
-# 体内验证
-cd MachineLearningModels/VivoValidation
-python Vivo_XGB_FP.py      # XGBoost模型(分子指纹)
-python vivo_rf_Mordred.py  # 随机森林模型(Mordred描述符)
-```
-
 ### 结果输出
-- 预测结果保存在 result/vivoresult/ 目录下
+- 预测结果保存在 result/ 目录下
 - 日志文件保存在 data/log/ 目录下
 - 模型文件保存在 model/ 目录下
 
 ## 🔍 特征说明
 
 ### 分子指纹
-- Morgan指纹 (ECFP4)
+- 使用 Pybel 生成分子指纹
 - 1024位二进制指纹
-- 半径为2的圆形指纹
+- 支持多种指纹类型
 
 ### Mordred描述符
 - 2D分子描述符
@@ -146,20 +136,3 @@ python vivo_rf_Mordred.py  # 随机森林模型(Mordred描述符)
    - 使用数据生成器
 
 ## 📧 联系方式
-
-如有任何问题，请联系:
-- zhou_wei@gdut.edu.cn (W.Z.)
-- zhiyundu@gdut.edu.cn (Z.D.)
-
-## 📝 引用
-
-如果您使用了本项目的代码或数据集，请引用我们的论文：
-
-```bibtex
-@article{su2024qsar,
-  title={QSAR Prediction of BBB Permeability Based on Machine Learning upon a Novel Dataset of PET Tracers},
-  author={Su, Qing and Ye, Zhilong and Han, Chunyan and Xiao, Ganyao and Chen, Jiazhi and Chen, Haiyan and Huang, Shun and Wang, Lu and Zhou, Wei and Du, Zhiyun},
-  journal={},
-  year={2024}
-}
-```
