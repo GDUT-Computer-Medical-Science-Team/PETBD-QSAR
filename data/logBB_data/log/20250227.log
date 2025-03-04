@@ -1,0 +1,602 @@
+[INFO][2025-02-27 02:22:47,206] MLP_FP.py:139	--	===============启动 MLP 特征筛选及训练工作===============
+[INFO][2025-02-27 02:22:47,208] MLP_FP.py:150	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 02:22:59,072] LightGBM_FP.py:325	--	===============启动 LightGBM 特征筛选及训练工作===============
+[INFO][2025-02-27 02:22:59,077] LightGBM_FP.py:336	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 02:23:04,296] XG_FP2.py:204	--	===============启动 XGBoost 特征筛选及训练工作===============
+[INFO][2025-02-27 02:23:04,299] XG_FP2.py:215	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 02:23:13,665] MLP_FP.py:154	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 02:23:13,715] MLP_FP.py:160	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 02:23:13,715] MLP_FP.py:161	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 02:23:13,764] MLP_FP.py:180	--	特征索引文件存在，加载已选择的特征
+[INFO][2025-02-27 02:23:13,765] MLP_FP.py:190	--	使用特征索引文件，选择的特征数量: 50
+[INFO][2025-02-27 02:23:13,765] MLP_FP.py:191	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 02:23:13,766] MLP_FP.py:216	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 02:23:13,767] MLP_FP.py:220	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 02:23:20,729] MLP_FP.py:260	--	Fold 1 - MSE: 0.1372, RMSE: 0.3704, R2: 0.6488, MAE: 0.2963, MAPE: 1.51%, Adjusted R2: -3.7414
+[INFO][2025-02-27 02:23:24,237] LightGBM_FP.py:340	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 02:23:24,275] LightGBM_FP.py:345	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 02:23:24,276] LightGBM_FP.py:346	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 02:23:24,299] LightGBM_FP.py:347	--	部分生成的指纹数据：
+                                              SMILES  ...  PubchemFP880
+0  [2H]C([2H])(F)C([2H])([2H])Oc1ccccc1OC(c1ccccc...  ...             0
+1  [2H]C([2H])(F)Oc1ccc(-n2c(CCN3C(=O)c4cccc(OC(C...  ...             0
+2  C#C[C@@]1(O)C2C[C@H](OC)C3c4ccc(O)cc4CCC3C2C[C...  ...             0
+3        C#C[C@@]1(O)C2CCC3c4ccc(O)cc4CCC3C2C[C@H]1F  ...             0
+4  C#C[C@]1(O)[C@@H](F)CC2C3CCc4cc(O)ccc4C3[C@@H]...  ...             0
+
+[5 rows x 883 columns]
+[INFO][2025-02-27 02:23:24,354] LightGBM_FP.py:390	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 02:23:24,354] LightGBM_FP.py:392	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 02:23:24,355] LightGBM_FP.py:400	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 02:23:24,355] LightGBM_FP.py:401	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 02:23:24,356] LightGBM_FP.py:405	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 02:23:24,356] LightGBM_FP.py:408	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 02:23:27,879] MLP_FP.py:260	--	Fold 2 - MSE: 0.2653, RMSE: 0.5151, R2: 0.0070, MAE: 0.3845, MAPE: 4.17%, Adjusted R2: -12.4054
+[INFO][2025-02-27 02:23:28,347] XG_FP2.py:219	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 02:23:28,350] XG_FP2.py:224	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 02:23:28,351] XG_FP2.py:231	--	读取 545 个特征
+[INFO][2025-02-27 02:23:28,454] XG_FP2.py:259	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 02:23:28,455] XG_FP2.py:261	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 02:23:28,455] XG_FP2.py:269	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 02:23:28,455] XG_FP2.py:270	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 02:23:28,456] XG_FP2.py:274	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 02:23:28,456] XG_FP2.py:278	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 02:23:28,461] XG_FP2.py:294	--	使用训练验证集进行超参数优化和交叉验证
+[INFO][2025-02-27 02:23:28,461] XG_FP2.py:297	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 02:23:34,704] MLP_FP.py:260	--	Fold 3 - MSE: 0.2010, RMSE: 0.4483, R2: 0.6623, MAE: 0.3394, MAPE: 1.46%, Adjusted R2: -3.5596
+[INFO][2025-02-27 02:23:41,304] MLP_FP.py:260	--	Fold 4 - MSE: 0.2497, RMSE: 0.4997, R2: 0.4419, MAE: 0.3855, MAPE: 2.45%, Adjusted R2: -6.5347
+[INFO][2025-02-27 02:23:47,863] XG_FP2.py:302	--	最优超参数: {'n_estimators': 154, 'max_depth': 7, 'learning_rate': 0.24876257726676215, 'subsample': 0.6245513816765544, 'colsample_bytree': 0.8815273765220452, 'min_child_weight': 3}
+[INFO][2025-02-27 02:23:47,863] XG_FP2.py:303	--	最优 RMSE: 0.3825
+[INFO][2025-02-27 02:23:48,139] XG_FP2.py:336	--	Fold 1 - MSE: 0.1409, RMSE: 0.3754, R2: 0.4762, MAE: 0.2556, MAPE: 202.47%
+[INFO][2025-02-27 02:23:48,414] XG_FP2.py:336	--	Fold 2 - MSE: 0.2291, RMSE: 0.4786, R2: 0.3192, MAE: 0.4015, MAPE: 286.93%
+[INFO][2025-02-27 02:23:48,681] XG_FP2.py:336	--	Fold 3 - MSE: 0.2111, RMSE: 0.4595, R2: 0.2464, MAE: 0.3481, MAPE: 156.88%
+[INFO][2025-02-27 02:23:48,993] XG_FP2.py:336	--	Fold 4 - MSE: 0.2660, RMSE: 0.5158, R2: 0.0791, MAE: 0.3754, MAPE: 382.44%
+[INFO][2025-02-27 02:23:49,230] MLP_FP.py:260	--	Fold 5 - MSE: 0.1966, RMSE: 0.4434, R2: 0.4490, MAE: 0.3190, MAPE: 0.91%, Adjusted R2: -6.4391
+[INFO][2025-02-27 02:23:49,268] XG_FP2.py:336	--	Fold 5 - MSE: 0.2120, RMSE: 0.4604, R2: 0.4577, MAE: 0.3263, MAPE: 112.01%
+[INFO][2025-02-27 02:23:49,550] XG_FP2.py:336	--	Fold 6 - MSE: 0.1656, RMSE: 0.4070, R2: 0.6701, MAE: 0.3130, MAPE: 108.60%
+[INFO][2025-02-27 02:23:49,820] XG_FP2.py:336	--	Fold 7 - MSE: 0.2589, RMSE: 0.5088, R2: 0.4049, MAE: 0.3519, MAPE: 372.12%
+[INFO][2025-02-27 02:23:50,096] XG_FP2.py:336	--	Fold 8 - MSE: 0.1665, RMSE: 0.4081, R2: 0.5983, MAE: 0.3044, MAPE: 147.67%
+[INFO][2025-02-27 02:23:50,385] XG_FP2.py:336	--	Fold 9 - MSE: 0.2825, RMSE: 0.5315, R2: 0.4285, MAE: 0.4170, MAPE: 172.32%
+[INFO][2025-02-27 02:23:50,666] XG_FP2.py:336	--	Fold 10 - MSE: 0.2582, RMSE: 0.5082, R2: 0.3303, MAE: 0.3899, MAPE: 210.80%
+[INFO][2025-02-27 02:23:50,666] XG_FP2.py:340	--	10折交叉验证平均指标：
+[INFO][2025-02-27 02:23:50,666] XG_FP2.py:341	--	MSE: 0.2191
+[INFO][2025-02-27 02:23:50,666] XG_FP2.py:342	--	RMSE: 0.4653
+[INFO][2025-02-27 02:23:50,666] XG_FP2.py:343	--	R2: 0.4011
+[INFO][2025-02-27 02:23:50,666] XG_FP2.py:344	--	MAE: 0.3483
+[INFO][2025-02-27 02:23:50,666] XG_FP2.py:345	--	MAPE: 215.23%
+[INFO][2025-02-27 02:23:50,945] XG_FP2.py:386	--	最终评估指标：
+[INFO][2025-02-27 02:23:50,946] XG_FP2.py:387	--	测试集 -> MSE: 0.1165, RMSE: 0.3413, R2: 0.7018, Adjusted R2: -3.0258, MAE: 0.2748, MAPE: 134.44%
+[INFO][2025-02-27 02:23:51,163] XG_FP2.py:400	--	最终测试集评估指标：
+[INFO][2025-02-27 02:23:51,163] XG_FP2.py:401	--	测试集 -> MSE: 0.1165, RMSE: 0.3413, R2: 0.7018, Adjusted R2: -3.0258, MAE: 0.2748, MAPE: 134.44%
+[INFO][2025-02-27 02:23:51,167] XG_FP2.py:412	--	训练集和测试集的预测结果已保存到 './result/xgb_fp_train_results.csv' 和 './result/xgb_fp_test_results.csv'
+[INFO][2025-02-27 02:23:51,191] XG_FP2.py:424	--	模型已保存到: logbbModel\xgb_fp_model.joblib
+[INFO][2025-02-27 02:23:51,216] XG_FP2.py:433	--	模型加载成功，并且预测结果一致！
+[INFO][2025-02-27 02:23:56,491] MLP_FP.py:260	--	Fold 6 - MSE: 0.1669, RMSE: 0.4085, R2: 0.6511, MAE: 0.3067, MAPE: 1.27%, Adjusted R2: -5.1634
+[INFO][2025-02-27 02:23:59,150] LightGBM_FP.py:413	--	最优超参数: {'num_leaves': 452, 'learning_rate': 0.07676218244722882, 'n_estimators': 1378, 'max_depth': 19, 'min_child_samples': 5, 'subsample': 0.7845342322431388, 'colsample_bytree': 0.8428531600872952, 'reg_alpha': 1.4267946838317452e-07, 'reg_lambda': 0.00018329117522618778, 'min_split_gain': 0.006387059505099912, 'max_bin': 266, 'boosting_type': 'gbdt'}
+[INFO][2025-02-27 02:23:59,150] LightGBM_FP.py:414	--	最优 RMSE: 0.4226
+[INFO][2025-02-27 02:23:59,265] LightGBM_FP.py:447	--	Fold 1 - MSE: 0.1621, RMSE: 0.4026, R2: 0.3977, MAE: 0.3070, MAPE: 209.53%
+[INFO][2025-02-27 02:23:59,389] LightGBM_FP.py:447	--	Fold 2 - MSE: 0.2283, RMSE: 0.4778, R2: 0.3217, MAE: 0.3936, MAPE: 211.52%
+[INFO][2025-02-27 02:23:59,503] LightGBM_FP.py:447	--	Fold 3 - MSE: 0.1668, RMSE: 0.4084, R2: 0.4047, MAE: 0.3080, MAPE: 147.17%
+[INFO][2025-02-27 02:23:59,617] LightGBM_FP.py:447	--	Fold 4 - MSE: 0.2207, RMSE: 0.4698, R2: 0.2359, MAE: 0.3519, MAPE: 426.02%
+[INFO][2025-02-27 02:23:59,733] LightGBM_FP.py:447	--	Fold 5 - MSE: 0.1368, RMSE: 0.3699, R2: 0.6500, MAE: 0.2983, MAPE: 127.63%
+[INFO][2025-02-27 02:23:59,852] LightGBM_FP.py:447	--	Fold 6 - MSE: 0.1792, RMSE: 0.4233, R2: 0.6431, MAE: 0.3241, MAPE: 143.73%
+[INFO][2025-02-27 02:23:59,972] LightGBM_FP.py:447	--	Fold 7 - MSE: 0.2552, RMSE: 0.5052, R2: 0.4133, MAE: 0.3722, MAPE: 423.25%
+[INFO][2025-02-27 02:24:00,082] LightGBM_FP.py:447	--	Fold 8 - MSE: 0.1446, RMSE: 0.3803, R2: 0.6511, MAE: 0.3079, MAPE: 115.49%
+[INFO][2025-02-27 02:24:00,200] LightGBM_FP.py:447	--	Fold 9 - MSE: 0.2061, RMSE: 0.4540, R2: 0.5831, MAE: 0.3489, MAPE: 122.25%
+[INFO][2025-02-27 02:24:00,316] LightGBM_FP.py:447	--	Fold 10 - MSE: 0.2155, RMSE: 0.4643, R2: 0.4410, MAE: 0.3670, MAPE: 225.49%
+[INFO][2025-02-27 02:24:00,316] LightGBM_FP.py:451	--	10折交叉验证平均指标：
+[INFO][2025-02-27 02:24:00,316] LightGBM_FP.py:452	--	MSE: 0.1915
+[INFO][2025-02-27 02:24:00,316] LightGBM_FP.py:453	--	RMSE: 0.4355
+[INFO][2025-02-27 02:24:00,316] LightGBM_FP.py:454	--	R2: 0.4742
+[INFO][2025-02-27 02:24:00,316] LightGBM_FP.py:455	--	MAE: 0.3379
+[INFO][2025-02-27 02:24:00,316] LightGBM_FP.py:456	--	MAPE: 215.21%
+[INFO][2025-02-27 02:24:00,318] LightGBM_FP.py:466	--	测试集评估指标：
+[INFO][2025-02-27 02:24:00,318] LightGBM_FP.py:467	--	MSE: 0.1630, RMSE: 0.4037, R2: 0.5827, MAE: 0.3045, MAPE: 132.43%
+[INFO][2025-02-27 02:24:00,333] LightGBM_FP.py:495	--	训练集和测试集的预测结果已保存到 './result/lightgbm_fp_train_results.csv' 和 './result/lightgbm_fp_test_results.csv'
+[INFO][2025-02-27 02:24:00,336] LightGBM_FP.py:503	--	模型已保存到: logbbModel\lightgbm_fp_model.joblib
+[INFO][2025-02-27 02:24:00,338] LightGBM_FP.py:511	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 02:24:01,945] MLP_FP.py:260	--	Fold 7 - MSE: 0.1923, RMSE: 0.4385, R2: 0.5733, MAE: 0.3271, MAPE: 38982254329460.37%, Adjusted R2: -6.5391
+[INFO][2025-02-27 02:24:05,826] MLP_FP.py:260	--	Fold 8 - MSE: 0.1710, RMSE: 0.4136, R2: 0.3222, MAE: 0.3111, MAPE: 26053300821268.98%, Adjusted R2: -10.9740
+[INFO][2025-02-27 02:24:09,331] MLP_FP.py:260	--	Fold 9 - MSE: 0.1385, RMSE: 0.3722, R2: 0.5541, MAE: 0.2877, MAPE: 1.34%, Adjusted R2: -6.8780
+[INFO][2025-02-27 02:24:13,079] MLP_FP.py:260	--	Fold 10 - MSE: 0.1711, RMSE: 0.4137, R2: 0.0362, MAE: 0.3200, MAPE: 2168632675635.37%, Adjusted R2: -16.0268
+[INFO][2025-02-27 02:24:13,079] MLP_FP.py:264	--	10折交叉验证平均指标：
+[INFO][2025-02-27 02:24:13,079] MLP_FP.py:265	--	MSE: 0.1890
+[INFO][2025-02-27 02:24:13,079] MLP_FP.py:266	--	RMSE: 0.4323
+[INFO][2025-02-27 02:24:13,079] MLP_FP.py:267	--	R2: 0.4346
+[INFO][2025-02-27 02:24:13,079] MLP_FP.py:268	--	MAE: 0.3277
+[INFO][2025-02-27 02:24:13,079] MLP_FP.py:269	--	MAPE: 6720418782637.78%
+[INFO][2025-02-27 02:24:13,081] MLP_FP.py:279	--	测试集评估指标：
+[INFO][2025-02-27 02:24:13,081] MLP_FP.py:280	--	MSE: 0.0244, RMSE: 0.1563, R2: 0.9374, MAE: 0.1081, MAPE: 0.60%
+[INFO][2025-02-27 02:24:13,084] MLP_FP.py:288	--	模型已保存到: logbbModel\mlp_fp_model.joblib
+[INFO][2025-02-27 02:24:13,087] MLP_FP.py:296	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 02:24:13,090] MLP_FP.py:309	--	训练集和测试集的预测结果已保存到 './result/mlp_fp_train_results.csv' 和 './result/mlp_fp_test_results.csv'
+[INFO][2025-02-27 02:27:44,355] LightGBM_FP.py:325	--	===============启动 LightGBM 特征筛选及训练工作===============
+[INFO][2025-02-27 02:27:44,357] LightGBM_FP.py:336	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 02:27:59,788] MLP_FP.py:139	--	===============启动 MLP 特征筛选及训练工作===============
+[INFO][2025-02-27 02:27:59,790] MLP_FP.py:150	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 02:28:07,081] LightGBM_FP.py:340	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 02:28:07,126] LightGBM_FP.py:345	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 02:28:07,126] LightGBM_FP.py:346	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 02:28:07,151] LightGBM_FP.py:347	--	部分生成的指纹数据：
+                                              SMILES  ...  PubchemFP880
+0  [2H]C([2H])(F)C([2H])([2H])Oc1ccccc1OC(c1ccccc...  ...             0
+1  [2H]C([2H])(F)Oc1ccc(-n2c(CCN3C(=O)c4cccc(OC(C...  ...             0
+2  C#C[C@@]1(O)C2C[C@H](OC)C3c4ccc(O)cc4CCC3C2C[C...  ...             0
+3        C#C[C@@]1(O)C2CCC3c4ccc(O)cc4CCC3C2C[C@H]1F  ...             0
+4  C#C[C@]1(O)[C@@H](F)CC2C3CCc4cc(O)ccc4C3[C@@H]...  ...             0
+
+[5 rows x 883 columns]
+[INFO][2025-02-27 02:28:07,203] LightGBM_FP.py:390	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 02:28:07,203] LightGBM_FP.py:392	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 02:28:07,204] LightGBM_FP.py:400	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 02:28:07,204] LightGBM_FP.py:401	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 02:28:07,205] LightGBM_FP.py:405	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 02:28:07,205] LightGBM_FP.py:408	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 02:28:24,000] MLP_FP.py:154	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 02:28:24,042] MLP_FP.py:160	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 02:28:24,042] MLP_FP.py:161	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 02:28:24,103] MLP_FP.py:180	--	特征索引文件存在，加载已选择的特征
+[INFO][2025-02-27 02:28:24,104] MLP_FP.py:190	--	使用特征索引文件，选择的特征数量: 50
+[INFO][2025-02-27 02:28:24,105] MLP_FP.py:191	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 02:28:24,106] MLP_FP.py:216	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 02:28:24,107] MLP_FP.py:220	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 02:28:30,309] MLP_FP.py:260	--	Fold 1 - MSE: 0.1277, RMSE: 0.3574, R2: 0.6730, MAE: 0.2804, MAPE: 1.30%, Adjusted R2: -3.4152
+[INFO][2025-02-27 02:28:36,540] MLP_FP.py:260	--	Fold 2 - MSE: 0.2505, RMSE: 0.5005, R2: 0.0625, MAE: 0.3481, MAPE: 3.98%, Adjusted R2: -11.6559
+[INFO][2025-02-27 02:28:43,757] MLP_FP.py:260	--	Fold 3 - MSE: 0.2386, RMSE: 0.4884, R2: 0.5991, MAE: 0.3819, MAPE: 1.87%, Adjusted R2: -4.4123
+[INFO][2025-02-27 02:28:51,174] MLP_FP.py:260	--	Fold 4 - MSE: 0.2818, RMSE: 0.5308, R2: 0.3702, MAE: 0.3974, MAPE: 2.51%, Adjusted R2: -7.5027
+[INFO][2025-02-27 02:28:56,841] MLP_FP.py:260	--	Fold 5 - MSE: 0.1896, RMSE: 0.4355, R2: 0.4686, MAE: 0.3073, MAPE: 1.05%, Adjusted R2: -6.1743
+[INFO][2025-02-27 02:29:04,181] MLP_FP.py:260	--	Fold 6 - MSE: 0.2130, RMSE: 0.4615, R2: 0.5547, MAE: 0.3591, MAPE: 1.54%, Adjusted R2: -6.8677
+[INFO][2025-02-27 02:29:10,024] MLP_FP.py:260	--	Fold 7 - MSE: 0.2029, RMSE: 0.4504, R2: 0.5498, MAE: 0.3384, MAPE: 53672458244878.16%, Adjusted R2: -6.9543
+[INFO][2025-02-27 02:29:16,381] MLP_FP.py:260	--	Fold 8 - MSE: 0.2036, RMSE: 0.4513, R2: 0.1930, MAE: 0.3179, MAPE: 7476379962981.04%, Adjusted R2: -13.2574
+[INFO][2025-02-27 02:29:23,620] MLP_FP.py:260	--	Fold 9 - MSE: 0.1458, RMSE: 0.3818, R2: 0.5307, MAE: 0.2860, MAPE: 1.31%, Adjusted R2: -7.2918
+[INFO][2025-02-27 02:29:30,997] MLP_FP.py:260	--	Fold 10 - MSE: 0.1936, RMSE: 0.4400, R2: -0.0903, MAE: 0.3218, MAPE: 1493889537493.45%, Adjusted R2: -18.2625
+[INFO][2025-02-27 02:29:30,997] MLP_FP.py:264	--	10折交叉验证平均指标：
+[INFO][2025-02-27 02:29:30,997] MLP_FP.py:265	--	MSE: 0.2047
+[INFO][2025-02-27 02:29:30,997] MLP_FP.py:266	--	RMSE: 0.4498
+[INFO][2025-02-27 02:29:30,997] MLP_FP.py:267	--	R2: 0.3911
+[INFO][2025-02-27 02:29:30,997] MLP_FP.py:268	--	MAE: 0.3338
+[INFO][2025-02-27 02:29:30,997] MLP_FP.py:269	--	MAPE: 6264272774536.62%
+[INFO][2025-02-27 02:29:30,999] MLP_FP.py:279	--	测试集评估指标：
+[INFO][2025-02-27 02:29:30,999] MLP_FP.py:280	--	MSE: 0.0265, RMSE: 0.1628, R2: 0.9322, MAE: 0.1165, MAPE: 0.64%
+[INFO][2025-02-27 02:29:31,004] MLP_FP.py:288	--	模型已保存到: logbbModel\mlp_fp_model.joblib
+[INFO][2025-02-27 02:29:31,007] MLP_FP.py:296	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 02:29:31,013] MLP_FP.py:309	--	训练集和测试集的预测结果已保存到 './result/mlp_fp_train_results.csv' 和 './result/mlp_fp_test_results.csv'
+[INFO][2025-02-27 02:30:50,935] MLP_FP.py:139	--	===============启动 MLP 特征筛选及训练工作===============
+[INFO][2025-02-27 02:30:50,938] MLP_FP.py:150	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 02:31:13,901] MLP_FP.py:154	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 02:31:13,948] MLP_FP.py:160	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 02:31:13,948] MLP_FP.py:161	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 02:31:14,003] MLP_FP.py:180	--	特征索引文件存在，加载已选择的特征
+[INFO][2025-02-27 02:31:14,004] MLP_FP.py:190	--	使用特征索引文件，选择的特征数量: 50
+[INFO][2025-02-27 02:31:14,004] MLP_FP.py:191	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 02:31:14,006] MLP_FP.py:216	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 02:31:14,006] MLP_FP.py:220	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 02:31:21,777] MLP_FP.py:260	--	Fold 1 - MSE: 0.1437, RMSE: 0.3790, R2: 0.6321, MAE: 0.3060, MAPE: 1.52%, Adjusted R2: -3.9660
+[INFO][2025-02-27 02:31:28,373] MLP_FP.py:260	--	Fold 2 - MSE: 0.2104, RMSE: 0.4586, R2: 0.2127, MAE: 0.3285, MAPE: 3.40%, Adjusted R2: -9.6279
+[INFO][2025-02-27 02:31:34,922] MLP_FP.py:260	--	Fold 3 - MSE: 0.2904, RMSE: 0.5389, R2: 0.5120, MAE: 0.4095, MAPE: 1.40%, Adjusted R2: -5.5881
+[INFO][2025-02-27 02:31:40,464] MLP_FP.py:260	--	Fold 4 - MSE: 0.3020, RMSE: 0.5496, R2: 0.3249, MAE: 0.3992, MAPE: 2.76%, Adjusted R2: -8.1139
+[INFO][2025-02-27 02:32:02,639] LightGBM_FP.py:413	--	最优超参数: {'num_leaves': 2433, 'learning_rate': 0.023001946423563256, 'n_estimators': 2526, 'max_depth': 14, 'min_child_samples': 5, 'subsample': 0.581007112258361, 'colsample_bytree': 0.8217926930779198, 'reg_alpha': 0.0066964204630721325, 'reg_lambda': 6.299996505207879e-07, 'min_split_gain': 0.005409217506010392, 'max_bin': 264, 'boosting_type': 'dart'}
+[INFO][2025-02-27 02:32:02,639] LightGBM_FP.py:414	--	最优 RMSE: 0.4280
+[INFO][2025-02-27 02:32:07,579] LightGBM_FP.py:447	--	Fold 1 - MSE: 0.1578, RMSE: 0.3972, R2: 0.4138, MAE: 0.2891, MAPE: 194.88%
+[INFO][2025-02-27 02:32:12,495] LightGBM_FP.py:447	--	Fold 2 - MSE: 0.2169, RMSE: 0.4658, R2: 0.3553, MAE: 0.3844, MAPE: 248.36%
+[INFO][2025-02-27 02:32:17,309] LightGBM_FP.py:447	--	Fold 3 - MSE: 0.1485, RMSE: 0.3854, R2: 0.4699, MAE: 0.2824, MAPE: 130.15%
+[INFO][2025-02-27 02:32:22,262] LightGBM_FP.py:447	--	Fold 4 - MSE: 0.2263, RMSE: 0.4757, R2: 0.2168, MAE: 0.3617, MAPE: 412.24%
+[INFO][2025-02-27 10:04:06,030] LightGBM_FP.py:325	--	===============启动 LightGBM 特征筛选及训练工作===============
+[INFO][2025-02-27 10:04:06,034] LightGBM_FP.py:336	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:04:16,327] MLP_FP.py:139	--	===============启动 MLP 特征筛选及训练工作===============
+[INFO][2025-02-27 10:04:16,330] MLP_FP.py:150	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:04:21,304] LightGBM_FP.py:340	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 10:04:21,343] LightGBM_FP.py:345	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 10:04:21,343] LightGBM_FP.py:346	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 10:04:21,368] LightGBM_FP.py:347	--	部分生成的指纹数据：
+                                              SMILES  ...  PubchemFP880
+0  [2H]C([2H])(F)C([2H])([2H])Oc1ccccc1OC(c1ccccc...  ...             0
+1  [2H]C([2H])(F)Oc1ccc(-n2c(CCN3C(=O)c4cccc(OC(C...  ...             0
+2  C#C[C@@]1(O)C2C[C@H](OC)C3c4ccc(O)cc4CCC3C2C[C...  ...             0
+3        C#C[C@@]1(O)C2CCC3c4ccc(O)cc4CCC3C2C[C@H]1F  ...             0
+4  C#C[C@]1(O)[C@@H](F)CC2C3CCc4cc(O)ccc4C3[C@@H]...  ...             0
+
+[5 rows x 883 columns]
+[INFO][2025-02-27 10:04:21,420] LightGBM_FP.py:390	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 10:04:21,421] LightGBM_FP.py:392	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 10:04:21,421] LightGBM_FP.py:400	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 10:04:21,421] LightGBM_FP.py:401	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 10:04:21,422] LightGBM_FP.py:405	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 10:04:21,422] LightGBM_FP.py:408	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 10:04:36,202] MLP_FP.py:154	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 10:04:36,252] MLP_FP.py:160	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 10:04:36,252] MLP_FP.py:161	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 10:04:36,310] MLP_FP.py:180	--	特征索引文件存在，加载已选择的特征
+[INFO][2025-02-27 10:04:36,311] MLP_FP.py:190	--	使用特征索引文件，选择的特征数量: 50
+[INFO][2025-02-27 10:04:36,311] MLP_FP.py:191	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 10:04:36,312] MLP_FP.py:216	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 10:04:36,313] MLP_FP.py:220	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 10:04:43,167] MLP_FP.py:260	--	Fold 1 - MSE: 0.1355, RMSE: 0.3681, R2: 0.6531, MAE: 0.2978, MAPE: 1.41%, Adjusted R2: -3.6832
+[INFO][2025-02-27 10:04:50,402] MLP_FP.py:260	--	Fold 2 - MSE: 0.2798, RMSE: 0.5290, R2: -0.0472, MAE: 0.4099, MAPE: 3.80%, Adjusted R2: -13.1366
+[INFO][2025-02-27 10:04:56,059] MLP_FP.py:260	--	Fold 3 - MSE: 0.2077, RMSE: 0.4557, R2: 0.6510, MAE: 0.3302, MAPE: 1.02%, Adjusted R2: -3.7112
+[INFO][2025-02-27 10:05:02,327] MLP_FP.py:260	--	Fold 4 - MSE: 0.2561, RMSE: 0.5061, R2: 0.4276, MAE: 0.3867, MAPE: 2.24%, Adjusted R2: -6.7276
+[INFO][2025-02-27 10:05:09,084] MLP_FP.py:260	--	Fold 5 - MSE: 0.1942, RMSE: 0.4407, R2: 0.4558, MAE: 0.3106, MAPE: 0.96%, Adjusted R2: -6.3471
+[INFO][2025-02-27 10:05:14,899] MLP_FP.py:260	--	Fold 6 - MSE: 0.1611, RMSE: 0.4014, R2: 0.6631, MAE: 0.2895, MAPE: 1.27%, Adjusted R2: -4.9512
+[INFO][2025-02-27 10:05:20,894] MLP_FP.py:260	--	Fold 7 - MSE: 0.2230, RMSE: 0.4722, R2: 0.5050, MAE: 0.3511, MAPE: 21981704226428.71%, Adjusted R2: -7.7444
+[INFO][2025-02-27 10:05:27,893] MLP_FP.py:260	--	Fold 8 - MSE: 0.1779, RMSE: 0.4218, R2: 0.2948, MAE: 0.3110, MAPE: 33287737766578.41%, Adjusted R2: -11.4584
+[INFO][2025-02-27 10:05:33,166] LightGBM_FP.py:413	--	最优超参数: {'num_leaves': 816, 'learning_rate': 0.040029229072135006, 'n_estimators': 2147, 'max_depth': 18, 'min_child_samples': 14, 'subsample': 0.9925648796560831, 'colsample_bytree': 0.8388192869712512, 'reg_alpha': 0.03704666085731061, 'reg_lambda': 2.3009130429403717e-06, 'min_split_gain': 0.0010703114013513137, 'max_bin': 202, 'boosting_type': 'dart'}
+[INFO][2025-02-27 10:05:33,166] LightGBM_FP.py:414	--	最优 RMSE: 0.4465
+[INFO][2025-02-27 10:05:33,957] MLP_FP.py:260	--	Fold 9 - MSE: 0.1575, RMSE: 0.3969, R2: 0.4930, MAE: 0.3073, MAPE: 1.33%, Adjusted R2: -7.9569
+[INFO][2025-02-27 10:05:35,945] LightGBM_FP.py:447	--	Fold 1 - MSE: 0.1560, RMSE: 0.3950, R2: 0.4202, MAE: 0.3088, MAPE: 185.43%
+[INFO][2025-02-27 10:05:38,747] LightGBM_FP.py:447	--	Fold 2 - MSE: 0.2104, RMSE: 0.4587, R2: 0.3747, MAE: 0.3793, MAPE: 281.75%
+[INFO][2025-02-27 10:05:40,542] MLP_FP.py:260	--	Fold 10 - MSE: 0.1299, RMSE: 0.3604, R2: 0.2683, MAE: 0.2710, MAPE: 4991763434923.04%, Adjusted R2: -11.9264
+[INFO][2025-02-27 10:05:40,543] MLP_FP.py:264	--	10折交叉验证平均指标：
+[INFO][2025-02-27 10:05:40,543] MLP_FP.py:265	--	MSE: 0.1923
+[INFO][2025-02-27 10:05:40,543] MLP_FP.py:266	--	RMSE: 0.4352
+[INFO][2025-02-27 10:05:40,543] MLP_FP.py:267	--	R2: 0.4365
+[INFO][2025-02-27 10:05:40,543] MLP_FP.py:268	--	MAE: 0.3265
+[INFO][2025-02-27 10:05:40,543] MLP_FP.py:269	--	MAPE: 6026120542794.22%
+[INFO][2025-02-27 10:05:40,545] MLP_FP.py:279	--	测试集评估指标：
+[INFO][2025-02-27 10:05:40,545] MLP_FP.py:280	--	MSE: 0.0250, RMSE: 0.1581, R2: 0.9360, MAE: 0.1135, MAPE: 0.61%
+[INFO][2025-02-27 10:05:40,561] MLP_FP.py:288	--	模型已保存到: logbbModel\mlp_fp_model.joblib
+[INFO][2025-02-27 10:05:40,564] MLP_FP.py:296	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 10:05:40,569] MLP_FP.py:309	--	训练集和测试集的预测结果已保存到 './result/mlp_fp_train_results.csv' 和 './result/mlp_fp_test_results.csv'
+[INFO][2025-02-27 10:05:41,596] LightGBM_FP.py:447	--	Fold 3 - MSE: 0.1607, RMSE: 0.4008, R2: 0.4266, MAE: 0.2890, MAPE: 147.78%
+[INFO][2025-02-27 10:05:44,492] LightGBM_FP.py:447	--	Fold 4 - MSE: 0.2237, RMSE: 0.4730, R2: 0.2255, MAE: 0.3626, MAPE: 301.65%
+[INFO][2025-02-27 10:05:47,205] LightGBM_FP.py:447	--	Fold 5 - MSE: 0.1621, RMSE: 0.4026, R2: 0.5853, MAE: 0.3146, MAPE: 121.45%
+[INFO][2025-02-27 10:05:49,982] LightGBM_FP.py:447	--	Fold 6 - MSE: 0.2588, RMSE: 0.5087, R2: 0.4845, MAE: 0.3575, MAPE: 135.28%
+[INFO][2025-02-27 10:05:52,798] LightGBM_FP.py:447	--	Fold 7 - MSE: 0.2878, RMSE: 0.5365, R2: 0.3383, MAE: 0.3987, MAPE: 403.22%
+[INFO][2025-02-27 10:05:55,695] LightGBM_FP.py:447	--	Fold 8 - MSE: 0.1675, RMSE: 0.4093, R2: 0.5960, MAE: 0.3210, MAPE: 138.74%
+[INFO][2025-02-27 10:05:58,559] LightGBM_FP.py:447	--	Fold 9 - MSE: 0.1812, RMSE: 0.4257, R2: 0.6334, MAE: 0.3148, MAPE: 92.75%
+[INFO][2025-02-27 10:06:01,416] LightGBM_FP.py:447	--	Fold 10 - MSE: 0.2302, RMSE: 0.4798, R2: 0.4030, MAE: 0.3612, MAPE: 214.14%
+[INFO][2025-02-27 10:06:01,416] LightGBM_FP.py:451	--	10折交叉验证平均指标：
+[INFO][2025-02-27 10:06:01,416] LightGBM_FP.py:452	--	MSE: 0.2038
+[INFO][2025-02-27 10:06:01,417] LightGBM_FP.py:453	--	RMSE: 0.4490
+[INFO][2025-02-27 10:06:01,417] LightGBM_FP.py:454	--	R2: 0.4488
+[INFO][2025-02-27 10:06:01,417] LightGBM_FP.py:455	--	MAE: 0.3407
+[INFO][2025-02-27 10:06:01,417] LightGBM_FP.py:456	--	MAPE: 202.22%
+[INFO][2025-02-27 10:06:01,419] LightGBM_FP.py:466	--	测试集评估指标：
+[INFO][2025-02-27 10:06:01,419] LightGBM_FP.py:467	--	MSE: 0.1741, RMSE: 0.4173, R2: 0.5542, MAE: 0.3238, MAPE: 123.92%
+[INFO][2025-02-27 10:06:01,429] LightGBM_FP.py:495	--	训练集和测试集的预测结果已保存到 './result/lightgbm_fp_train_results.csv' 和 './result/lightgbm_fp_test_results.csv'
+[INFO][2025-02-27 10:06:01,550] LightGBM_FP.py:503	--	模型已保存到: logbbModel\lightgbm_fp_model.joblib
+[INFO][2025-02-27 10:06:01,563] LightGBM_FP.py:511	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 10:10:56,425] LightGBM_FP.py:325	--	===============启动 LightGBM 特征筛选及训练工作===============
+[INFO][2025-02-27 10:10:56,429] LightGBM_FP.py:336	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:11:11,474] LightGBM_FP.py:325	--	===============启动 LightGBM 特征筛选及训练工作===============
+[INFO][2025-02-27 10:11:11,476] LightGBM_FP.py:336	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:11:16,762] MLP_FP.py:139	--	===============启动 MLP 特征筛选及训练工作===============
+[INFO][2025-02-27 10:11:16,767] MLP_FP.py:150	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:11:38,255] LightGBM_FP.py:340	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 10:11:38,308] LightGBM_FP.py:345	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 10:11:38,308] LightGBM_FP.py:346	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 10:11:38,342] LightGBM_FP.py:347	--	部分生成的指纹数据：
+                                              SMILES  ...  PubchemFP880
+0  [2H]C([2H])(F)C([2H])([2H])Oc1ccccc1OC(c1ccccc...  ...             0
+1  [2H]C([2H])(F)Oc1ccc(-n2c(CCN3C(=O)c4cccc(OC(C...  ...             0
+2  C#C[C@@]1(O)C2C[C@H](OC)C3c4ccc(O)cc4CCC3C2C[C...  ...             0
+3        C#C[C@@]1(O)C2CCC3c4ccc(O)cc4CCC3C2C[C@H]1F  ...             0
+4  C#C[C@]1(O)[C@@H](F)CC2C3CCc4cc(O)ccc4C3[C@@H]...  ...             0
+
+[5 rows x 883 columns]
+[INFO][2025-02-27 10:11:38,395] LightGBM_FP.py:390	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 10:11:38,396] LightGBM_FP.py:392	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 10:11:38,396] LightGBM_FP.py:400	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 10:11:38,396] LightGBM_FP.py:401	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 10:11:38,397] LightGBM_FP.py:405	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 10:11:38,397] LightGBM_FP.py:408	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 10:11:44,532] MLP_FP.py:154	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 10:11:44,588] MLP_FP.py:160	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 10:11:44,588] MLP_FP.py:161	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 10:11:44,658] MLP_FP.py:180	--	特征索引文件存在，加载已选择的特征
+[INFO][2025-02-27 10:11:44,659] MLP_FP.py:190	--	使用特征索引文件，选择的特征数量: 50
+[INFO][2025-02-27 10:11:44,659] MLP_FP.py:191	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 10:11:44,660] MLP_FP.py:216	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 10:11:44,661] MLP_FP.py:220	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 10:11:52,262] MLP_FP.py:261	--	Fold 1:
+[INFO][2025-02-27 10:11:52,262] MLP_FP.py:262	--	MSE: 0.1855, RMSE: 0.4307, R²: 0.3107, Adj R²: 0.3107, MAE: 0.3018, MAPE: 2.06%
+[INFO][2025-02-27 10:11:58,611] MLP_FP.py:261	--	Fold 2:
+[INFO][2025-02-27 10:11:58,611] MLP_FP.py:262	--	MSE: 0.2334, RMSE: 0.4832, R²: 0.3063, Adj R²: 0.3063, MAE: 0.3993, MAPE: 2.00%
+[INFO][2025-02-27 10:11:58,700] LightGBM_FP.py:413	--	最优超参数: {'num_leaves': 1438, 'learning_rate': 0.08539025730421008, 'n_estimators': 810, 'max_depth': 16, 'min_child_samples': 5, 'subsample': 0.628954262651914, 'colsample_bytree': 0.5227959508028049, 'reg_alpha': 1.7731666311701484e-06, 'reg_lambda': 0.019157828937216896, 'min_split_gain': 2.2489435193030587e-05, 'max_bin': 242, 'boosting_type': 'gbdt'}
+[INFO][2025-02-27 10:11:58,700] LightGBM_FP.py:414	--	最优 RMSE: 0.4094
+[INFO][2025-02-27 10:11:59,019] LightGBM_FP.py:453	--	Fold 1:
+[INFO][2025-02-27 10:11:59,020] LightGBM_FP.py:454	--	MSE: 0.1181, RMSE: 0.3436, R²: 0.5612, Adj R²: 0.5612, MAE: 0.2396, MAPE: 169.10%
+[INFO][2025-02-27 10:11:59,379] LightGBM_FP.py:453	--	Fold 2:
+[INFO][2025-02-27 10:11:59,379] LightGBM_FP.py:454	--	MSE: 0.1970, RMSE: 0.4438, R²: 0.4147, Adj R²: 0.4147, MAE: 0.3529, MAPE: 240.24%
+[INFO][2025-02-27 10:11:59,685] LightGBM_FP.py:453	--	Fold 3:
+[INFO][2025-02-27 10:11:59,685] LightGBM_FP.py:454	--	MSE: 0.1578, RMSE: 0.3973, R²: 0.4367, Adj R²: 0.4367, MAE: 0.2961, MAPE: 128.41%
+[INFO][2025-02-27 10:12:00,055] LightGBM_FP.py:453	--	Fold 4:
+[INFO][2025-02-27 10:12:00,055] LightGBM_FP.py:454	--	MSE: 0.2423, RMSE: 0.4923, R²: 0.1612, Adj R²: 0.1612, MAE: 0.3573, MAPE: 299.05%
+[INFO][2025-02-27 10:12:00,365] LightGBM_FP.py:453	--	Fold 5:
+[INFO][2025-02-27 10:12:00,365] LightGBM_FP.py:454	--	MSE: 0.1614, RMSE: 0.4017, R²: 0.5872, Adj R²: 0.5872, MAE: 0.3086, MAPE: 141.91%
+[INFO][2025-02-27 10:12:00,686] LightGBM_FP.py:453	--	Fold 6:
+[INFO][2025-02-27 10:12:00,686] LightGBM_FP.py:454	--	MSE: 0.1954, RMSE: 0.4420, R²: 0.6108, Adj R²: 0.6108, MAE: 0.3283, MAPE: 112.73%
+[INFO][2025-02-27 10:12:01,015] LightGBM_FP.py:453	--	Fold 7:
+[INFO][2025-02-27 10:12:01,015] LightGBM_FP.py:454	--	MSE: 0.2293, RMSE: 0.4789, R²: 0.4728, Adj R²: 0.4728, MAE: 0.3415, MAPE: 447.17%
+[INFO][2025-02-27 10:12:01,324] LightGBM_FP.py:453	--	Fold 8:
+[INFO][2025-02-27 10:12:01,324] LightGBM_FP.py:454	--	MSE: 0.1448, RMSE: 0.3805, R²: 0.6507, Adj R²: 0.6507, MAE: 0.2937, MAPE: 131.72%
+[INFO][2025-02-27 10:12:01,648] LightGBM_FP.py:453	--	Fold 9:
+[INFO][2025-02-27 10:12:01,649] LightGBM_FP.py:454	--	MSE: 0.2047, RMSE: 0.4524, R²: 0.5859, Adj R²: 0.5859, MAE: 0.3416, MAPE: 118.95%
+[INFO][2025-02-27 10:12:01,972] LightGBM_FP.py:453	--	Fold 10:
+[INFO][2025-02-27 10:12:01,972] LightGBM_FP.py:454	--	MSE: 0.2124, RMSE: 0.4608, R²: 0.4492, Adj R²: 0.4492, MAE: 0.3524, MAPE: 209.57%
+[INFO][2025-02-27 10:12:01,973] LightGBM_FP.py:458	--	
+10折交叉验证平均指标：
+[INFO][2025-02-27 10:12:01,973] LightGBM_FP.py:459	--	MSE: 0.1863
+[INFO][2025-02-27 10:12:01,973] LightGBM_FP.py:460	--	RMSE: 0.4293
+[INFO][2025-02-27 10:12:01,973] LightGBM_FP.py:461	--	R²: 0.4930
+[INFO][2025-02-27 10:12:01,973] LightGBM_FP.py:462	--	Adjusted R²: 0.4930
+[INFO][2025-02-27 10:12:01,973] LightGBM_FP.py:463	--	MAE: 0.3212
+[INFO][2025-02-27 10:12:01,973] LightGBM_FP.py:464	--	MAPE: 199.88%
+[INFO][2025-02-27 10:12:01,975] LightGBM_FP.py:477	--	
+测试集评估指标：
+[INFO][2025-02-27 10:12:01,975] LightGBM_FP.py:478	--	MSE: 0.1491
+[INFO][2025-02-27 10:12:01,975] LightGBM_FP.py:479	--	RMSE: 0.3862
+[INFO][2025-02-27 10:12:01,975] LightGBM_FP.py:480	--	R²: 0.6181
+[INFO][2025-02-27 10:12:01,975] LightGBM_FP.py:481	--	Adjusted R²: -4.1555
+[INFO][2025-02-27 10:12:01,975] LightGBM_FP.py:482	--	MAE: 0.2923
+[INFO][2025-02-27 10:12:01,975] LightGBM_FP.py:483	--	MAPE: 110.71%
+[INFO][2025-02-27 10:12:01,982] LightGBM_FP.py:511	--	训练集和测试集的预测结果已保存到 './result/lightgbm_fp_train_results.csv' 和 './result/lightgbm_fp_test_results.csv'
+[INFO][2025-02-27 10:12:02,030] LightGBM_FP.py:519	--	模型已保存到: logbbModel\lightgbm_fp_model.joblib
+[INFO][2025-02-27 10:12:02,037] LightGBM_FP.py:527	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 10:12:04,616] MLP_FP.py:261	--	Fold 3:
+[INFO][2025-02-27 10:12:04,616] MLP_FP.py:262	--	MSE: 0.2112, RMSE: 0.4596, R²: 0.2463, Adj R²: 0.2463, MAE: 0.3629, MAPE: 1.31%
+[INFO][2025-02-27 10:12:09,004] MLP_FP.py:261	--	Fold 4:
+[INFO][2025-02-27 10:12:09,004] MLP_FP.py:262	--	MSE: 0.2124, RMSE: 0.4609, R²: 0.2647, Adj R²: 0.2647, MAE: 0.3552, MAPE: 2.99%
+[INFO][2025-02-27 10:12:12,230] MLP_FP.py:261	--	Fold 5:
+[INFO][2025-02-27 10:12:12,230] MLP_FP.py:262	--	MSE: 0.2047, RMSE: 0.4524, R²: 0.4765, Adj R²: 0.4765, MAE: 0.3540, MAPE: 1.07%
+[INFO][2025-02-27 10:12:16,409] MLP_FP.py:261	--	Fold 6:
+[INFO][2025-02-27 10:12:16,409] MLP_FP.py:262	--	MSE: 0.2010, RMSE: 0.4483, R²: 0.5997, Adj R²: 0.5997, MAE: 0.3530, MAPE: 1.69%
+[INFO][2025-02-27 10:12:20,173] MLP_FP.py:261	--	Fold 7:
+[INFO][2025-02-27 10:12:20,173] MLP_FP.py:262	--	MSE: 0.3583, RMSE: 0.5986, R²: 0.1763, Adj R²: 0.1763, MAE: 0.4397, MAPE: 46599858358361.23%
+[INFO][2025-02-27 10:12:23,843] MLP_FP.py:261	--	Fold 8:
+[INFO][2025-02-27 10:12:23,844] MLP_FP.py:262	--	MSE: 0.3010, RMSE: 0.5487, R²: 0.2738, Adj R²: 0.2738, MAE: 0.4373, MAPE: 21504989485707.37%
+[INFO][2025-02-27 10:12:26,882] MLP_FP.py:261	--	Fold 9:
+[INFO][2025-02-27 10:12:26,882] MLP_FP.py:262	--	MSE: 0.1962, RMSE: 0.4429, R²: 0.6031, Adj R²: 0.6031, MAE: 0.3411, MAPE: 1.15%
+[INFO][2025-02-27 10:12:30,330] MLP_FP.py:261	--	Fold 10:
+[INFO][2025-02-27 10:12:30,330] MLP_FP.py:262	--	MSE: 0.3018, RMSE: 0.5494, R²: 0.2171, Adj R²: 0.2171, MAE: 0.3946, MAPE: 2.02%
+[INFO][2025-02-27 10:12:30,331] MLP_FP.py:266	--	
+10折交叉验证平均指标：
+[INFO][2025-02-27 10:12:30,331] MLP_FP.py:267	--	MSE: 0.2406
+[INFO][2025-02-27 10:12:30,331] MLP_FP.py:268	--	RMSE: 0.4875
+[INFO][2025-02-27 10:12:30,331] MLP_FP.py:269	--	R²: 0.3475
+[INFO][2025-02-27 10:12:30,331] MLP_FP.py:270	--	Adjusted R²: 0.3475
+[INFO][2025-02-27 10:12:30,331] MLP_FP.py:271	--	MAE: 0.3739
+[INFO][2025-02-27 10:12:30,331] MLP_FP.py:272	--	MAPE: 6810484784408.29%
+[INFO][2025-02-27 10:12:30,332] MLP_FP.py:285	--	
+测试集评估指标：
+[INFO][2025-02-27 10:12:30,332] MLP_FP.py:286	--	MSE: 0.1377
+[INFO][2025-02-27 10:12:30,332] MLP_FP.py:287	--	RMSE: 0.3711
+[INFO][2025-02-27 10:12:30,333] MLP_FP.py:288	--	R²: 0.6474
+[INFO][2025-02-27 10:12:30,333] MLP_FP.py:289	--	Adjusted R²: -3.7594
+[INFO][2025-02-27 10:12:30,333] MLP_FP.py:290	--	MAE: 0.2801
+[INFO][2025-02-27 10:12:30,333] MLP_FP.py:291	--	MAPE: 1.22%
+[INFO][2025-02-27 10:12:30,336] MLP_FP.py:299	--	模型已保存到: logbbModel\mlp_fp_model.joblib
+[INFO][2025-02-27 10:12:30,338] MLP_FP.py:307	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 10:12:30,341] MLP_FP.py:320	--	训练集和测试集的预测结果已保存到 './result/mlp_fp_train_results.csv' 和 './result/mlp_fp_test_results.csv'
+[INFO][2025-02-27 10:55:51,920] XG_FP2.py:204	--	===============启动 XGBoost 特征筛选及训练工作===============
+[INFO][2025-02-27 10:55:51,923] XG_FP2.py:215	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:56:14,265] XG_FP2.py:219	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 10:56:14,268] XG_FP2.py:224	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 10:56:14,269] XG_FP2.py:231	--	读取 545 个特征
+[INFO][2025-02-27 10:56:14,365] XG_FP2.py:259	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 10:56:14,366] XG_FP2.py:261	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 10:56:14,366] XG_FP2.py:269	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 10:56:14,366] XG_FP2.py:270	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 10:56:14,367] XG_FP2.py:274	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 10:56:14,367] XG_FP2.py:278	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 10:56:14,370] XG_FP2.py:294	--	使用训练验证集进行超参数优化和交叉验证
+[INFO][2025-02-27 10:56:14,370] XG_FP2.py:297	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 10:56:26,614] XG_FP2.py:302	--	最优超参数: {'n_estimators': 87, 'max_depth': 8, 'learning_rate': 0.21649134739431214, 'subsample': 0.6897385267833026, 'colsample_bytree': 0.8951506835163187, 'min_child_weight': 2}
+[INFO][2025-02-27 10:56:26,614] XG_FP2.py:303	--	最优 RMSE: 0.3709
+[INFO][2025-02-27 10:56:26,710] XG_FP2.py:336	--	Fold 1 - MSE: 0.1305, RMSE: 0.3612, R2: 0.5150, MAE: 0.2569, MAPE: 198.66%
+[INFO][2025-02-27 10:56:26,800] XG_FP2.py:336	--	Fold 2 - MSE: 0.2132, RMSE: 0.4617, R2: 0.3666, MAE: 0.3641, MAPE: 221.90%
+[INFO][2025-02-27 10:56:26,895] XG_FP2.py:336	--	Fold 3 - MSE: 0.1908, RMSE: 0.4368, R2: 0.3191, MAE: 0.3264, MAPE: 164.96%
+[INFO][2025-02-27 10:56:26,989] XG_FP2.py:336	--	Fold 4 - MSE: 0.2599, RMSE: 0.5098, R2: 0.1003, MAE: 0.3761, MAPE: 373.58%
+[INFO][2025-02-27 10:56:27,109] XG_FP2.py:336	--	Fold 5 - MSE: 0.1523, RMSE: 0.3902, R2: 0.6104, MAE: 0.2827, MAPE: 102.77%
+[INFO][2025-02-27 10:56:27,223] XG_FP2.py:336	--	Fold 6 - MSE: 0.1875, RMSE: 0.4330, R2: 0.6265, MAE: 0.3329, MAPE: 116.57%
+[INFO][2025-02-27 10:56:27,321] XG_FP2.py:336	--	Fold 7 - MSE: 0.1975, RMSE: 0.4445, R2: 0.5459, MAE: 0.3181, MAPE: 359.74%
+[INFO][2025-02-27 10:56:27,426] XG_FP2.py:336	--	Fold 8 - MSE: 0.1480, RMSE: 0.3847, R2: 0.6431, MAE: 0.2978, MAPE: 127.86%
+[INFO][2025-02-27 10:56:27,529] XG_FP2.py:336	--	Fold 9 - MSE: 0.2228, RMSE: 0.4720, R2: 0.5493, MAE: 0.3685, MAPE: 108.25%
+[INFO][2025-02-27 10:56:27,628] XG_FP2.py:336	--	Fold 10 - MSE: 0.2341, RMSE: 0.4838, R2: 0.3929, MAE: 0.3773, MAPE: 193.39%
+[INFO][2025-02-27 10:56:27,628] XG_FP2.py:340	--	10折交叉验证平均指标：
+[INFO][2025-02-27 10:56:27,628] XG_FP2.py:341	--	MSE: 0.1936
+[INFO][2025-02-27 10:56:27,628] XG_FP2.py:342	--	RMSE: 0.4378
+[INFO][2025-02-27 10:56:27,628] XG_FP2.py:343	--	R2: 0.4669
+[INFO][2025-02-27 10:56:27,628] XG_FP2.py:344	--	MAE: 0.3301
+[INFO][2025-02-27 10:56:27,628] XG_FP2.py:345	--	MAPE: 196.77%
+[INFO][2025-02-27 10:56:27,744] XG_FP2.py:386	--	最终评估指标：
+[INFO][2025-02-27 10:56:27,744] XG_FP2.py:387	--	测试集 -> MSE: 0.1285, RMSE: 0.3585, R2: 0.6709, Adjusted R2: -3.4428, MAE: 0.2775, MAPE: 128.54%
+[INFO][2025-02-27 10:56:28,047] XG_FP2.py:400	--	最终测试集评估指标：
+[INFO][2025-02-27 10:56:28,047] XG_FP2.py:401	--	测试集 -> MSE: 0.1285, RMSE: 0.3585, R2: 0.6709, Adjusted R2: -3.4428, MAE: 0.2775, MAPE: 128.54%
+[INFO][2025-02-27 10:56:28,050] XG_FP2.py:412	--	训练集和测试集的预测结果已保存到 './result/xgb_fp_train_results.csv' 和 './result/xgb_fp_test_results.csv'
+[INFO][2025-02-27 10:56:28,063] XG_FP2.py:424	--	模型已保存到: logbbModel\xgb_fp_model.joblib
+[INFO][2025-02-27 10:56:28,074] XG_FP2.py:433	--	模型加载成功，并且预测结果一致！
+[INFO][2025-02-27 10:56:46,487] XG_FP2.py:204	--	===============启动 XGBoost 特征筛选及训练工作===============
+[INFO][2025-02-27 10:56:46,489] XG_FP2.py:215	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:57:09,080] XG_FP2.py:219	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 10:57:09,082] XG_FP2.py:224	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 10:57:09,083] XG_FP2.py:231	--	读取 545 个特征
+[INFO][2025-02-27 10:57:09,164] XG_FP2.py:259	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 10:57:09,165] XG_FP2.py:261	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 10:57:09,165] XG_FP2.py:269	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 10:57:09,165] XG_FP2.py:270	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 10:57:09,166] XG_FP2.py:274	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 10:57:09,166] XG_FP2.py:278	--	将训练验证集按9:1划分为训练集(441个样本)和验证集(49个样本)
+[INFO][2025-02-27 10:57:09,169] XG_FP2.py:294	--	使用训练验证集进行超参数优化和交叉验证
+[INFO][2025-02-27 10:57:09,169] XG_FP2.py:297	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 10:57:23,724] XG_FP2.py:302	--	最优超参数: {'n_estimators': 186, 'max_depth': 10, 'learning_rate': 0.18100350704135698, 'subsample': 0.6591249982199839, 'colsample_bytree': 0.8593147704615522, 'min_child_weight': 1}
+[INFO][2025-02-27 10:57:23,724] XG_FP2.py:303	--	最优 RMSE: 0.3701
+[INFO][2025-02-27 10:57:24,048] XG_FP2.py:336	--	Fold 1 - MSE: 0.0944, RMSE: 0.3072, R2: 0.6494, MAE: 0.2188, MAPE: 191.82%
+[INFO][2025-02-27 10:57:24,403] XG_FP2.py:336	--	Fold 2 - MSE: 0.1822, RMSE: 0.4269, R2: 0.4584, MAE: 0.3279, MAPE: 255.30%
+[INFO][2025-02-27 10:57:24,737] XG_FP2.py:336	--	Fold 3 - MSE: 0.1969, RMSE: 0.4437, R2: 0.2974, MAE: 0.3193, MAPE: 135.71%
+[INFO][2025-02-27 10:57:25,037] XG_FP2.py:336	--	Fold 4 - MSE: 0.3167, RMSE: 0.5627, R2: -0.0961, MAE: 0.3941, MAPE: 431.65%
+[INFO][2025-02-27 10:57:25,384] XG_FP2.py:336	--	Fold 5 - MSE: 0.1863, RMSE: 0.4317, R2: 0.5233, MAE: 0.3168, MAPE: 132.60%
+[INFO][2025-02-27 10:57:25,695] XG_FP2.py:336	--	Fold 6 - MSE: 0.1620, RMSE: 0.4025, R2: 0.6772, MAE: 0.3001, MAPE: 118.09%
+[INFO][2025-02-27 10:57:26,016] XG_FP2.py:336	--	Fold 7 - MSE: 0.2307, RMSE: 0.4803, R2: 0.4696, MAE: 0.3244, MAPE: 301.08%
+[INFO][2025-02-27 10:57:26,335] XG_FP2.py:336	--	Fold 8 - MSE: 0.1462, RMSE: 0.3823, R2: 0.6475, MAE: 0.3154, MAPE: 149.47%
+[INFO][2025-02-27 10:57:26,640] XG_FP2.py:336	--	Fold 9 - MSE: 0.2339, RMSE: 0.4837, R2: 0.5267, MAE: 0.3718, MAPE: 114.12%
+[INFO][2025-02-27 10:57:26,976] XG_FP2.py:336	--	Fold 10 - MSE: 0.2036, RMSE: 0.4512, R2: 0.4720, MAE: 0.3292, MAPE: 178.92%
+[INFO][2025-02-27 10:57:26,976] XG_FP2.py:340	--	10折交叉验证平均指标：
+[INFO][2025-02-27 10:57:26,976] XG_FP2.py:341	--	MSE: 0.1953
+[INFO][2025-02-27 10:57:26,976] XG_FP2.py:342	--	RMSE: 0.4372
+[INFO][2025-02-27 10:57:26,976] XG_FP2.py:343	--	R2: 0.4625
+[INFO][2025-02-27 10:57:26,976] XG_FP2.py:344	--	MAE: 0.3218
+[INFO][2025-02-27 10:57:26,977] XG_FP2.py:345	--	MAPE: 200.88%
+[INFO][2025-02-27 10:57:27,246] XG_FP2.py:386	--	最终评估指标：
+[INFO][2025-02-27 10:57:27,246] XG_FP2.py:387	--	测试集 -> MSE: 0.1286, RMSE: 0.3587, R2: 0.6706, Adjusted R2: -3.4464, MAE: 0.2768, MAPE: 106.03%
+[INFO][2025-02-27 10:57:27,442] XG_FP2.py:400	--	最终测试集评估指标：
+[INFO][2025-02-27 10:57:27,442] XG_FP2.py:401	--	测试集 -> MSE: 0.1286, RMSE: 0.3587, R2: 0.6706, Adjusted R2: -3.4464, MAE: 0.2768, MAPE: 106.03%
+[INFO][2025-02-27 10:57:27,444] XG_FP2.py:412	--	训练集和测试集的预测结果已保存到 './result/xgb_fp_train_results.csv' 和 './result/xgb_fp_test_results.csv'
+[INFO][2025-02-27 10:57:27,481] XG_FP2.py:424	--	模型已保存到: logbbModel\xgb_fp_model.joblib
+[INFO][2025-02-27 10:57:27,509] XG_FP2.py:433	--	模型加载成功，并且预测结果一致！
+[INFO][2025-02-27 10:58:56,259] Catboost_FP.py:164	--	===============启动 CatBoost 特征筛选及训练工作===============
+[INFO][2025-02-27 10:58:56,261] Catboost_FP.py:181	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 10:59:17,784] Catboost_FP.py:185	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 10:59:17,819] Catboost_FP.py:190	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 10:59:17,819] Catboost_FP.py:191	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 10:59:17,842] Catboost_FP.py:192	--	部分生成的指纹数据：
+                                              SMILES  ...  PubchemFP880
+0  [2H]C([2H])(F)C([2H])([2H])Oc1ccccc1OC(c1ccccc...  ...             0
+1  [2H]C([2H])(F)Oc1ccc(-n2c(CCN3C(=O)c4cccc(OC(C...  ...             0
+2  C#C[C@@]1(O)C2C[C@H](OC)C3c4ccc(O)cc4CCC3C2C[C...  ...             0
+3        C#C[C@@]1(O)C2CCC3c4ccc(O)cc4CCC3C2C[C@H]1F  ...             0
+4  C#C[C@]1(O)[C@@H](F)CC2C3CCc4cc(O)ccc4C3[C@@H]...  ...             0
+
+[5 rows x 883 columns]
+[INFO][2025-02-27 10:59:17,886] Catboost_FP.py:207	--	读取 545 条特征数据
+[INFO][2025-02-27 10:59:17,886] Catboost_FP.py:211	--	特征索引文件存在，加载已选择的特征
+[INFO][2025-02-27 10:59:17,888] Catboost_FP.py:221	--	使用特征索引文件，选择的特征数量: 50
+[INFO][2025-02-27 10:59:17,888] Catboost_FP.py:222	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 10:59:17,889] Catboost_FP.py:242	--	将数据集按9:1划分为训练集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 10:59:27,792] Catboost_FP.py:282	--	Fold 1 - MSE: 0.1421, RMSE: 0.3770, R2: 0.4719, MAE: 0.2560, MAPE: 194.40%, Adjusted R2: 13.6749
+[INFO][2025-02-27 10:59:37,149] Catboost_FP.py:282	--	Fold 2 - MSE: 0.2084, RMSE: 0.4565, R2: 0.3807, MAE: 0.3623, MAPE: 200.65%, Adjusted R2: 15.8636
+[INFO][2025-02-27 10:59:43,211] Catboost_FP.py:282	--	Fold 3 - MSE: 0.1571, RMSE: 0.3963, R2: 0.4394, MAE: 0.2873, MAPE: 142.02%, Adjusted R2: 14.4546
+[INFO][2025-02-27 10:59:50,487] Catboost_FP.py:282	--	Fold 4 - MSE: 0.2018, RMSE: 0.4492, R2: 0.3014, MAE: 0.3405, MAPE: 251.48%, Adjusted R2: 17.7664
+[INFO][2025-02-27 10:59:58,921] Catboost_FP.py:282	--	Fold 5 - MSE: 0.1785, RMSE: 0.4225, R2: 0.5433, MAE: 0.3118, MAPE: 110.81%, Adjusted R2: 11.9599
+[INFO][2025-02-27 11:00:07,992] Catboost_FP.py:282	--	Fold 6 - MSE: 0.1694, RMSE: 0.4116, R2: 0.6625, MAE: 0.3185, MAPE: 101.01%, Adjusted R2: 9.0998
+[INFO][2025-02-27 11:00:12,520] Catboost_FP.py:282	--	Fold 7 - MSE: 0.2208, RMSE: 0.4699, R2: 0.4925, MAE: 0.3322, MAPE: 422.51%, Adjusted R2: 13.1810
+[INFO][2025-02-27 11:00:15,385] Catboost_FP.py:282	--	Fold 8 - MSE: 0.1596, RMSE: 0.3995, R2: 0.6151, MAE: 0.3265, MAPE: 168.81%, Adjusted R2: 10.2374
+[INFO][2025-02-27 11:00:24,843] Catboost_FP.py:282	--	Fold 9 - MSE: 0.2357, RMSE: 0.4855, R2: 0.5231, MAE: 0.3675, MAPE: 148.31%, Adjusted R2: 12.4445
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:282	--	Fold 10 - MSE: 0.2124, RMSE: 0.4609, R2: 0.4490, MAE: 0.3581, MAPE: 190.87%, Adjusted R2: 14.2238
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:286	--	10折交叉验证平均指标：
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:287	--	MSE: 0.1886
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:288	--	RMSE: 0.4329
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:289	--	R2: 0.4879
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:290	--	MAE: 0.3261
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:291	--	MAPE: 193.09%
+[INFO][2025-02-27 11:00:33,979] Catboost_FP.py:292	--	Adjusted R2: 13.2906
+[INFO][2025-02-27 11:00:39,167] LightGBM_FP.py:330	--	===============启动 LightGBM 特征筛选及训练工作===============
+[INFO][2025-02-27 11:00:39,170] LightGBM_FP.py:341	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 11:00:39,948] Catboost_FP.py:322	--	模型已保存到: logbbModel\catboost_fp_model.joblib
+[INFO][2025-02-27 11:00:39,952] Catboost_FP.py:332	--	模型加载成功，并且预测结果一致！
+[INFO][2025-02-27 11:00:39,952] Catboost_FP.py:334	--	
+最终数据集划分:
+[INFO][2025-02-27 11:00:39,952] Catboost_FP.py:335	--	训练集: 490个样本 (89.9%)
+[INFO][2025-02-27 11:00:39,952] Catboost_FP.py:336	--	测试集: 55个样本 (10.1%)
+[INFO][2025-02-27 11:00:40,254] Catboost_FP.py:340	--	训练集和测试集散点图已保存到 './result/catboost_fp_scatter.png'
+[INFO][2025-02-27 11:00:40,264] Catboost_FP.py:349	--	训练集和测试集的预测结果已保存到 './result/catboost_fp_train_results.csv' 和 './result/catboost_fp_test_results.csv'
+[INFO][2025-02-27 11:01:01,287] LightGBM_FP.py:345	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 11:01:01,324] LightGBM_FP.py:350	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 11:01:01,324] LightGBM_FP.py:351	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 11:01:01,350] LightGBM_FP.py:352	--	部分生成的指纹数据：
+                                              SMILES  ...  PubchemFP880
+0  [2H]C([2H])(F)C([2H])([2H])Oc1ccccc1OC(c1ccccc...  ...             0
+1  [2H]C([2H])(F)Oc1ccc(-n2c(CCN3C(=O)c4cccc(OC(C...  ...             0
+2  C#C[C@@]1(O)C2C[C@H](OC)C3c4ccc(O)cc4CCC3C2C[C...  ...             0
+3        C#C[C@@]1(O)C2CCC3c4ccc(O)cc4CCC3C2C[C@H]1F  ...             0
+4  C#C[C@]1(O)[C@@H](F)CC2C3CCc4cc(O)ccc4C3[C@@H]...  ...             0
+
+[5 rows x 883 columns]
+[INFO][2025-02-27 11:01:01,405] LightGBM_FP.py:395	--	存在特征索引文件，进行读取
+[INFO][2025-02-27 11:01:01,405] LightGBM_FP.py:397	--	读取特征索引完成，索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-02-27 11:01:01,406] LightGBM_FP.py:405	--	筛选后的特征矩阵形状为：(545, 50)
+[INFO][2025-02-27 11:01:01,406] LightGBM_FP.py:406	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 11:01:01,407] LightGBM_FP.py:416	--	将数据集按9:1划分为训练验证集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 11:01:01,407] LightGBM_FP.py:419	--	开始进行超参数搜索（100轮）...
+[INFO][2025-02-27 11:01:46,033] Catboost_FP.py:164	--	===============启动 CatBoost 特征筛选及训练工作===============
+[INFO][2025-02-27 11:01:46,037] Catboost_FP.py:181	--	读取 545 条 SMILES 数据
+[INFO][2025-02-27 11:02:11,808] Catboost_FP.py:185	--	生成了 545 条指纹数据，每个指纹有 882 位
+[INFO][2025-02-27 11:02:11,850] Catboost_FP.py:190	--	分子指纹生成并保存在: ../../data/logBB_data/logBB_w_desc_fp.csv
+[INFO][2025-02-27 11:02:11,850] Catboost_FP.py:191	--	生成的数据框形状: (545, 883)
+[INFO][2025-02-27 11:02:11,890] Catboost_FP.py:192	--	部分生成的指纹数据：
+                                              SMILES  ...  PubchemFP880
+0  [2H]C([2H])(F)C([2H])([2H])Oc1ccccc1OC(c1ccccc...  ...             0
+1  [2H]C([2H])(F)Oc1ccc(-n2c(CCN3C(=O)c4cccc(OC(C...  ...             0
+2  C#C[C@@]1(O)C2C[C@H](OC)C3c4ccc(O)cc4CCC3C2C[C...  ...             0
+3        C#C[C@@]1(O)C2CCC3c4ccc(O)cc4CCC3C2C[C@H]1F  ...             0
+4  C#C[C@]1(O)[C@@H](F)CC2C3CCc4cc(O)ccc4C3[C@@H]...  ...             0
+
+[5 rows x 883 columns]
+[INFO][2025-02-27 11:02:11,966] Catboost_FP.py:207	--	读取 545 条特征数据
+[INFO][2025-02-27 11:02:11,966] Catboost_FP.py:211	--	特征索引文件存在，加载已选择的特征
+[INFO][2025-02-27 11:02:11,967] Catboost_FP.py:221	--	使用特征索引文件，选择的特征数量: 50
+[INFO][2025-02-27 11:02:11,967] Catboost_FP.py:222	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-02-27 11:02:11,968] Catboost_FP.py:242	--	将数据集按9:1划分为训练集(490个样本)和测试集(55个样本)
+[INFO][2025-02-27 11:02:20,466] Catboost_FP.py:282	--	Fold 1 - MSE: 0.1386, RMSE: 0.3723, R2: 0.4850, MAE: 0.2594, MAPE: 174.27%, Adjusted R2: 13.3598
+[INFO][2025-02-27 11:02:26,424] Catboost_FP.py:282	--	Fold 2 - MSE: 0.1937, RMSE: 0.4401, R2: 0.4244, MAE: 0.3499, MAPE: 203.39%, Adjusted R2: 14.8150
+[INFO][2025-02-27 11:02:36,829] Catboost_FP.py:282	--	Fold 3 - MSE: 0.1847, RMSE: 0.4297, R2: 0.3409, MAE: 0.3255, MAPE: 149.23%, Adjusted R2: 16.8182
+[INFO][2025-02-27 11:02:42,649] Catboost_FP.py:282	--	Fold 4 - MSE: 0.2840, RMSE: 0.5329, R2: 0.0169, MAE: 0.3824, MAPE: 259.11%, Adjusted R2: 24.5947
+[INFO][2025-02-27 11:02:54,307] Catboost_FP.py:282	--	Fold 5 - MSE: 0.1492, RMSE: 0.3863, R2: 0.6182, MAE: 0.2731, MAPE: 101.68%, Adjusted R2: 10.1633
+[INFO][2025-02-27 11:03:00,980] LightGBM_FP.py:424	--	最优超参数: {'num_leaves': 2885, 'learning_rate': 0.06321254436783735, 'n_estimators': 1775, 'max_depth': 24, 'min_child_samples': 36, 'subsample': 0.8707189959857446, 'colsample_bytree': 0.6876318709234558, 'reg_alpha': 1.031491107506169e-08, 'reg_lambda': 1.0853612730200448e-08, 'min_split_gain': 0.001955589890237647, 'max_bin': 235, 'boosting_type': 'dart'}
+[INFO][2025-02-27 11:03:00,980] LightGBM_FP.py:425	--	最优 RMSE: 0.4478
+[INFO][2025-02-27 11:03:02,147] Catboost_FP.py:282	--	Fold 6 - MSE: 0.2012, RMSE: 0.4485, R2: 0.5993, MAE: 0.3540, MAPE: 164.88%, Adjusted R2: 10.6162
+[INFO][2025-02-27 11:03:03,414] LightGBM_FP.py:464	--	Fold 1:
+[INFO][2025-02-27 11:03:03,414] LightGBM_FP.py:465	--	MSE: 0.1914, RMSE: 0.4375, R²: 0.2888, Adj R²: 0.2888, MAE: 0.3344, MAPE: 202.41%
+[INFO][2025-02-27 11:03:05,830] LightGBM_FP.py:464	--	Fold 2:
+[INFO][2025-02-27 11:03:05,831] LightGBM_FP.py:465	--	MSE: 0.2533, RMSE: 0.5033, R²: 0.2474, Adj R²: 0.2474, MAE: 0.4300, MAPE: 262.79%
+[INFO][2025-02-27 11:03:08,299] LightGBM_FP.py:464	--	Fold 3:
+[INFO][2025-02-27 11:03:08,299] LightGBM_FP.py:465	--	MSE: 0.1892, RMSE: 0.4349, R²: 0.3249, Adj R²: 0.3249, MAE: 0.3388, MAPE: 154.35%
+[INFO][2025-02-27 11:03:09,799] Catboost_FP.py:282	--	Fold 7 - MSE: 0.2201, RMSE: 0.4691, R2: 0.4941, MAE: 0.3344, MAPE: 334.94%, Adjusted R2: 13.1412
+[INFO][2025-02-27 11:03:10,865] LightGBM_FP.py:464	--	Fold 4:
+[INFO][2025-02-27 11:03:10,865] LightGBM_FP.py:465	--	MSE: 0.2174, RMSE: 0.4663, R²: 0.2474, Adj R²: 0.2474, MAE: 0.3742, MAPE: 166.97%
+[INFO][2025-02-27 11:03:13,505] LightGBM_FP.py:464	--	Fold 5:
+[INFO][2025-02-27 11:03:13,505] LightGBM_FP.py:465	--	MSE: 0.2471, RMSE: 0.4971, R²: 0.3680, Adj R²: 0.3680, MAE: 0.3756, MAPE: 154.16%
+[INFO][2025-02-27 11:03:13,576] Catboost_FP.py:282	--	Fold 8 - MSE: 0.1236, RMSE: 0.3516, R2: 0.7018, MAE: 0.2713, MAPE: 134.51%, Adjusted R2: 8.1573
+[INFO][2025-02-27 11:03:16,081] LightGBM_FP.py:464	--	Fold 6:
+[INFO][2025-02-27 11:03:16,081] LightGBM_FP.py:465	--	MSE: 0.3080, RMSE: 0.5550, R²: 0.3865, Adj R²: 0.3865, MAE: 0.3920, MAPE: 157.97%
+[INFO][2025-02-27 11:03:18,699] LightGBM_FP.py:464	--	Fold 7:
+[INFO][2025-02-27 11:03:18,699] LightGBM_FP.py:465	--	MSE: 0.3637, RMSE: 0.6031, R²: 0.1639, Adj R²: 0.1639, MAE: 0.4548, MAPE: 504.03%
+[INFO][2025-02-27 11:03:20,884] LightGBM_FP.py:464	--	Fold 8:
+[INFO][2025-02-27 11:03:20,884] LightGBM_FP.py:465	--	MSE: 0.2405, RMSE: 0.4904, R²: 0.4200, Adj R²: 0.4200, MAE: 0.3950, MAPE: 188.81%
+[INFO][2025-02-27 11:03:21,034] Catboost_FP.py:282	--	Fold 9 - MSE: 0.2168, RMSE: 0.4656, R2: 0.5614, MAE: 0.3567, MAPE: 121.19%, Adjusted R2: 11.5256
+[INFO][2025-02-27 11:03:23,253] LightGBM_FP.py:464	--	Fold 9:
+[INFO][2025-02-27 11:03:23,253] LightGBM_FP.py:465	--	MSE: 0.2722, RMSE: 0.5217, R²: 0.4493, Adj R²: 0.4493, MAE: 0.3734, MAPE: 128.13%
+[INFO][2025-02-27 11:03:26,095] LightGBM_FP.py:464	--	Fold 10:
+[INFO][2025-02-27 11:03:26,096] LightGBM_FP.py:465	--	MSE: 0.2671, RMSE: 0.5168, R²: 0.3072, Adj R²: 0.3072, MAE: 0.4058, MAPE: 200.91%
+[INFO][2025-02-27 11:03:26,096] LightGBM_FP.py:469	--	
+10折交叉验证平均指标：
+[INFO][2025-02-27 11:03:26,096] LightGBM_FP.py:470	--	MSE: 0.2550
+[INFO][2025-02-27 11:03:26,097] LightGBM_FP.py:471	--	RMSE: 0.5026
+[INFO][2025-02-27 11:03:26,097] LightGBM_FP.py:472	--	R²: 0.3203
+[INFO][2025-02-27 11:03:26,097] LightGBM_FP.py:473	--	Adjusted R²: 0.3203
+[INFO][2025-02-27 11:03:26,097] LightGBM_FP.py:474	--	MAE: 0.3874
+[INFO][2025-02-27 11:03:26,097] LightGBM_FP.py:475	--	MAPE: 212.05%
+[INFO][2025-02-27 11:03:26,099] LightGBM_FP.py:488	--	
+测试集评估指标：
+[INFO][2025-02-27 11:03:26,099] LightGBM_FP.py:489	--	MSE: 0.1401
+[INFO][2025-02-27 11:03:26,099] LightGBM_FP.py:490	--	RMSE: 0.3744
+[INFO][2025-02-27 11:03:26,099] LightGBM_FP.py:491	--	R²: 0.6411
+[INFO][2025-02-27 11:03:26,099] LightGBM_FP.py:492	--	Adjusted R²: -3.8445
+[INFO][2025-02-27 11:03:26,099] LightGBM_FP.py:493	--	MAE: 0.2896
+[INFO][2025-02-27 11:03:26,099] LightGBM_FP.py:494	--	MAPE: 127.34%
+[INFO][2025-02-27 11:03:26,109] LightGBM_FP.py:522	--	训练集和测试集的预测结果已保存到 './result/lightgbm_fp_train_results.csv' 和 './result/lightgbm_fp_test_results.csv'
+[INFO][2025-02-27 11:03:26,207] LightGBM_FP.py:530	--	模型已保存到: logbbModel\lightgbm_fp_model.joblib
+[INFO][2025-02-27 11:03:26,214] LightGBM_FP.py:538	--	模型加载验证成功：预测结果与原模型一致
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:282	--	Fold 10 - MSE: 0.2183, RMSE: 0.4672, R2: 0.4338, MAE: 0.3451, MAPE: 197.14%, Adjusted R2: 14.5881
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:286	--	10折交叉验证平均指标：
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:287	--	MSE: 0.1930
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:288	--	RMSE: 0.4363
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:289	--	R2: 0.4676
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:290	--	MAE: 0.3252
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:291	--	MAPE: 184.04%
+[INFO][2025-02-27 11:03:31,036] Catboost_FP.py:292	--	Adjusted R2: 13.7779
+[INFO][2025-02-27 11:03:35,838] Catboost_FP.py:314	--	
+测试集评估指标：
+[INFO][2025-02-27 11:03:35,838] Catboost_FP.py:315	--	MSE: 0.1213
+[INFO][2025-02-27 11:03:35,838] Catboost_FP.py:316	--	RMSE: 0.3483
+[INFO][2025-02-27 11:03:35,838] Catboost_FP.py:317	--	R²: 0.6894
+[INFO][2025-02-27 11:03:35,838] Catboost_FP.py:318	--	Adjusted R²: -3.1938
+[INFO][2025-02-27 11:03:35,838] Catboost_FP.py:319	--	MAE: 0.2544
+[INFO][2025-02-27 11:03:35,838] Catboost_FP.py:320	--	MAPE: 109.05%
+[INFO][2025-02-27 11:03:35,843] Catboost_FP.py:341	--	模型已保存到: logbbModel\catboost_fp_model.joblib
+[INFO][2025-02-27 11:03:35,846] Catboost_FP.py:351	--	模型加载成功，并且预测结果一致！
+[INFO][2025-02-27 11:03:35,847] Catboost_FP.py:353	--	
+最终数据集划分:
+[INFO][2025-02-27 11:03:35,847] Catboost_FP.py:354	--	训练集: 490个样本 (89.9%)
+[INFO][2025-02-27 11:03:35,847] Catboost_FP.py:355	--	测试集: 55个样本 (10.1%)
+[INFO][2025-02-27 11:03:35,993] Catboost_FP.py:359	--	训练集和测试集散点图已保存到 './result/catboost_fp_scatter.png'
+[INFO][2025-02-27 11:03:35,997] Catboost_FP.py:368	--	训练集和测试集的预测结果已保存到 './result/catboost_fp_train_results.csv' 和 './result/catboost_fp_test_results.csv'

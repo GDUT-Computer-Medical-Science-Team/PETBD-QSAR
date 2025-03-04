@@ -1,0 +1,626 @@
+[INFO][2025-03-04 09:29:45,611] B3DB_FP.py:96	--	开始加载B3DB数据集...
+[INFO][2025-03-04 09:29:45,633] B3DB_FP.py:106	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 09:29:45,824] B3DB_FP.py:109	--	特征矩阵形状: (7807, 881)
+[INFO][2025-03-04 09:29:45,873] B3DB_FP.py:136	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 09:29:45,874] B3DB_FP.py:138	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 09:29:45,876] B3DB_FP.py:146	--	筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 09:29:45,877] B3DB_FP.py:147	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 09:29:45,877] B3DB_FP.py:166	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 09:29:46,081] B3DB_FP.py:169	--	开始进行预测...
+[INFO][2025-03-04 09:29:46,174] B3DB_FP.py:183	--	已将预测结果保存至 './result/B3DB_logBB_FP_Predict.csv'
+[INFO][2025-03-04 09:29:46,364] B3DB_FP.py:198	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:208	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:209	--	样本数量: 7807
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:210	--	特征数量: 50
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:211	--	MSE: 0.2515
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:212	--	RMSE: 0.5015
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:213	--	R2: -2.2881
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:214	--	调整后R2: -2.3093
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:215	--	MAE: 0.3734
+[INFO][2025-03-04 09:29:46,365] B3DB_FP.py:216	--	MAPE: inf%
+[INFO][2025-03-04 09:31:22,105] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 09:31:22,109] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 09:31:22,212] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:143	--	MSE: 0.1483
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:144	--	RMSE: 0.3851
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:145	--	R²: -0.9392
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:146	--	调整后R²: -0.9517
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:147	--	MAE: 0.2967
+[INFO][2025-03-04 09:31:22,213] B3DB_Mordred.py:148	--	MAPE: 651936557.75%
+[INFO][2025-03-04 09:50:48,202] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 09:50:48,206] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 09:50:48,304] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:143	--	MSE: 0.1483
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:144	--	RMSE: 0.3851
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:145	--	R²: -0.9392
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:146	--	调整后R²: -0.9517
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:147	--	MAE: 0.2967
+[INFO][2025-03-04 09:50:48,305] B3DB_Mordred.py:148	--	MAPE: 651936557.75%
+[INFO][2025-03-04 09:51:12,392] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 09:51:12,396] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 09:51:12,754] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:143	--	MSE: 0.1530
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:144	--	RMSE: 0.3912
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:145	--	R²: -1.0009
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:146	--	调整后R²: -1.0138
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:147	--	MAE: 0.2988
+[INFO][2025-03-04 09:51:12,755] B3DB_Mordred.py:148	--	MAPE: 681015212.64%
+[INFO][2025-03-04 10:17:39,552] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:17:39,558] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:17:39,910] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:143	--	MSE: 0.1530
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:144	--	RMSE: 0.3912
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:145	--	R²: -1.0009
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:146	--	调整后R²: -1.0138
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:147	--	MAE: 0.2988
+[INFO][2025-03-04 10:17:39,911] B3DB_Mordred.py:148	--	MAPE: 681015212.64%
+[INFO][2025-03-04 10:17:47,680] B3DB_FP.py:96	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:17:47,701] B3DB_FP.py:106	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:17:47,887] B3DB_FP.py:109	--	特征矩阵形状: (7807, 881)
+[INFO][2025-03-04 10:17:47,935] B3DB_FP.py:136	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:17:47,935] B3DB_FP.py:138	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:17:47,938] B3DB_FP.py:146	--	筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:17:47,938] B3DB_FP.py:147	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:17:47,938] B3DB_FP.py:166	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:17:48,091] B3DB_FP.py:169	--	开始进行预测...
+[INFO][2025-03-04 10:17:48,176] B3DB_FP.py:183	--	已将预测结果保存至 './result/B3DB_logBB_FP_Predict.csv'
+[INFO][2025-03-04 10:17:48,283] B3DB_FP.py:198	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:208	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:209	--	样本数量: 7807
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:210	--	特征数量: 50
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:211	--	MSE: 0.2755
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:212	--	RMSE: 0.5249
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:213	--	R2: -2.6024
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:214	--	调整后R2: -2.6256
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:215	--	MAE: 0.3929
+[INFO][2025-03-04 10:17:48,285] B3DB_FP.py:216	--	MAPE: inf%
+[INFO][2025-03-04 10:18:31,234] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:18:31,241] B3DB_regression_fp.py:105	--	计算B3DB数据集的分子指纹...
+[INFO][2025-03-04 10:19:02,500] B3DB_regression_fp.py:109	--	特征矩阵形状: (1058, 882)
+[INFO][2025-03-04 10:20:18,847] B3DB_regression_MD.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:20:18,848] B3DB_regression_MD.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:125	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:139	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:140	--	样本数量: 1058
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:141	--	特征数量: 50
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:142	--	MSE: 0.6631
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:143	--	RMSE: 0.8143
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:144	--	R²: -0.1748
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:145	--	调整后R²: -0.2331
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:146	--	MAE: 0.6665
+[INFO][2025-03-04 10:20:18,879] B3DB_regression_MD.py:147	--	MAPE: 6905739311.32%
+[INFO][2025-03-04 10:20:39,985] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:20:39,986] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:141	--	MSE: 0.6353
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:142	--	RMSE: 0.7970
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:143	--	R²: -0.1256
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:144	--	调整后R²: -0.1815
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:145	--	MAE: 0.6079
+[INFO][2025-03-04 10:20:40,251] B3DB_regression_MD.py:146	--	MAPE: 3771221096.01%
+[INFO][2025-03-04 10:20:51,958] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:20:51,965] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:20:52,019] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:20:52,029] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:20:52,030] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:20:52,030] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:20:52,031] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:20:52,031] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:20:52,187] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:20:52,208] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_Predict.csv'
+[INFO][2025-03-04 10:20:52,318] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:217	--	MSE: 0.5978
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:218	--	RMSE: 0.7732
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:219	--	R2: -0.0592
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:220	--	调整后R2: -0.1118
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:221	--	MAE: 0.6074
+[INFO][2025-03-04 10:20:52,320] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:21:16,877] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:21:16,883] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:21:16,938] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:21:16,949] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:21:16,949] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:21:16,950] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:21:16,950] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:21:16,950] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:21:17,106] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:21:17,127] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:21:17,239] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:217	--	MSE: 0.5978
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:218	--	RMSE: 0.7732
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:219	--	R2: -0.0592
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:220	--	调整后R2: -0.1118
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:221	--	MAE: 0.6074
+[INFO][2025-03-04 10:21:17,240] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:22:13,267] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:22:13,274] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:22:13,330] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:22:13,340] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:22:13,341] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:22:13,342] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:22:13,342] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:22:13,342] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:22:13,498] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:22:13,523] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:22:13,642] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:217	--	MSE: 0.5978
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:218	--	RMSE: 0.7732
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:219	--	R2: -0.0592
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:220	--	调整后R2: -0.1118
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:221	--	MAE: 0.6074
+[INFO][2025-03-04 10:22:13,643] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:23:33,563] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:23:33,568] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:23:33,934] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:23:33,934] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:143	--	MSE: 0.1530
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:144	--	RMSE: 0.3912
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:145	--	R²: -1.0009
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:146	--	调整后R²: -1.0138
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:147	--	MAE: 0.2988
+[INFO][2025-03-04 10:23:33,935] B3DB_Mordred.py:148	--	MAPE: 681015212.64%
+[INFO][2025-03-04 10:25:09,608] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:25:09,614] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:25:09,670] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:25:09,681] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:25:09,681] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:25:09,682] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:25:09,682] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:25:09,682] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:25:09,841] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:25:09,861] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:25:09,972] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:217	--	MSE: 0.5978
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:218	--	RMSE: 0.7732
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:219	--	R2: -0.0592
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:220	--	调整后R2: -0.1118
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:221	--	MAE: 0.6074
+[INFO][2025-03-04 10:25:09,973] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:25:17,224] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:25:17,225] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:141	--	MSE: 0.6353
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:142	--	RMSE: 0.7970
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:143	--	R²: -0.1256
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:144	--	调整后R²: -0.1815
+[INFO][2025-03-04 10:25:17,494] B3DB_regression_MD.py:145	--	MAE: 0.6079
+[INFO][2025-03-04 10:25:17,495] B3DB_regression_MD.py:146	--	MAPE: 3771221096.01%
+[INFO][2025-03-04 10:26:18,991] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:26:18,992] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:26:34,777] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:26:34,778] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:26:49,162] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:26:49,163] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:141	--	MSE: 2.1174
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:142	--	RMSE: 1.4551
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:143	--	R²: -2.7516
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:144	--	调整后R²: -2.9378
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:145	--	MAE: 1.2527
+[INFO][2025-03-04 10:26:49,190] B3DB_regression_MD.py:146	--	MAPE: 22168229942.98%
+[INFO][2025-03-04 10:27:01,970] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:27:01,971] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:141	--	MSE: 0.6631
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:142	--	RMSE: 0.8143
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:143	--	R²: -0.1748
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:144	--	调整后R²: -0.2331
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:145	--	MAE: 0.6665
+[INFO][2025-03-04 10:27:02,004] B3DB_regression_MD.py:146	--	MAPE: 6905739311.32%
+[INFO][2025-03-04 10:27:19,218] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:27:19,219] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:27:31,292] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:27:31,293] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:141	--	MSE: 0.6353
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:142	--	RMSE: 0.7970
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:143	--	R²: -0.1256
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:144	--	调整后R²: -0.1815
+[INFO][2025-03-04 10:27:31,560] B3DB_regression_MD.py:145	--	MAE: 0.6079
+[INFO][2025-03-04 10:27:31,561] B3DB_regression_MD.py:146	--	MAPE: 3771221096.01%
+[INFO][2025-03-04 10:27:48,085] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:27:48,091] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:27:48,149] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:27:48,160] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:27:48,160] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:27:48,161] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:27:48,161] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:27:48,161] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:27:48,316] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:27:48,336] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:27:48,445] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:217	--	MSE: 0.5978
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:218	--	RMSE: 0.7732
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:219	--	R2: -0.0592
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:220	--	调整后R2: -0.1118
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:221	--	MAE: 0.6074
+[INFO][2025-03-04 10:27:48,447] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:28:06,106] B3DB_FP.py:96	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:28:06,125] B3DB_FP.py:106	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:28:06,320] B3DB_FP.py:109	--	特征矩阵形状: (7807, 881)
+[INFO][2025-03-04 10:28:06,372] B3DB_FP.py:136	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:28:06,372] B3DB_FP.py:138	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:28:06,374] B3DB_FP.py:146	--	筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:28:06,375] B3DB_FP.py:147	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:28:06,375] B3DB_FP.py:166	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:28:06,527] B3DB_FP.py:169	--	开始进行预测...
+[INFO][2025-03-04 10:28:06,610] B3DB_FP.py:183	--	已将预测结果保存至 './result/B3DB_logBB_FP_Predict.csv'
+[INFO][2025-03-04 10:28:06,756] B3DB_FP.py:198	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:208	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:209	--	样本数量: 7807
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:210	--	特征数量: 50
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:211	--	MSE: 0.2616
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:212	--	RMSE: 0.5115
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:213	--	R2: -2.4200
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:214	--	调整后R2: -2.4420
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:215	--	MAE: 0.3812
+[INFO][2025-03-04 10:28:06,757] B3DB_FP.py:216	--	MAPE: inf%
+[INFO][2025-03-04 10:28:33,163] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:28:33,165] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:28:33,437] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:141	--	MSE: 0.6353
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:142	--	RMSE: 0.7970
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:143	--	R²: -0.1256
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:144	--	调整后R²: -0.1815
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:145	--	MAE: 0.6079
+[INFO][2025-03-04 10:28:33,438] B3DB_regression_MD.py:146	--	MAPE: 3771221096.01%
+[INFO][2025-03-04 10:28:43,298] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:28:43,302] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:143	--	MSE: 0.1530
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:144	--	RMSE: 0.3912
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:145	--	R²: -1.0009
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:146	--	调整后R²: -1.0138
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:147	--	MAE: 0.2988
+[INFO][2025-03-04 10:28:43,656] B3DB_Mordred.py:148	--	MAPE: 681015212.64%
+[INFO][2025-03-04 10:29:12,253] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:29:12,259] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:29:12,312] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:29:12,323] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:29:12,323] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:29:12,324] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:29:12,324] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:29:12,324] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:29:12,481] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:29:12,501] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:29:12,611] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:29:12,612] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:29:12,612] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:29:12,612] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:29:12,613] B3DB_regression_fp.py:217	--	MSE: 0.5978
+[INFO][2025-03-04 10:29:12,613] B3DB_regression_fp.py:218	--	RMSE: 0.7732
+[INFO][2025-03-04 10:29:12,613] B3DB_regression_fp.py:219	--	R2: -0.0592
+[INFO][2025-03-04 10:29:12,613] B3DB_regression_fp.py:220	--	调整后R2: -0.1118
+[INFO][2025-03-04 10:29:12,613] B3DB_regression_fp.py:221	--	MAE: 0.6074
+[INFO][2025-03-04 10:29:12,613] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:30:36,181] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:30:36,187] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:30:36,242] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:30:36,252] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:30:36,253] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:30:36,253] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:30:36,253] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:30:36,254] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:30:36,384] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:30:36,409] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:30:36,521] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:217	--	MSE: 0.6522
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:218	--	RMSE: 0.8076
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:219	--	R2: -0.1556
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:220	--	调整后R2: -0.2129
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:221	--	MAE: 0.6382
+[INFO][2025-03-04 10:30:36,522] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:30:41,743] B3DB_FP.py:96	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:30:41,762] B3DB_FP.py:106	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:30:41,940] B3DB_FP.py:109	--	特征矩阵形状: (7807, 881)
+[INFO][2025-03-04 10:30:41,988] B3DB_FP.py:136	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:30:41,988] B3DB_FP.py:138	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:30:41,990] B3DB_FP.py:146	--	筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:30:41,990] B3DB_FP.py:147	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:30:41,991] B3DB_FP.py:166	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:30:42,119] B3DB_FP.py:169	--	开始进行预测...
+[INFO][2025-03-04 10:30:42,203] B3DB_FP.py:183	--	已将预测结果保存至 './result/B3DB_logBB_FP_Predict.csv'
+[INFO][2025-03-04 10:30:42,310] B3DB_FP.py:198	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:208	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:209	--	样本数量: 7807
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:210	--	特征数量: 50
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:211	--	MSE: 0.2789
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:212	--	RMSE: 0.5281
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:213	--	R2: -2.6466
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:214	--	调整后R2: -2.6701
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:215	--	MAE: 0.3891
+[INFO][2025-03-04 10:30:42,311] B3DB_FP.py:216	--	MAPE: inf%
+[INFO][2025-03-04 10:30:53,917] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:30:53,918] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:30:54,182] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:141	--	MSE: 0.6353
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:142	--	RMSE: 0.7970
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:143	--	R²: -0.1256
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:144	--	调整后R²: -0.1815
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:145	--	MAE: 0.6079
+[INFO][2025-03-04 10:30:54,183] B3DB_regression_MD.py:146	--	MAPE: 3771221096.01%
+[INFO][2025-03-04 10:32:41,192] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:32:41,198] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:32:41,259] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:32:41,269] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:32:41,269] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:32:41,271] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:32:41,271] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:32:41,271] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:32:41,402] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:32:41,421] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:32:41,537] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:32:41,538] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:217	--	MSE: 0.6522
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:218	--	RMSE: 0.8076
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:219	--	R2: -0.1556
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:220	--	调整后R2: -0.2129
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:221	--	MAE: 0.6382
+[INFO][2025-03-04 10:32:41,539] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:32:47,130] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:32:47,131] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:141	--	MSE: 0.5586
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:142	--	RMSE: 0.7474
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:143	--	R²: 0.0102
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:144	--	调整后R²: -0.0390
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:145	--	MAE: 0.5781
+[INFO][2025-03-04 10:32:47,351] B3DB_regression_MD.py:146	--	MAPE: 2005246177.44%
+[INFO][2025-03-04 10:33:35,080] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:33:35,086] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:33:35,141] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 10:33:35,152] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:33:35,152] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:33:35,153] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 10:33:35,153] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:33:35,153] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:33:35,279] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 10:33:35,298] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 10:33:35,411] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:217	--	MSE: 0.6522
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:218	--	RMSE: 0.8076
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:219	--	R2: -0.1556
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:220	--	调整后R2: -0.2129
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:221	--	MAE: 0.6382
+[INFO][2025-03-04 10:33:35,412] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 10:34:05,330] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:34:05,333] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:143	--	MSE: 0.1146
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:144	--	RMSE: 0.3386
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:145	--	R²: -0.4987
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:146	--	调整后R²: -0.5084
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:147	--	MAE: 0.2401
+[INFO][2025-03-04 10:34:05,644] B3DB_Mordred.py:148	--	MAPE: 482773988.58%
+[INFO][2025-03-04 10:35:55,570] B3DB_FP.py:96	--	开始加载B3DB数据集...
+[INFO][2025-03-04 10:35:55,590] B3DB_FP.py:106	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 10:35:55,778] B3DB_FP.py:109	--	特征矩阵形状: (7807, 881)
+[INFO][2025-03-04 10:35:55,826] B3DB_FP.py:136	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 10:35:55,826] B3DB_FP.py:138	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 10:35:55,829] B3DB_FP.py:146	--	筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 10:35:55,829] B3DB_FP.py:147	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 10:35:55,829] B3DB_FP.py:166	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 10:35:55,964] B3DB_FP.py:169	--	开始进行预测...
+[INFO][2025-03-04 10:35:56,046] B3DB_FP.py:183	--	已将预测结果保存至 './result/B3DB_logBB_FP_Predict.csv'
+[INFO][2025-03-04 10:35:56,154] B3DB_FP.py:198	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 10:35:56,155] B3DB_FP.py:208	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 10:35:56,155] B3DB_FP.py:209	--	样本数量: 7807
+[INFO][2025-03-04 10:35:56,155] B3DB_FP.py:210	--	特征数量: 50
+[INFO][2025-03-04 10:35:56,156] B3DB_FP.py:211	--	MSE: 0.2789
+[INFO][2025-03-04 10:35:56,156] B3DB_FP.py:212	--	RMSE: 0.5281
+[INFO][2025-03-04 10:35:56,156] B3DB_FP.py:213	--	R2: -2.6466
+[INFO][2025-03-04 10:35:56,156] B3DB_FP.py:214	--	调整后R2: -2.6701
+[INFO][2025-03-04 10:35:56,156] B3DB_FP.py:215	--	MAE: 0.3891
+[INFO][2025-03-04 10:35:56,156] B3DB_FP.py:216	--	MAPE: inf%
+[INFO][2025-03-04 11:27:08,832] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 11:27:08,839] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 11:27:08,897] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 11:27:08,908] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 11:27:08,909] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 11:27:08,909] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 11:27:08,909] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 11:27:08,910] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 11:27:09,048] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 11:27:09,068] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 11:27:09,188] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:217	--	MSE: 0.6522
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:218	--	RMSE: 0.8076
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:219	--	R2: -0.1556
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:220	--	调整后R2: -0.2129
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:221	--	MAE: 0.6382
+[INFO][2025-03-04 11:27:09,189] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 11:27:13,806] B3DB_regression_fp.py:100	--	开始加载B3DB数据集...
+[INFO][2025-03-04 11:27:13,811] B3DB_regression_fp.py:111	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 11:27:13,867] B3DB_regression_fp.py:114	--	特征矩阵形状: (1058, 881)
+[INFO][2025-03-04 11:27:13,877] B3DB_regression_fp.py:141	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 11:27:13,878] B3DB_regression_fp.py:143	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 11:27:13,878] B3DB_regression_fp.py:151	--	筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 11:27:13,878] B3DB_regression_fp.py:152	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 11:27:13,879] B3DB_regression_fp.py:172	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 11:27:14,002] B3DB_regression_fp.py:175	--	开始进行预测...
+[INFO][2025-03-04 11:27:14,026] B3DB_regression_fp.py:189	--	已将预测结果保存至 './result/B3DB_logBB_FP_regression_Predict.csv'
+[INFO][2025-03-04 11:27:14,137] B3DB_regression_fp.py:204	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:214	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:215	--	样本数量: 1058
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:216	--	特征数量: 50
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:217	--	MSE: 0.6522
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:218	--	RMSE: 0.8076
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:219	--	R2: -0.1556
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:220	--	调整后R2: -0.2129
+[INFO][2025-03-04 11:27:14,138] B3DB_regression_fp.py:221	--	MAE: 0.6382
+[INFO][2025-03-04 11:27:14,139] B3DB_regression_fp.py:222	--	MAPE: inf%
+[INFO][2025-03-04 11:27:36,972] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 11:27:36,973] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:141	--	MSE: 0.5586
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:142	--	RMSE: 0.7474
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:143	--	R²: 0.0102
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:144	--	调整后R²: -0.0390
+[INFO][2025-03-04 11:27:37,206] B3DB_regression_MD.py:145	--	MAE: 0.5781
+[INFO][2025-03-04 11:27:37,207] B3DB_regression_MD.py:146	--	MAPE: 2005246177.44%
+[INFO][2025-03-04 11:28:04,779] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 11:28:04,784] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:143	--	MSE: 0.1146
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:144	--	RMSE: 0.3386
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:145	--	R²: -0.4987
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:146	--	调整后R²: -0.5084
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:147	--	MAE: 0.2401
+[INFO][2025-03-04 11:28:05,092] B3DB_Mordred.py:148	--	MAPE: 482773988.58%
+[INFO][2025-03-04 11:28:18,748] B3DB_FP.py:96	--	开始加载B3DB数据集...
+[INFO][2025-03-04 11:28:18,768] B3DB_FP.py:106	--	从已有文件加载分子指纹...
+[INFO][2025-03-04 11:28:18,942] B3DB_FP.py:109	--	特征矩阵形状: (7807, 881)
+[INFO][2025-03-04 11:28:18,991] B3DB_FP.py:136	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 11:28:18,991] B3DB_FP.py:138	--	读取特征索引完成，特征索引内容: [6, 14, 19, 20, 46, 180, 181, 183, 188, 192, 199, 261, 286, 287, 299, 300, 305, 308, 347, 349, 356, 364, 378, 391, 392, 414, 418, 437, 440, 442, 445, 467, 483, 549, 577, 588, 596, 646, 647, 656, 667, 680, 688, 704, 713, 738, 755, 800, 819, 839]
+[INFO][2025-03-04 11:28:18,994] B3DB_FP.py:146	--	筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 11:28:18,994] B3DB_FP.py:147	--	选择的特征名称: ['PubchemFP6', 'PubchemFP14', 'PubchemFP19', 'PubchemFP20', 'PubchemFP46', 'PubchemFP180', 'PubchemFP181', 'PubchemFP183', 'PubchemFP188', 'PubchemFP192', 'PubchemFP199', 'PubchemFP261', 'PubchemFP286', 'PubchemFP287', 'PubchemFP299', 'PubchemFP300', 'PubchemFP305', 'PubchemFP308', 'PubchemFP347', 'PubchemFP349', 'PubchemFP356', 'PubchemFP364', 'PubchemFP378', 'PubchemFP391', 'PubchemFP392', 'PubchemFP414', 'PubchemFP418', 'PubchemFP437', 'PubchemFP440', 'PubchemFP442', 'PubchemFP445', 'PubchemFP467', 'PubchemFP483', 'PubchemFP549', 'PubchemFP577', 'PubchemFP588', 'PubchemFP596', 'PubchemFP646', 'PubchemFP647', 'PubchemFP656', 'PubchemFP667', 'PubchemFP680', 'PubchemFP688', 'PubchemFP704', 'PubchemFP713', 'PubchemFP738', 'PubchemFP755', 'PubchemFP800', 'PubchemFP819', 'PubchemFP839']
+[INFO][2025-03-04 11:28:18,994] B3DB_FP.py:166	--	加载预训练的XGBoost模型...
+[INFO][2025-03-04 11:28:19,123] B3DB_FP.py:169	--	开始进行预测...
+[INFO][2025-03-04 11:28:19,214] B3DB_FP.py:183	--	已将预测结果保存至 './result/B3DB_logBB_FP_Predict.csv'
+[INFO][2025-03-04 11:28:19,341] B3DB_FP.py:198	--	散点图已保存到 './result/B3DB_fp_logBB_prediction_scatter.png'
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:208	--	
+========外部验证结果 (B3DB数据集)========
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:209	--	样本数量: 7807
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:210	--	特征数量: 50
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:211	--	MSE: 0.2789
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:212	--	RMSE: 0.5281
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:213	--	R2: -2.6466
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:214	--	调整后R2: -2.6701
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:215	--	MAE: 0.3891
+[INFO][2025-03-04 11:28:19,343] B3DB_FP.py:216	--	MAPE: inf%
+[INFO][2025-03-04 11:37:29,679] B3DB_Mordred.py:78	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 11:37:29,683] B3DB_Mordred.py:81	--	读取特征索引完成，筛选后的特征矩阵形状为：(7807, 50)
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:126	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:140	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:141	--	样本数量: 7807
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:142	--	特征数量: 50
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:143	--	MSE: 0.1148
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:144	--	RMSE: 0.3388
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:145	--	R²: -0.5005
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:146	--	调整后R²: -0.5102
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:147	--	MAE: 0.2402
+[INFO][2025-03-04 11:37:30,187] B3DB_Mordred.py:148	--	MAPE: 506632388.22%
+[INFO][2025-03-04 11:38:00,695] B3DB_regression_MD.py:77	--	存在特征索引文件，进行读取
+[INFO][2025-03-04 11:38:00,697] B3DB_regression_MD.py:80	--	读取特征索引完成，筛选后的特征矩阵形状为：(1058, 50)
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:124	--	已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:138	--	
+========外部验证性能评估 (B3DB数据集)========
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:139	--	样本数量: 1058
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:140	--	特征数量: 50
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:141	--	MSE: 0.8175
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:142	--	RMSE: 0.9041
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:143	--	R²: -0.4483
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:144	--	调整后R²: -0.5203
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:145	--	MAE: 0.7055
+[INFO][2025-03-04 11:38:01,129] B3DB_regression_MD.py:146	--	MAPE: 8721193441.74%
