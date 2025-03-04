@@ -1,7 +1,8 @@
-# QSAR Prediction of BBB Permeability Based on Machine Learning upon a Novel Dataset of PET Tracers
+# PETBD-QSAR
+
 
 <div align="center">
-
+QSAR Prediction of BBB Permeability Based on Machine Learning upon a Novel Dataset of PET Tracers
 基于PET示踪剂数据集的机器学习血脑屏障渗透性QSAR预测模型
 
 ![Python](https://img.shields.io/badge/Python-3.8-blue)
