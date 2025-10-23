@@ -1,137 +1,238 @@
 # PETBD-QSAR
 
-
 <div align="center">
-基于PET示踪剂数据集的机器学习血脑屏障渗透性QSAR预测模型
+Machine Learning QSAR Prediction Models for Blood-Brain Barrier Permeability Based on PET Tracer Datasets
 
 ![Python](https://img.shields.io/badge/Python-3.8-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 </div>
 
-## 📖 项目简介
+## 📖 Project Overview
 
-本项目基于全新的PET示踪剂生物分布数据集(PETBD)，通过机器学习方法构建血脑屏障渗透性的QSAR预测模型。主要特点：
+This project builds QSAR prediction models for blood-brain barrier permeability using machine learning methods based on a novel PET tracer biodistribution dataset (PETBD). Key features:
 
-- 📊 **首个PET示踪剂数据集**: 包含816个小分子PET示踪剂的体内生物分布数据
-- 🧬 **多器官分布数据**: 包含14个典型器官在静脉注射后60分钟的药物浓度数据
-- 🧠 **BBB渗透性预测**: 预测化合物的血脑屏障渗透系数(logBB)和脑部药物浓度
-- 🔄 **数据整合工具**: 用于整合公开文献中的PET示踪剂研究数据
+- 📊 **First PET Tracer Dataset**: Contains in vivo biodistribution data for 816 small molecule PET tracers
+- 🧬 **Multi-Organ Distribution Data**: Includes drug concentration data for 14 typical organs at 60 minutes post-intravenous injection
+- 🧠 **BBB Permeability Prediction**: Predicts blood-brain barrier penetration coefficient (logBB) and brain drug concentration
+- 🔄 **Data Integration Tools**: Tools for integrating PET tracer research data from published literature
 
-## 🛠️ 环境配置
+## 🛠️ Environment Setup
 
 ```bash
-# 创建并激活环境
+# Create and activate environment
 conda create -n MDM python=3.8
 conda activate MDM
 
-# 安装基础依赖
-conda install numpy pandas scikit-learn pybel
+# Install core dependencies
+conda install numpy pandas scikit-learn rdkit
 
-# 安装机器学习框架
+# Install machine learning frameworks
 pip install optuna xgboost lightgbm catboost
 
-# 安装数据处理工具
+# Install molecular descriptor tools
+pip install mordred padelpy
+
+# Install data processing tools
 pip install openpyxl==3.0.10
 pip install "pandas<2.0.0"
 pip install PyYAML==6.0
 pip install tqdm==4.64.1
 pip install xlrd==2.0.1
-pip install mordred
+pip install colorlog joblib
 ```
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
-├── MachineLearningModels/    # 机器学习模型
-│   ├── logBBModel/          # logBB预测模型
-│   ├── CbrainModel/         # 脑部浓度预测模型
-│   └── utils/               # 工具类
-├── MedicalDatasetsMerger/   # PET数据集整合工具
-├── utils/                   # 工具类
-├── preprocess/              # 数据预处理
-├── data/                    # 数据存储
-├── model/                   # 预训练模型存储
-└── result/                  # 结果输出
+├── MachineLearningModels/    # Machine learning models
+│   ├── logBBModel/          # logBB prediction models
+│   │   ├── *_PETBD_18F_Resample.py    # 18F isotope resampling models
+│   │   ├── *_FP_18F_Resample.py       # Fingerprint + 18F models
+│   │   └── B3DB_*.py                  # B3DB validation scripts
+│   ├── CbrainModel/         # Brain concentration prediction models
+│   │   └── *_Cbrain_18F_Resample.py   # Cbrain 18F models
+│   └── VivoValidation/      # In vivo validation
+├── MedicalDatasetsMerger/   # PET dataset integration tool
+├── utils/                   # Utility classes
+├── preprocess/              # Data preprocessing
+├── data/                    # Data storage
+├── model/                   # Pre-trained model storage
+└── result/                  # Output results
 ```
 
-## 📊 评估指标
+## 🔬 Model Algorithms
 
-模型评估使用以下指标：
-| 指标 | 描述 |
-|------|------|
-| MSE | 均方误差 |
-| RMSE | 均方根误差 |
-| R² | 决定系数 |
-| Adjusted R² | 调整R² |
-| MAE | 平均绝对误差 |
-| MAPE | 平均绝对百分比误差 |
+The project implements six machine learning algorithms with 18F isotope resampling:
 
-## 💻 使用说明
+| Algorithm | LogBB Model | Cbrain Model | Features |
+|-----------|-------------|--------------|----------|
+| XGBoost | ✓ | ✓ | Gradient boosting |
+| Random Forest | ✓ | ✓ | Ensemble learning |
+| LightGBM | ✓ | ✓ | Fast gradient boosting |
+| CatBoost | ✓ | ✓ | Categorical boosting |
+| MLP | ✓ | ✓ | Neural network |
+| SVM | ✓ | ✓ | Support vector machine |
 
-### 数据准备
-1. 将数据文件 (pet.xlsx/logbb.csv) 放在 data/ 目录下
-2. 数据文件必须包含以下列：
-   - SMILES: 分子的SMILES表示
-   - cbrain: 脑部浓度值
-   - logBB: 血脑屏障渗透系数(可选)
+## 🧪 18F Isotope Resampling
 
-### 模型训练
+The project implements isotope-based dataset balancing to address class imbalance:
+
+**Resampling Strategies:**
+- **Oversample**: Replicate minority class samples to match majority class
+- **Undersample**: Reduce majority class samples to match minority class
+- **Combined** (Recommended): Keep all original data + add oversampled minority samples
+
+**Key Implementation Files:**
+- `XGBoost_PETBD_18F_Resample.py` - XGBoost with 18F resampling
+- `RF_PETBD_18F_Resample.py` - Random Forest with 18F resampling
+- `LightGBM_PETBD_18F_Resample.py` - LightGBM with 18F resampling
+- `CatBoost_PETBD_18F_Resample.py` - CatBoost with 18F resampling
+- `MLP_PETBD_18F_Resample.py` - Neural network with 18F resampling
+- `SVM_PETBD_18F_Resample.py` - SVM with 18F resampling
+
+## 📊 Evaluation Metrics
+
+Model performance is evaluated using the following metrics:
+
+| Metric | Description |
+|--------|-------------|
+| MSE | Mean Squared Error |
+| RMSE | Root Mean Squared Error |
+| R² | Coefficient of Determination |
+| Adjusted R² | Adjusted R² |
+| MAE | Mean Absolute Error |
+| MAPE | Mean Absolute Percentage Error |
+
+## 💻 Usage
+
+### Data Preparation
+1. Place data files (PETBD_v20240912.csv/OrganDataAt60min.csv) in the data/ directory
+2. Data files must contain the following columns:
+   - SMILES: Molecular SMILES representation
+   - compound index: Compound name with isotope information
+   - logBB at60min: Blood-brain barrier penetration coefficient
+   - brain mean60min: Brain concentration value (for Cbrain models)
+   - Metadata: animal type, gender, animal weight (g), injection dosage (μCi)
+
+### Model Training
+
+**LogBB Models:**
 ```bash
-# 训练logBB预测模型
-python MachineLearningModels/logBBModel/train.py
+cd MachineLearningModels/logBBModel
 
-# 训练脑部浓度预测模型
-python MachineLearningModels/CbrainModel/train.py
+# Train with 18F resampling
+python XGBoost_PETBD_18F_Resample.py
+python RF_PETBD_18F_Resample.py
+python LightGBM_PETBD_18F_Resample.py
+python CatBoost_PETBD_18F_Resample.py
+python MLP_PETBD_18F_Resample.py
+python SVM_PETBD_18F_Resample.py
 ```
 
-### 结果输出
-- 预测结果保存在 result/ 目录下
-- 日志文件保存在 data/log/ 目录下
-- 模型文件保存在 model/ 目录下
+**Cbrain Models:**
+```bash
+cd MachineLearningModels/CbrainModel
 
-## 🔍 特征说明
+# Train brain concentration models
+python XGBoost_Cbrain_18F_Resample.py
+python RF_Cbrain_18F_Resample.py
+python LightGBM_Cbrain_18F_Resample.py
+python CatBoost_Cbrain_18F_Resample.py
+python MLP_Cbrain_18F_Resample.py
+python SVM_Cbrain_18F_Resample.py
+```
 
-### 分子指纹
-- 使用 Pybel 生成分子指纹
+**External Validation:**
+```bash
+cd MachineLearningModels/VivoValidation
 
+# Validate with experimental data
+python Vivo_XGB_FP.py
+python vivo_xgb_Mordred.py
+python Vivo_LightGBM_Mordred.py
+```
 
-### Mordred描述符
-- 2D分子描述符
-- 包括拓扑学特征、物理化学性质等
-- 自动去除高度相关特征
+### Output Files
+- Prediction results saved in result/ directory
+- Log files saved in data/log/ directory
+- Model files saved in model/ or *Model/ directories
+- JSON reports with comprehensive metrics
 
-## ⚙️ 模型参数
+## 🔍 Feature Engineering
 
-所有模型都经过Optuna自动调参优化，主要参数包括：
-- 学习率
-- 树的深度
-- 特征采样比例
-- 正则化参数
-- 迭代次数
+### Molecular Fingerprints
+- Morgan fingerprints generated using RDKit (radius=2, 1024-bit)
+- PaDEL fingerprints via padelpy wrapper
 
-## 📝 日志记录
+### Mordred Descriptors
+- 2D molecular descriptors
+- Includes topological features, physicochemical properties
+- Automatic removal of highly correlated features
 
-系统自动记录以下信息：
-- 数据加载和预处理过程
-- 特征计算和选择过程
-- 模型训练和预测过程
-- 评估指标和结果
-- 错误和异常信息
+### Metadata Features
+- Animal type (mouse/rat encoding)
+- Gender (male/female encoding)
+- Animal weight (g, median imputation)
+- Injection dosage (μCi, median imputation)
 
-## 🔧 错误处理
+### Combined Feature Models
+- Stratified feature selection maintaining representation from all types
+- Example: 21 Morgan + 25 Mordred + 4 Metadata = 50 features
 
-常见问题及解决方案：
-1. 特征数量不匹配
-   - 确保特征选择数量为50个
-   - 检查预处理步骤是否正确
+## ⚙️ Hyperparameter Optimization
 
-2. 模型文件缺失
-   - 确保模型文件在正确路径下
-   - 检查模型文件名是否正确
+All models use Optuna for automatic hyperparameter tuning (typically 100 trials):
 
-3. 内存不足
-   - 减少批处理数据量
-   - 使用数据生成器
+**Common Parameters:**
+- Learning rate
+- Tree depth (for tree-based models)
+- Feature sampling ratio
+- Regularization parameters
+- Number of iterations/estimators
 
-## 📧 联系方式
+**Cross-Validation:**
+- 10-fold cross-validation on training data
+- Separate train/validation/test split for evaluation
+
+## 📝 Logging System
+
+The system uses a custom DataLogger class with colored output:
+- **DEBUG** (cyan): Detailed debugging information
+- **INFO** (green): General information and progress
+- **WARNING** (yellow): Warning messages
+- **ERROR** (red): Error conditions
+- **File logging**: Saves to `data/*/log/{YYYYMMDD}.log`
+
+## 🔧 Troubleshooting
+
+Common issues and solutions:
+
+1. **Feature Dimension Mismatch**
+   - Ensure feature selection maintains consistent dimensions
+   - Check preprocessing steps are correct
+   - Delete cached feature files to force recalculation
+
+2. **Missing Model Files**
+   - Ensure model files are in correct path
+   - Check model filenames are correct
+   - Verify .joblib files are not corrupted
+
+3. **Memory Issues**
+   - Reduce batch processing size
+   - Use feature selection to reduce dimensionality
+   - Monitor memory during descriptor calculation
+
+4. **Environment Issues**
+   - Always activate conda environment: `conda activate MDM`
+   - Verify Python version is 3.8: `python --version`
+   - Check all dependencies: `pip install -r requirements.txt`
+
+5. **PaDEL Calculation Errors**
+   - Ensure Java 8+ is installed and in system PATH
+   - Verify SMILES strings are valid
+   - Check RDKit can parse all molecules
+
+## 📄 License
+
+MIT License
