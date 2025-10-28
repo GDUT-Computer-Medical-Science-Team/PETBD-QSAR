@@ -16,15 +16,15 @@ from padelpy import padeldescriptor
 import joblib
 from sklearn.feature_selection import RFE
 
-# 设置日志
+# [Chinese text removed]
 log = DataLogger(log_file=f"../../data/logBB_data/log/{datetime.now().strftime('%Y%m%d')}.log").getlog("rf_feature_selection")
 
 
 def calculate_padel_fingerprints(smiles_list):
     """
-    计算分子的PaDEL指纹
-    :param smiles_list: SMILES 字符串列表
-    :return: DataFrame，包含所有计算的指纹
+    [Chinese text removed]PaDEL[Chinese text removed]
+    :param smiles_list: SMILES [Chinese text removed]
+    :return: DataFrame，[Chinese text removed]
     """
     with tempfile.NamedTemporaryFile(mode='w', suffix='.smi', delete=False) as temp_file:
         for smi in smiles_list:
@@ -54,7 +54,7 @@ def calculate_padel_fingerprints(smiles_list):
             df.insert(0, 'SMILES', smiles_list)
             return df
     except Exception as e:
-        log.error(f"计算PaDEL指纹时发生错误: {str(e)}")
+        log.error(f"[Chinese text removed]PaDEL[Chinese text removed]Error: {str(e)}")
         raise
     finally:
         if os.path.exists(temp_smi_file):
@@ -63,15 +63,15 @@ def calculate_padel_fingerprints(smiles_list):
 
 def adjusted_r2(y_true, y_pred, num_features):
     """
-    计算调整后的 R^2
-    :param y_true: 真实值
-    :param y_pred: 预测值
-    :param num_features: 模型使用的特征数量
-    :return: 调整后的 R^2
+    Calculate adjusted R²
+    :param y_true: true values
+    :param y_pred: predicted values
+    :param num_features: number of features used by the model
+    :return: adjusted R²
     """
     n = len(y_true)
     r2 = r2_score(y_true, y_pred)
-    # 避免除零
+    # avoid division by zero
     if n - num_features - 1 == 0:
         return r2
     return 1 - (1 - r2) * (n - 1) / (n - num_features - 1)
@@ -79,11 +79,11 @@ def adjusted_r2(y_true, y_pred, num_features):
 
 def plot_scatter(y_true_train, y_pred_train, y_true_test, y_pred_test):
     """
-    绘制训练集和测试集散点图
+    [Chinese text removed]
     """
     plt.figure(figsize=(12, 6))
 
-    # 训练集
+    # [Chinese text removed]
     plt.subplot(1, 2, 1)
     plt.scatter(y_true_train, y_pred_train, color='blue', alpha=0.5, label='Train')
     plt.plot([y_true_train.min(), y_true_train.max()],
@@ -94,7 +94,7 @@ def plot_scatter(y_true_train, y_pred_train, y_true_test, y_pred_test):
     plt.ylabel('Predicted Values')
     plt.legend()
 
-    # 测试集
+    # [Chinese text removed]
     plt.subplot(1, 2, 2)
     plt.scatter(y_true_test, y_pred_test, color='green', alpha=0.5, label='Test')
     plt.plot([y_true_test.min(), y_true_test.max()],
@@ -110,7 +110,7 @@ def plot_scatter(y_true_train, y_pred_train, y_true_test, y_pred_test):
 
 
 # --------------------------------------------------------------------
-# 1. 超参数搜索（不使用交叉验证，采用简单的训练/验证划分，并搜索轮数少）
+# 1. [Chinese text removed]parameter[Chinese text removed]（[Chinese text removed]Cross-validation，[Chinese text removed]/[Chinese text removed]，[Chinese text removed]）
 def objective(trial, X, y):
     param = {
         'n_estimators': trial.suggest_int('n_estimators', 100, 1000),
@@ -124,103 +124,103 @@ def objective(trial, X, y):
         'random_state': 42
     }
 
-    # 使用简单的训练/验证划分进行评估
+    # [Chinese text removed]/[Chinese text removed]
     X_train_split, X_valid_split, y_train_split, y_valid_split = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
 
-    # 训练模型
+    # [Chinese text removed]
     model = RandomForestRegressor(**param)
     model.fit(X_train_split, y_train_split)
 
-    # 预测并计算评估指标
+    # [Chinese text removed]Calculate evaluation metrics
     y_pred = model.predict(X_valid_split)
     rmse = np.sqrt(mean_squared_error(y_valid_split, y_pred))
 
-    return rmse  # 返回 RMSE 作为优化目标
+    return rmse  # return RMSE [Chinese text removed]
 
 
 # --------------------------------------------------------------------
 def main():
     logBB_data_file = "../../data/logBB_data/logBB.csv"
     logBB_desc_file = "../../data/logBB_data/logBB_w_desc_fp.csv"
-    feature_index_path = "../../data/logBB_data/logBB_w_desc_fp_index2.txt"  # 特征索引文件路径
-    log.info("===============启动 RandomForest 特征筛选及训练工作===============")
+    feature_index_path = "../../data/logBB_data/logBB_w_desc_fp_index2.txt"  # features[Chinese text removed]
+    log.info("===============Starting RandomForest features[Chinese text removed]===============")
 
-    # 检查数据文件
+    # [Chinese text removed]
     if not os.path.exists(logBB_data_file):
-        log.error("缺失logBB数据集文件")
-        raise FileNotFoundError("缺失logBB数据集")
+        log.error("[Chinese text removed]logBB[Chinese text removed]")
+        raise FileNotFoundError("[Chinese text removed]logBB[Chinese text removed]")
 
-    # 读取数据
+    # [Chinese text removed]
     df = pd.read_csv(logBB_data_file, encoding='utf-8')
     df = df.dropna(subset=['logBB']).reset_index(drop=True)
 
-    # 删除 Compound index 列
+    # [Chinese text removed] Compound index [Chinese text removed]
     if 'Compound index' in df.columns:
         df = df.drop(columns=['Compound index'])
-        log.info("已删除 Compound index 列")
+        log.info("[Chinese text removed] Compound index [Chinese text removed]")
 
     SMILES = df['SMILES']
-    log.info(f"读取 {len(SMILES)} 条 SMILES 数据")
+    log.info(f"[Chinese text removed] {len(SMILES)} [Chinese text removed] SMILES [Chinese text removed]")
 
-    # 生成分子指纹
+    # [Chinese text removed]
     df_desc = calculate_padel_fingerprints(SMILES)
-    log.info(f"生成了 {df_desc.shape[0]} 条指纹数据，每个指纹有 {df_desc.shape[1]} 位")
+    log.info(f"[Chinese text removed] {df_desc.shape[0]} [Chinese text removed]，[Chinese text removed] {df_desc.shape[1]} [Chinese text removed]")
 
-    # 合并指纹与原始数据
+    # [Chinese text removed]original[Chinese text removed]
     df_final = pd.concat([df, df_desc.drop('SMILES', axis=1)], axis=1)
-    log.info(f"生成的数据框形状: {df_final.shape}")
+    log.info(f"[Chinese text removed]: {df_final.shape}")
 
-    # 特征选择与数据准备
+    # features[Chinese text removed]
     X_initial = df_final.drop(['SMILES', 'logBB'], axis=1)
     y = df_final['logBB']
 
-    # 打印特征
-    log.info(f"初始特征数量: {X_initial.shape[1]}")
-    log.info(f"特征名称: {X_initial.columns.tolist()}")
+    # [Chinese text removed]features
+    log.info(f"[Chinese text removed]features[Chinese text removed]: {X_initial.shape[1]}")
+    log.info(f"features[Chinese text removed]: {X_initial.columns.tolist()}")
 
-    # 检查特征索引文件是否存在
+    # [Chinese text removed]features[Chinese text removed]
     if os.path.exists(feature_index_path):
-        log.info("特征索引文件存在，加载已选择的特征")
+        log.info("features[Chinese text removed]，[Chinese text removed]features")
         desc_index = np.loadtxt(feature_index_path, dtype=int, delimiter=',')
         
-        # 确保索引在有效范围内
+        # [Chinese text removed]
         valid_indices = desc_index[desc_index < X_initial.shape[1]]
         if len(valid_indices) != len(desc_index):
-            log.warning(f"部分特征索引超出范围，将只使用有效索引")
+            log.warning(f"[Chinese text removed]featuresIndex out of range，[Chinese text removed]")
             desc_index = valid_indices
         
-        X = X_initial.iloc[:, desc_index]  # 使用有效的索引
-        log.info(f"使用特征索引文件，选择的特征数量: {X.shape[1]}")
-        log.info(f"选择的特征名称: {X.columns.tolist()}")
+        X = X_initial.iloc[:, desc_index]  # [Chinese text removed]
+        log.info(f"[Chinese text removed]features[Chinese text removed]，[Chinese text removed]features[Chinese text removed]: {X.shape[1]}")
+        log.info(f"[Chinese text removed]features[Chinese text removed]: {X.columns.tolist()}")
     else:
-        log.error("特征索引文件不存在，无法加载特征")
+        log.error("features[Chinese text removed]，[Chinese text removed]features")
         return
 
-    # 数据集划分
+    # Dataset split
     X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
-    log.info(f"将数据集按9:1划分为训练验证集({len(X_train_val)})个样本和测试集({len(X_test)})个样本")
+    log.info(f"[Chinese text removed]9:1[Chinese text removed]({len(X_train_val)})[Chinese text removed]samples[Chinese text removed]({len(X_test)})[Chinese text removed]samples")
 
-    # 在剩余数据中分出验证集 (10%)
+    # [Chinese text removed] (10%)
     X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=0.1, random_state=42)
-    log.info(f"将训练验证集按9:1划分为训练集({len(X_train)})个样本和验证集({len(X_val)})个样本")
+    log.info(f"[Chinese text removed]9:1[Chinese text removed]({len(X_train)})[Chinese text removed]samples[Chinese text removed]({len(X_val)})[Chinese text removed]samples")
 
-    # 数据归一化
+    # [Chinese text removed]
     sc = MinMaxScaler()
     X_scaled = sc.fit_transform(X)
     X = pd.DataFrame(X_scaled, columns=X.columns)
 
-    # 首先进行完整的超参数搜索（100轮）
-    log.info("开始进行超参数搜索（100轮）...")
+    # [Chinese text removed]parameter[Chinese text removed]（100[Chinese text removed]）
+    log.info("Starting hyperparameter search (100 trials)...")
     study = optuna.create_study(direction='minimize')
     study.optimize(lambda trial: objective(trial, X, y), n_trials=100)
     
     best_params = study.best_params
-    log.info(f"最优超参数: {best_params}")
-    log.info(f"最优 RMSE: {study.best_value:.4f}")
+    log.info(f"Best hyperparameters: {best_params}")
+    log.info(f"Best RMSE: {study.best_value:.4f}")
 
-    # 使用找到的最佳参数进行十折交叉验证
+    # [Chinese text removed]parameter[Chinese text removed]Cross-validation
     kf = KFold(n_splits=10, shuffle=True, random_state=42)
     metrics_list = []
 
@@ -228,14 +228,14 @@ def main():
         X_train_cv, X_val_cv = X.iloc[train_index], X.iloc[val_index]
         y_train_cv, y_val_cv = y.iloc[train_index], y.iloc[val_index]
 
-        # 使用最佳参数训练模型
+        # [Chinese text removed]parameter[Chinese text removed]
         model_final = RandomForestRegressor(**best_params)
         model_final.fit(X_train_cv, y_train_cv)
 
-        # 预测
+        # [Chinese text removed]
         y_val_pred = model_final.predict(X_val_cv)
 
-        # 计算评估指标
+        # Calculate evaluation metrics
         mse_val = mean_squared_error(y_val_cv, y_val_pred)
         rmse_val = np.sqrt(mse_val)
         r2_val = r2_score(y_val_cv, y_val_pred)
@@ -255,9 +255,9 @@ def main():
 
         log.info(f"Fold {fold_num + 1} - MSE: {mse_val:.4f}, RMSE: {rmse_val:.4f}, R2: {r2_val:.4f}, MAE: {mae_val:.4f}, MAPE: {mape_val:.2f}%, Adjusted R2: {adj_r2_val:.4f}")
 
-    # 平均指标
+    # [Chinese text removed]
     avg_metrics = {key: np.mean([m[key] for m in metrics_list]) for key in metrics_list[0] if key != 'fold'}
-    log.info("10折交叉验证平均指标：")
+    log.info("10[Chinese text removed]Cross-validation[Chinese text removed]：")
     log.info(f"MSE: {avg_metrics['mse']:.4f}")
     log.info(f"RMSE: {avg_metrics['rmse']:.4f}")
     log.info(f"R2: {avg_metrics['r2']:.4f}")
@@ -266,16 +266,16 @@ def main():
     log.info(f"Adjusted R2: {avg_metrics['adj_r2']:.4f}")
 
     # ----------------------------------------------------------------
-    # 4. 除了10折交叉验证，我们还进行一次单独的训练/测试划分用于绘制散点图和保存预测结果
+    # 4. Besides 10-fold CV, we also perform a separate train/test split for plotting scatter and saving predictions
     model_final = RandomForestRegressor(**best_params)
     model_final.fit(X_train, y_train)
 
-    # 在所有数据集上进行预测
+    # Make predictions on all datasets
     y_pred_train = model_final.predict(X_train)
     y_pred_val = model_final.predict(X_val)
     y_pred_test = model_final.predict(X_test)
 
-    # 计算评估指标
+    # Calculate evaluation metrics
     mse_train = mean_squared_error(y_train, y_pred_train)
     rmse_train = np.sqrt(mse_train)
     r2_train = r2_score(y_train, y_pred_train)
@@ -297,11 +297,11 @@ def main():
     mape_test = mean_absolute_percentage_error(y_test, y_pred_test)
     adj_r2_test = adjusted_r2(y_test, y_pred_test, X_test.shape[1])
 
-    # 输出评估结果
-    log.info("最终评估指标：")
-    log.info(f"测试集 -> MSE: {mse_test:.4f}, RMSE: {rmse_test:.4f}, R2: {r2_test:.4f}, Adjusted R2: {adj_r2_test:.4f}, MAE: {mae_test:.4f}, MAPE: {mape_test:.2f}%")
+    # [Chinese text removed]
+    log.info("[Chinese text removed]：")
+    log.info(f"[Chinese text removed] -> MSE: {mse_test:.4f}, RMSE: {rmse_test:.4f}, R2: {r2_test:.4f}, Adjusted R2: {adj_r2_test:.4f}, MAE: {mae_test:.4f}, MAPE: {mape_test:.2f}%")
 
-    # 保存结果
+    # [Chinese text removed]
     train_results = pd.DataFrame({
         'True Values': y_train, 
         'Predicted Values': y_pred_train
@@ -320,28 +320,28 @@ def main():
     val_results.to_csv('./result/rf_fp_val_results.csv', index=False)
     test_results.to_csv('./result/rf_fp_test_results.csv', index=False)
 
-    # 定义模型保存目录
+    # [Chinese text removed]
     model_dir = "logbbModel"
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
 
-    # 定义模型保存路径
+    # [Chinese text removed]
     model_save_path = os.path.join(model_dir, "rf_fp_model.joblib")
 
-    # 保存模型
+    # Save model
     joblib.dump(model_final, model_save_path)
-    log.info(f"模型已保存到: {model_save_path}")
+    log.info(f"Model saved to: {model_save_path}")
 
-    # 加载模型
+    # [Chinese text removed]
     loaded_model = joblib.load(model_save_path)
-    # 进行预测
+    # [Chinese text removed]
     y_pred_test_loaded = loaded_model.predict(X_test)
 
-    # 验证加载的模型与原始模型是否一致
-    assert np.allclose(y_pred_test, y_pred_test_loaded), "加载的模型与原始模型预测结果不一致！"
-    log.info("模型加载成功，并且预测结果一致！")
+    # [Chinese text removed]original[Chinese text removed]
+    assert np.allclose(y_pred_test, y_pred_test_loaded), "[Chinese text removed]original[Chinese text removed]！"
+    log.info("[Chinese text removed]Success，[Chinese text removed]！")
 
-    # 绘制散点图
+    # Plot scatter plot
     plot_scatter(y_train, y_pred_train, y_test, y_pred_test)
 
 

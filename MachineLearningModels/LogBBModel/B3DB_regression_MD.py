@@ -15,28 +15,28 @@ from preprocess.data_preprocess.data_preprocess_utils import calculate_Mordred_d
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import cross_val_predict
 
-# 设置日志记录器
+# [Chinese text removed]
 log = DataLogger(log_file=f"../../data/b3db_data/log/{datetime.now().strftime('%Y%m%d')}.log").getlog(
     "ratio_xgboost_training")
 
-# 文件路径设置
+# [Chinese text removed]
 b3db_file = "../../data/B3DB_regression.tsv"
 desc_file = '../../data/B3DB_w_desc_regrssion_fp.csv'
 desc_index_file = "../../data/logBB_data/logBB_w_desc_fp_index2.txt"
 
 
 
-# 读取数据
+# [Chinese text removed]
 df = pd.read_csv(b3db_file, sep='\t')
 RFE_features_to_select = 50
-# 检查目标列和SMILES列的名称
+# [Chinese text removed]SMILES[Chinese text removed]
 smile_column_name = 'SMILES'
 pred_column_name = 'logBB'
 seed = int(time())
 
-# 生成或读取描述符
+# [Chinese text removed]
 if not os.path.exists(desc_file):
-    X = calculate_Mordred_desc(df[smile_column_name])  # 确保calculate_Mordred_desc已定义
+    X = calculate_Mordred_desc(df[smile_column_name])  # [Chinese text removed]calculate_Mordred_desc[Chinese text removed]
     pd.concat([X, df[pred_column_name]], axis=1).to_csv(desc_file, index=False)
 else:
     df = pd.read_csv(desc_file)
@@ -44,18 +44,18 @@ else:
     X = X.drop(smile_column_name, axis=1)
 
 y = df[pred_column_name]
-mean_value = df['logBB'].mean()  # 计算目标变量的均值
-df['logBB'].fillna(mean_value, inplace=True)  # 用均值填充 NaN 值
+mean_value = df['logBB'].mean()  # [Chinese text removed]
+df['logBB'].fillna(mean_value, inplace=True)  # [Chinese text removed] NaN [Chinese text removed]
 
-# 特征归一化
+# Feature normalization
 sc = MinMaxScaler()
 sc.fit(X)
 X = pd.DataFrame(sc.transform(X))
 
-# 特征筛选
+# features[Chinese text removed]
 if not os.path.exists(desc_index_file):
-    log.info("不存在特征索引文件，进行特征筛选")
-    log.info(f"筛选前的特征矩阵形状为：{X.shape}")
+    log.info("[Chinese text removed]features[Chinese text removed]，[Chinese text removed]features[Chinese text removed]")
+    log.info(f"[Chinese text removed]features[Chinese text removed]：{X.shape}")
     # X = FeatureExtraction(X,
     #                       y,
     #                       VT_threshold=0.02,
@@ -68,93 +68,93 @@ if not os.path.exists(desc_index_file):
     try:
         np.savetxt(desc_index_file, desc_index, fmt='%d')
         X = X[desc_index]
-        log.info(f"特征筛选完成，筛选后的特征矩阵形状为：{X.shape}, 筛选得到的特征索引保存到：{desc_index_file}")
+        log.info(f"features[Chinese text removed]Complete，[Chinese text removed]features[Chinese text removed]：{X.shape}, [Chinese text removed]features[Chinese text removed]：{desc_index_file}")
     except (TypeError, KeyError) as e:
         log.error(e)
         os.remove(logBB_desc_index_file)
         sys.exit()
 else:
-    log.info("存在特征索引文件，进行读取")
+    log.info("[Chinese text removed]features[Chinese text removed]，[Chinese text removed]")
     desc_index = np.loadtxt(desc_index_file, dtype=int, delimiter=',').tolist()
     X = X[desc_index]
-    log.info(f"读取特征索引完成，筛选后的特征矩阵形状为：{X.shape}")
+    log.info(f"[Chinese text removed]features[Chinese text removed]Complete，[Chinese text removed]features[Chinese text removed]：{X.shape}")
 
-# 分割训练集与验证集
-# 分割后索引重置，否则训练时KFold出现错误
+# [Chinese text removed]
+# [Chinese text removed]，[Chinese text removed]KFold[Chinese text removed]Error
 X = X.reset_index(drop=True)
 y = y.reset_index(drop=True)
 
-# 从这里开始，您可以继续使用模型训练和验证的代码
+# [Chinese text removed]Starting，[Chinese text removed]
 model = joblib.load('./logbbModel/xgb_mordred_model.joblib')
-# 确保验证数据集 X_val 和 y_val 已经准备好
-# 如果需要，您可以重新加载并预处理数据集
+# [Chinese text removed] X_val [Chinese text removed] y_val [Chinese text removed]
+# [Chinese text removed]，[Chinese text removed]
 
 
-# 直接使用模型进行外部验证预测
+# [Chinese text removed]
 y_pred = model.predict(X)
 
-# 计算外部验证性能指标
+# [Chinese text removed]
 mse = mean_squared_error(y, y_pred)
 rmse = np.sqrt(mse)
 r2 = r2_score(y, y_pred)
 mae = mean_absolute_error(y, y_pred)
 
-# 安全计算MAPE，避免除零错误
+# [Chinese text removed]MAPE，avoid division by zeroError
 epsilon = 1e-10
 mape = np.mean(np.abs((y - y_pred) / np.maximum(np.abs(y), epsilon))) * 100
 
-# 计算调整后的 R 平方
+# [Chinese text removed] R [Chinese text removed]
 n = X.shape[0]
 p = X.shape[1]
 adj_r2 = 1 - (1 - r2) * (n - 1) / (n - p - 1)
 
-# 创建结果目录
+# [Chinese text removed]
 os.makedirs('./result', exist_ok=True)
 
-# 读取原始B3DB数据
+# [Chinese text removed]originalB3DB[Chinese text removed]
 original_b3db = pd.read_csv(b3db_file, sep='\t')
 
-# 确保索引对齐
+# [Chinese text removed]
 if len(original_b3db) == len(y_pred):
-    # 添加预测值到原始数据
+    # [Chinese text removed]predicted values[Chinese text removed]original[Chinese text removed]
     original_b3db['Predicted_logBB'] = y_pred
 
-    # 保存结果
+    # [Chinese text removed]
     original_b3db.to_csv('./result/B3DB_logBB_Mordred_Predict.csv', index=False)
-    log.info("已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'")
+    log.info("[Chinese text removed] './result/B3DB_logBB_Mordred_Predict.csv'")
 else:
-    log.warning(f"原始数据行数({len(original_b3db)})与预测结果行数({len(y_pred)})不匹配，无法直接合并")
+    log.warning(f"original[Chinese text removed]({len(original_b3db)})[Chinese text removed]({len(y_pred)})[Chinese text removed]，[Chinese text removed]")
 
-    # 创建包含SMILES、实际值和预测值的DataFrame
+    # [Chinese text removed]SMILES、[Chinese text removed]predicted values[Chinese text removed]DataFrame
     y_pred_df = pd.DataFrame({
         'SMILES': df[smile_column_name],
         'Actual_logBB': y,
         'Predicted_logBB': y_pred
     })
     y_pred_df.to_csv('./result/B3DB_logBB_Mordred_Predict.csv', index=False)
-    log.info("已将预测结果保存至 './result/B3DB_logBB_Mordred_Predict.csv'")
+    log.info("[Chinese text removed] './result/B3DB_logBB_Mordred_Predict.csv'")
 
-# 打印外部验证性能指标
-log.info("\n========外部验证性能评估 (B3DB数据集)========")
-log.info(f"样本数量: {n}")
-log.info(f"特征数量: {p}")
+# [Chinese text removed]
+log.info("\n========[Chinese text removed] (B3DB[Chinese text removed])========")
+log.info(f"samples[Chinese text removed]: {n}")
+log.info(f"features[Chinese text removed]: {p}")
 log.info(f"MSE: {mse:.4f}")
 log.info(f"RMSE: {rmse:.4f}")
 log.info(f"R²: {r2:.4f}")
-log.info(f"调整后R²: {adj_r2:.4f}")
+log.info(f"[Chinese text removed]R²: {adj_r2:.4f}")
 log.info(f"MAE: {mae:.4f}")
 log.info(f"MAPE: {mape:.2f}%")
 
-# 绘制散点图
+# Plot scatter plot
 plt.figure(figsize=(10, 6))
 plt.scatter(y, y_pred, alpha=0.5)
-plt.title('B3DB 外部验证 - 实际值 vs 预测值')
-plt.xlabel('实际 logBB 值')
-plt.ylabel('预测 logBB 值')
+plt.title('B3DB [Chinese text removed] - [Chinese text removed] vs predicted values')
+plt.xlabel('[Chinese text removed] logBB [Chinese text removed]')
+plt.ylabel('[Chinese text removed] logBB [Chinese text removed]')
 plt.grid(True)
 plt.plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=2)
 
-# 添加性能指标文本
+# [Chinese text removed]
 textstr = '\n'.join((
     f'R² = {r2:.3f}',
     f'RMSE = {rmse:.3f}',

@@ -12,19 +12,19 @@ from preprocess.data_preprocess.FeatureExtraction import FeatureExtraction
 from preprocess.data_preprocess.data_preprocess_utils import calculate_Mordred_desc
 import joblib
 
-# 创建必要的目录
+# [Chinese text removed]
 os.makedirs("../../data/logBB_data/log", exist_ok=True)
 os.makedirs("model", exist_ok=True)
 
 log = DataLogger(log_file=f"../../data/logBB_data/log/{datetime.now().strftime('%Y%m%d')}.log").getlog("mlp_cross_validation")
 
 def calculate_mape(y_true, y_pred):
-    epsilon = 1e-8  # 添加平滑项，避免分母为零
+    epsilon = 1e-8  # [Chinese text removed]，[Chinese text removed]
     y_true, y_pred = np.array(y_true), np.array(y_pred)
     return np.mean(np.abs((y_true - y_pred) / (y_true + epsilon))) * 100
 
 def objective(trial):
-    # 定义超参数搜索空间
+    # [Chinese text removed]parameter[Chinese text removed]
     param = {
         'hidden_layer_sizes': trial.suggest_categorical('hidden_layer_sizes', [(50,), (100,), (150,), (100, 50)]),
         'activation': trial.suggest_categorical('activation', ['relu', 'tanh']),
@@ -52,41 +52,41 @@ def objective(trial):
 
 def adjusted_r2(y_true, y_pred, n_features):
     """
-    计算调整后的R方
-    :param y_true: 真实值
-    :param y_pred: 预测值
-    :param n_features: 特征数量
-    :return: 调整后的R方值
+    [Chinese text removed]R[Chinese text removed]
+    :param y_true: true values
+    :param y_pred: predicted values
+    :param n_features: features[Chinese text removed]
+    :return: [Chinese text removed]R[Chinese text removed]
     """
     r2 = r2_score(y_true, y_pred)
     n = len(y_true)
     return 1 - (1 - r2) * (n - 1) / (n - n_features - 1)
 
 if __name__ == '__main__':
-    # 需要的文件路径
+    # [Chinese text removed]
     logBB_data_file = "../../data/logBB_data/logBB.csv"
     logBB_desc_file = "../../data/logBB_data/logBB_w_desc.csv"
     logBB_desc_index_file = "../../data/logBB_data/desc_index.txt"
     model_dir = "./logbbModel"
 
-    log.info("===============启动MLP交叉验证工作===============")
+    log.info("===============StartingMLPCross-validation[Chinese text removed]===============")
 
-    # 变量初始化
+    # [Chinese text removed]
     smile_column_name = 'SMILES'
     pred_column_name = 'logBB'
-    seed = 42  # 设置随机种子以确保结果可复现
+    seed = 42  # [Chinese text removed]
 
     if not os.path.exists(logBB_data_file):
-        raise FileNotFoundError("缺失logBB数据集")
+        raise FileNotFoundError("[Chinese text removed]logBB[Chinese text removed]")
 
-    # 检查特征文件是否存在并加载数据
+    # [Chinese text removed]features[Chinese text removed]
     if os.path.exists(logBB_desc_file):
-        log.info("存在特征文件，进行读取")
+        log.info("[Chinese text removed]features[Chinese text removed]，[Chinese text removed]")
         df = pd.read_csv(logBB_desc_file, encoding='utf-8')
         y = df[pred_column_name]
         X = df.drop([smile_column_name, pred_column_name], axis=1)
     else:
-        log.info("特征文件不存在，执行特征生成工作")
+        log.info("features[Chinese text removed]，[Chinese text removed]features[Chinese text removed]")
         df = pd.read_csv(logBB_data_file, encoding='utf-8')
         df = df.dropna(subset=[pred_column_name])
         df = df.reset_index(drop=True)
@@ -94,65 +94,65 @@ if __name__ == '__main__':
         y = df[pred_column_name]
         SMILES = df[smile_column_name]
 
-        # 在特征选择之前排除 blood mean60min
+        # [Chinese text removed]features[Chinese text removed] blood mean60min
         if 'blood mean60min' in df.columns:
             df = df.drop('blood mean60min', axis=1)
-            log.info("已排除特征: blood mean60min")
+            log.info("[Chinese text removed]features: blood mean60min")
 
-        # 确保所有特征都是数值类型
+        # [Chinese text removed]features[Chinese text removed]
         X = df.drop(['SMILES', 'logBB'], axis=1)
-        X = X.apply(pd.to_numeric, errors='coerce')  # 将非数值数据转换为 NaN
-        X = X.fillna(0)  # 用0填充NaN值
+        X = X.apply(pd.to_numeric, errors='coerce')  # [Chinese text removed]Converting[Chinese text removed] NaN
+        X = X.fillna(0)  # [Chinese text removed]0[Chinese text removed]NaN[Chinese text removed]
 
-        log.info(f"保存特征数据到csv文件 {logBB_desc_file} 中")
+        log.info(f"[Chinese text removed]features[Chinese text removed]csv[Chinese text removed] {logBB_desc_file} [Chinese text removed]")
         pd.concat([X, y], axis=1).to_csv(logBB_desc_file, encoding='utf-8', index=False)
 
-    # 特征筛选
+    # features[Chinese text removed]
     if not os.path.exists(logBB_desc_index_file):
-        log.info("不存在特征索引文件，进行特征筛选")
-        log.info(f"筛选前的特征矩阵形状为：{X.shape}")
+        log.info("[Chinese text removed]features[Chinese text removed]，[Chinese text removed]features[Chinese text removed]")
+        log.info(f"[Chinese text removed]features[Chinese text removed]：{X.shape}")
         desc_index = FeatureExtraction(X, y, VT_threshold=0.02, RFE_features_to_select=50).feature_extraction(returnIndex=True, index_dtype=int)
         np.savetxt(logBB_desc_index_file, desc_index, fmt='%d')
         X = X.iloc[:, desc_index]
-        log.info(f"特征筛选完成，筛选后的特征矩阵形状为：{X.shape}, 筛选得到的特征索引保存到：{logBB_desc_index_file}")
+        log.info(f"features[Chinese text removed]Complete，[Chinese text removed]features[Chinese text removed]：{X.shape}, [Chinese text removed]features[Chinese text removed]：{logBB_desc_index_file}")
     else:
-        log.info("存在特征索引文件，进行读取")
+        log.info("[Chinese text removed]features[Chinese text removed]，[Chinese text removed]")
         desc_index = np.loadtxt(logBB_desc_index_file, dtype=int).tolist()
         X = X.iloc[:, desc_index]
-        log.info(f"读取特征索引完成，筛选后的特征矩阵形状为：{X.shape}")
+        log.info(f"[Chinese text removed]features[Chinese text removed]Complete，[Chinese text removed]features[Chinese text removed]：{X.shape}")
 
-    # 特征归一化
-    log.info("归一化特征数据")
+    # Feature normalization
+    log.info("[Chinese text removed]features[Chinese text removed]")
     sc = MinMaxScaler()
     X_scaled = sc.fit_transform(X)
 
-    # 首先分出独立测试集 (10%)
+    # [Chinese text removed] (10%)
     X_train_val, X_test, y_train_val, y_test = train_test_split(
         X_scaled, y, test_size=0.1, random_state=42
     )
-    log.info(f"将数据集按9:1划分为训练验证集({len(X_train_val)}个样本)和测试集({len(X_test)}个样本)")
+    log.info(f"[Chinese text removed]9:1[Chinese text removed]({len(X_train_val)}[Chinese text removed]samples)[Chinese text removed]({len(X_test)}[Chinese text removed]samples)")
 
-    # 在剩余数据中分出验证集 (10%)
+    # [Chinese text removed] (10%)
     X_train, X_val, y_train, y_val = train_test_split(
         X_train_val, y_train_val, test_size=0.1, random_state=42
     )
-    log.info(f"将训练验证集按9:1划分为训练集({len(X_train)}个样本)和验证集({len(X_val)}个样本)")
+    log.info(f"[Chinese text removed]9:1[Chinese text removed]({len(X_train)}[Chinese text removed]samples)[Chinese text removed]({len(X_val)}[Chinese text removed]samples)")
 
-    # Optuna 超参数优化
+    # Optuna [Chinese text removed]parameter[Chinese text removed]
     study = optuna.create_study(direction='minimize')
     study.optimize(objective, n_trials=100)
 
-    log.info(f"最优参数: {study.best_params}")
-    log.info(f"最优RMSE: {study.best_value}")
+    log.info(f"Bestparameter: {study.best_params}")
+    log.info(f"BestRMSE: {study.best_value}")
 
-    # 使用最佳参数重新训练模型并进行评估
+    # [Chinese text removed]parameter[Chinese text removed]
     best_params = study.best_params
     model = MLPRegressor(**best_params)
 
-    # 设置交叉验证
+    # [Chinese text removed]Cross-validation
     cv = KFold(n_splits=10, shuffle=True, random_state=seed)
 
-    # 存储每折的性能指标
+    # [Chinese text removed]
     rmse_scores = []
     r2_scores = []
     adj_r2_scores = []
@@ -160,18 +160,18 @@ if __name__ == '__main__':
     mse_scores = []
     mape_scores = []
 
-    # 执行交叉验证
+    # [Chinese text removed]Cross-validation
     for train_idx, test_idx in cv.split(X_train):
         X_train_cv, X_test_cv = X_train[train_idx], X_train[test_idx]
         y_train_cv, y_test_cv = y_train.iloc[train_idx], y_train.iloc[test_idx]
 
-        # 训练模型
+        # [Chinese text removed]
         model.fit(X_train_cv, y_train_cv)
 
-        # 在验证集上进行预测
+        # [Chinese text removed]
         y_pred_cv = model.predict(X_test_cv)
 
-        # 计算性能指标
+        # [Chinese text removed]
         rmse = np.sqrt(mean_squared_error(y_test_cv, y_pred_cv))
         r2 = r2_score(y_test_cv, y_pred_cv)
         adj_r2 = adjusted_r2(y_test_cv, y_pred_cv, X_train_cv.shape[1])
@@ -179,7 +179,7 @@ if __name__ == '__main__':
         mse = mean_squared_error(y_test_cv, y_pred_cv)
         mape = calculate_mape(y_test_cv, y_pred_cv)
 
-        # 存储性能指标
+        # [Chinese text removed]
         rmse_scores.append(rmse)
         r2_scores.append(r2)
         adj_r2_scores.append(adj_r2)
@@ -187,8 +187,8 @@ if __name__ == '__main__':
         mse_scores.append(mse)
         mape_scores.append(mape)
 
-    # 打印平均性能指标
-    log.info("========十折交叉验证结果========")
+    # [Chinese text removed]
+    log.info("========[Chinese text removed]Cross-validation Results========")
     log.info(f"RMSE: {np.mean(rmse_scores):.3f}±{np.std(rmse_scores):.3f}")
     log.info(f"R2: {np.mean(r2_scores):.3f}±{np.std(r2_scores):.3f}")
     log.info(f"Adjusted R2: {np.mean(adj_r2_scores):.3f}±{np.std(adj_r2_scores):.3f}")
@@ -196,11 +196,11 @@ if __name__ == '__main__':
     log.info(f"MSE: {np.mean(mse_scores):.3f}±{np.std(mse_scores):.3f}")
     log.info(f"MAPE: {np.mean(mape_scores):.3f}±{np.std(mape_scores):.3f}%")
 
-    # 在测试集上进行最终评估
+    # [Chinese text removed]
     model.fit(X_train, y_train)
     y_pred_test = model.predict(X_test)
 
-    # 计算测试集指标
+    # [Chinese text removed]
     mse_test = mean_squared_error(y_test, y_pred_test)
     rmse_test = np.sqrt(mse_test)
     r2_test = r2_score(y_test, y_pred_test)
@@ -208,8 +208,8 @@ if __name__ == '__main__':
     mape_test = mean_absolute_percentage_error(y_test, y_pred_test)
     adj_r2_test = 1 - (1 - r2_test) * (len(y_test) - 1) / (len(y_test) - X_test.shape[1] - 1)
 
-    # 在计算测试集指标后添加
-    log.info("========测试集结果========")
+    # [Chinese text removed]
+    log.info("========Test Set Results========")
     log.info(f"RMSE: {rmse_test:.3f}")
     log.info(f"R2: {r2_test:.3f}")
     log.info(f"Adjusted R2: {adj_r2_test:.3f}")
@@ -217,11 +217,11 @@ if __name__ == '__main__':
     log.info(f"MSE: {mse_test:.3f}")
     log.info(f"MAPE: {mape_test:.3f}%")
 
-    # 在测试集评估后添加
+    # [Chinese text removed]
     joblib.dump(model, os.path.join(model_dir, "mlp_mordred_model.joblib"))
-    log.info(f"模型已保存至 {os.path.join(model_dir, 'mlp_mordred_model.joblib')}")
+    log.info(f"Model saved[Chinese text removed] {os.path.join(model_dir, 'mlp_mordred_model.joblib')}")
 
-    # 只保存测试集结果
+    # [Chinese text removed]Test Set Results
     test_results = pd.DataFrame({
         'True Values': y_test, 
         'Predicted Values': y_pred_test
@@ -230,19 +230,19 @@ if __name__ == '__main__':
     os.makedirs('./result', exist_ok=True)
     test_results.to_csv('./result/mlp_mordred_test_results.csv', index=False)
 
-    log.info("\n最终数据集划分:")
-    log.info(f"训练集: {len(X_train)}个样本 ({len(X_train)/len(X)*100:.1f}%) [应约为81%]")
-    log.info(f"验证集: {len(X_val)}个样本 ({len(X_val)/len(X)*100:.1f}%) [应约为9%]")
-    log.info(f"测试集: {len(X_test)}个样本 ({len(X_test)/len(X)*100:.1f}%) [应约为10%]")
+    log.info("\n[Chinese text removed]Dataset split:")
+    log.info(f"Training set: {len(X_train)}[Chinese text removed]samples ({len(X_train)/len(X)*100:.1f}%) [[Chinese text removed]81%]")
+    log.info(f"Validation set: {len(X_val)}[Chinese text removed]samples ({len(X_val)/len(X)*100:.1f}%) [[Chinese text removed]9%]")
+    log.info(f"Test set: {len(X_test)}[Chinese text removed]samples ({len(X_test)/len(X)*100:.1f}%) [[Chinese text removed]10%]")
 
-    # 保存训练集和测试集的预测结果到 CSV 文件
+    # [Chinese text removed] CSV [Chinese text removed]
     train_results = pd.DataFrame({
         'True Values': y_train,
         'Predicted Values': model.predict(X_train)
     })
     train_results.to_csv('./result/mlp_mordred_train_results.csv', index=False)
     test_results.to_csv('./result/mlp_mordred_test_results.csv', index=False)
-    log.info("训练集和测试集的预测结果已保存到 './result/mlp_mordred_train_results.csv' 和 './result/mlp_mordred_test_results.csv'")
+    log.info("[Chinese text removed] './result/mlp_mordred_train_results.csv' [Chinese text removed] './result/mlp_mordred_test_results.csv'")
 
-    # 定义模型保存路径
+    # [Chinese text removed]
     model_save_path = os.path.join(model_dir, "mlp_mordred_model.joblib")

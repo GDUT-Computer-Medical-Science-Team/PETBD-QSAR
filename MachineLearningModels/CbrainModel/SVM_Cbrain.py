@@ -20,17 +20,17 @@ from optuna.samplers import TPESampler
 from sklearn.svm import SVR
 import joblib
 
-# 确保定义 adjusted_r2_score 函数
+# [Chinese text removed] adjusted_r2_score [Chinese text removed]
 def adjusted_r2_score(r2, n, k):
     """
-    计算调整后的 R^2 值。
-    r2: 原始 R^2 值
-    n: 样本数量
-    k: 特征数量
+    [Chinese text removed] R^2 [Chinese text removed]。
+    r2: original R^2 [Chinese text removed]
+    n: samples[Chinese text removed]
+    k: features[Chinese text removed]
     """
     return 1 - (1 - r2) * ((n - 1) / (n - k - 1))
 
-# 初始化结果保存目录
+# [Chinese text removed]
 cur_time = time.localtime()
 result_parent_dir = f"result\\{time.strftime('%Y%m%d', cur_time)}"
 result_dir = f"{result_parent_dir}\\{time.strftime('%H%M%S', cur_time)}"
@@ -45,7 +45,7 @@ def check_datasets_exist(parent_folder: str):
     flag = False
     if os.path.exists(parent_folder):
         if not os.path.isdir(parent_folder):
-            raise NotADirectoryError(f"错误：{parent_folder}不是目录")
+            raise NotADirectoryError(f"Error：{parent_folder}[Chinese text removed]")
         files = os.listdir(parent_folder)
         for file in files:
             if file.endswith("_dataset.pt"):
@@ -57,7 +57,7 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
                      train_dir_path, test_dir_path,
                      FP=False, overwrite=False):
     """
-    检查是否有数据，无数据则重新生成数据
+    [Chinese text removed]，[Chinese text removed]
     :return:
     """
     try:
@@ -67,11 +67,11 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
         flag = False
 
     if not overwrite and flag:
-        log.info(f"存在TensorDatasets数据，无须进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，[Chinese text removed]")
     else:
-        log.info(f"不存在TensorDatasets数据，开始进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，Starting[Chinese text removed]")
         if not os.path.exists(merge_filepath):
-            raise FileNotFoundError(f"数据表文件\"{merge_filepath}\"未找到")
+            raise FileNotFoundError(f"[Chinese text removed]\"{merge_filepath}\"[Chinese text removed]")
         md = MedicalDatasetsHandler()
 
         md.read_merged_datafile(merged_filepath=merge_filepath,
@@ -82,7 +82,7 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
                                                        double_index=False,
                                                        FP=FP,
                                                        overwrite=overwrite)
-        log.info(f"数据获取完成")
+        log.info(f"[Chinese text removed]Complete")
 
 def objective(trial, X, y):
     params = {
@@ -117,18 +117,18 @@ def objective(trial, X, y):
     return np.mean(r2_scores)
 
 def train_svm(organ_name):
-    # 加载数据
+    # [Chinese text removed]
     X, y = loader.get_sklearn_data('../../data/train/train_organ_df.npy', organ_name)
     X_test, y_test = loader.get_sklearn_data('../../data/test/test_organ_df.npy', organ_name)
 
-    # Optuna 超参数优化
+    # Optuna [Chinese text removed]parameter[Chinese text removed]
     study = optuna.create_study(direction='maximize', sampler=TPESampler())
     study.optimize(lambda trial: objective(trial, X, y), n_trials=50)
 
     best_params = study.best_params
     best_svm = SVR(**best_params)
 
-    # 进行十折交叉验证
+    # [Chinese text removed]Cross-validation
     cv = KFold(n_splits=10, shuffle=True)
     cv_scores = {
         'r2': [],
@@ -139,7 +139,7 @@ def train_svm(organ_name):
         'rmse': []
     }
 
-    for train_idx, val_idx in tqdm(cv.split(X), desc="十折交叉验证"):
+    for train_idx, val_idx in tqdm(cv.split(X), desc="[Chinese text removed]Cross-validation"):
         X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
         y_train, y_val = y[train_idx], y[val_idx]
 
@@ -160,20 +160,20 @@ def train_svm(organ_name):
         cv_scores['mape'].append(mape)
         cv_scores['rmse'].append(rmse)
 
-    # 打印十折交叉验证结果
-    log.info("\n========十折交叉验证结果========")
-    log.info(f"平均R2: {np.mean(cv_scores['r2']):.3f} (±{np.std(cv_scores['r2']):.3f})")
-    log.info(f"平均调整后R2: {np.mean(cv_scores['adjusted_r2']):.3f} (±{np.std(cv_scores['adjusted_r2']):.3f})")
-    log.info(f"平均MSE: {np.mean(cv_scores['mse']):.3f} (±{np.std(cv_scores['mse']):.3f})")
-    log.info(f"平均MAE: {np.mean(cv_scores['mae']):.3f} (±{np.std(cv_scores['mae']):.3f})")
-    log.info(f"平均MAPE: {np.mean(cv_scores['mape']):.3f}% (±{np.std(cv_scores['mape']):.3f}%)")
-    log.info(f"平均RMSE: {np.mean(cv_scores['rmse']):.3f} (±{np.std(cv_scores['rmse']):.3f})")
+    # [Chinese text removed]Cross-validation Results
+    log.info("\n========[Chinese text removed]Cross-validation Results========")
+    log.info(f"[Chinese text removed]R2: {np.mean(cv_scores['r2']):.3f} (±{np.std(cv_scores['r2']):.3f})")
+    log.info(f"[Chinese text removed]R2: {np.mean(cv_scores['adjusted_r2']):.3f} (±{np.std(cv_scores['adjusted_r2']):.3f})")
+    log.info(f"[Chinese text removed]MSE: {np.mean(cv_scores['mse']):.3f} (±{np.std(cv_scores['mse']):.3f})")
+    log.info(f"[Chinese text removed]MAE: {np.mean(cv_scores['mae']):.3f} (±{np.std(cv_scores['mae']):.3f})")
+    log.info(f"[Chinese text removed]MAPE: {np.mean(cv_scores['mape']):.3f}% (±{np.std(cv_scores['mape']):.3f}%)")
+    log.info(f"[Chinese text removed]RMSE: {np.mean(cv_scores['rmse']):.3f} (±{np.std(cv_scores['rmse']):.3f})")
 
-    # 在全部训练数据上训练最终模型
+    # [Chinese text removed]Training final model
     best_svm.fit(X, y)
     preds = best_svm.predict(X_test)
 
-    # 计算测试集指标
+    # [Chinese text removed]
     test_r2 = r2_score(y_test, preds)
     test_mse = mean_squared_error(y_test, preds)
     test_mae = mean_absolute_error(y_test, preds)
@@ -181,21 +181,21 @@ def train_svm(organ_name):
     test_rmse = np.sqrt(test_mse)
     test_adjusted_r2 = adjusted_r2_score(test_r2, len(y_test), X_test.shape[1])
 
-    # 打印测试集结果
-    log.info("\n========测试集结果========")
+    # [Chinese text removed]Test Set Results
+    log.info("\n========Test Set Results========")
     log.info(f"R2: {test_r2:.3f}")
-    log.info(f"调整后R2: {test_adjusted_r2:.3f}")
+    log.info(f"[Chinese text removed]R2: {test_adjusted_r2:.3f}")
     log.info(f"MSE: {test_mse:.3f}")
     log.info(f"MAE: {test_mae:.3f}")
     log.info(f"MAPE: {test_mape:.3f}%")
     log.info(f"RMSE: {test_rmse:.3f}")
 
-    # 保存模型
+    # Save model
     model_dir = "model"
     os.makedirs(model_dir, exist_ok=True)
     model_save_path = f"{model_dir}/svm_model.joblib"
     joblib.dump(best_svm, model_save_path)
-    log.info(f"\n模型已保存至 {model_save_path}")
+    log.info(f"\nModel saved[Chinese text removed] {model_save_path}")
 
     return {
         'model': best_svm,
@@ -219,7 +219,7 @@ def train_svm(organ_name):
 
 if __name__ == '__main__':
     organ_name = 'brain'
-    merge_filepath = "../../data/数据表汇总.xlsx"
+    merge_filepath = "../../data/[Chinese text removed].xlsx"
     organ_names_list = ['blood', 'bone', 'brain', 'fat', 'heart',
                         'intestine', 'kidney', 'liver', 'lung', 'muscle',
                         'pancreas', 'spleen', 'stomach', 'uterus']
@@ -227,22 +227,22 @@ if __name__ == '__main__':
     train_datasets_dir = "../../data/train/datasets"
     test_datasets_dir = "../../data/test/datasets"
 
-    # 创建模型保存目录
+    # [Chinese text removed]
     model_dir = "model"
     os.makedirs(model_dir, exist_ok=True)
 
     overwrite = False
     FP = True
     if FP:
-        log.info("目标特征为：分子指纹")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
     else:
-        log.info("目标特征为：分子描述符")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
     check_data_exist(merge_filepath, organ_names_list, certain_time,
                      train_datasets_dir, test_datasets_dir,
                      FP=FP, overwrite=overwrite)
-    results = train_svm(organ_name)  # 调用训练 SVM 的函数
+    results = train_svm(organ_name)  # [Chinese text removed] SVM [Chinese text removed]
 
-    # 保存模型
+    # Save model
     model_save_path = f"{model_dir}/svm_fp_model.joblib"
     joblib.dump(results['model'], model_save_path)
-    log.info(f"模型已保存至 {model_save_path}")
+    log.info(f"Model saved[Chinese text removed] {model_save_path}")

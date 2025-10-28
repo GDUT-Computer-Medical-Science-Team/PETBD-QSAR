@@ -18,7 +18,7 @@ import optuna
 import joblib
 import matplotlib.pyplot as plt
 
-# 初始化结果保存目录
+# [Chinese text removed]
 cur_time = time.localtime()
 result_parent_dir = f"../../result/{time.strftime('%Y%m%d', cur_time)}"
 result_dir = f"{result_parent_dir}/{time.strftime('%H%M%S', cur_time)}"
@@ -31,7 +31,7 @@ def check_datasets_exist(parent_folder: str):
     flag = False
     if os.path.exists(parent_folder):
         if not os.path.isdir(parent_folder):
-            raise NotADirectoryError(f"错误：{parent_folder}不是目录")
+            raise NotADirectoryError(f"Error：{parent_folder}[Chinese text removed]")
         files = os.listdir(parent_folder)
         for file in files:
             if file.endswith("_dataset.pt"):
@@ -43,7 +43,7 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
                      train_dir_path, test_dir_path,
                      FP=False, overwrite=False):
     """
-    检查是否有数据，无数据则重新生成数据
+    [Chinese text removed]，[Chinese text removed]
     :return:
     """
     try:
@@ -53,11 +53,11 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
         flag = False
 
     if not overwrite and flag:
-        log.info(f"存在TensorDatasets数据，无须进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，[Chinese text removed]")
     else:
-        log.info(f"不存在TensorDatasets数据，开始进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，Starting[Chinese text removed]")
         if not os.path.exists(merge_filepath):
-            raise FileNotFoundError(f"数据表文件\"{merge_filepath}\"未找到")
+            raise FileNotFoundError(f"[Chinese text removed]\"{merge_filepath}\"[Chinese text removed]")
         md = MedicalDatasetsHandler()
         md.read_merged_datafile(merged_filepath=merge_filepath,
                                 organ_names=organ_names_list,
@@ -67,7 +67,7 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
                                                        double_index=False,
                                                        FP=FP,
                                                        overwrite=overwrite)
-        log.info(f"数据获取完成")
+        log.info(f"[Chinese text removed]Complete")
 
 def objective(trial, X, y):
     params = {
@@ -81,11 +81,11 @@ def objective(trial, X, y):
         'min_weight_fraction_leaf': trial.suggest_float('min_weight_fraction_leaf', 0.0, 0.5),
     }
 
-    # 仅在 bootstrap 为 True 时设置 max_samples
+    # [Chinese text removed] bootstrap [Chinese text removed] True [Chinese text removed] max_samples
     if params['bootstrap']:
         params['max_samples'] = trial.suggest_float('max_samples', 0.5, 1.0)
     else:
-        params['max_samples'] = None  # 或者不设置 max_samples
+        params['max_samples'] = None  # [Chinese text removed] max_samples
 
     rf = RandomForestRegressor(**params)
     cv = KFold(n_splits=10, shuffle=True)
@@ -103,11 +103,11 @@ def objective(trial, X, y):
 
 def adjusted_r2_score(r2, n, k):
     """
-    计算调整后的R方
-    :param r2: R方值
-    :param n: 样本数量
-    :param k: 自变量数量
-    :return: 调整后的R方值
+    [Chinese text removed]R[Chinese text removed]
+    :param r2: R[Chinese text removed]
+    :param n: samples[Chinese text removed]
+    :param k: [Chinese text removed]
+    :return: [Chinese text removed]R[Chinese text removed]
     """
     return 1 - (1 - r2) * (n - 1) / (n - k - 1)
 
@@ -118,12 +118,12 @@ def train_random_forest(organ_name):
     model_dir = "model"
     os.makedirs(model_dir, exist_ok=True)
 
-    log.info("开始随机森林模型的超参数优化")
+    log.info("Starting[Chinese text removed]parameter[Chinese text removed]")
     study = optuna.create_study(direction='minimize')
     study.optimize(lambda trial: objective(trial, X, y), n_trials=50)
 
     best_params = study.best_params
-    log.info(f"最佳参数: {best_params}")
+    log.info(f"[Chinese text removed]parameter: {best_params}")
 
     rf = RandomForestRegressor(**best_params)
     r2_list = []
@@ -133,12 +133,12 @@ def train_random_forest(organ_name):
     mape_list = []
     rmse_list = []
 
-    log.info("进行随机森林模型训练")
+    log.info("[Chinese text removed]")
     cv = KFold(n_splits=10, shuffle=True, random_state=42)
     y_train_all, y_train_pred_all = [], []
     y_val_all, y_val_pred_all = [], []
 
-    for train_idx, val_idx in tqdm(cv.split(X), desc="交叉验证"):
+    for train_idx, val_idx in tqdm(cv.split(X), desc="Cross-validation"):
         X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
         y_train, y_val = y[train_idx], y[val_idx]
 
@@ -160,16 +160,16 @@ def train_random_forest(organ_name):
         mape_list.append(mean_absolute_percentage_error(y_val, preds))
         rmse_list.append(np.sqrt(mean_squared_error(y_val, preds)))
 
-    log.info(f"交叉验证 R2: {np.mean(r2_list)}, 调整后R2: {np.mean(adj_r2_list)}, MSE: {np.mean(mse_list)}, MAE: {np.mean(mae_list)}, MAPE: {np.mean(mape_list)}, RMSE: {np.mean(rmse_list)}")
+    log.info(f"Cross-validation R2: {np.mean(r2_list)}, [Chinese text removed]R2: {np.mean(adj_r2_list)}, MSE: {np.mean(mse_list)}, MAE: {np.mean(mae_list)}, MAPE: {np.mean(mape_list)}, RMSE: {np.mean(rmse_list)}")
 
-    # 打印十折交叉验证结果
-    log.info("\n========十折交叉验证结果========")
-    log.info(f"平均R2: {np.mean(r2_list):.3f} (±{np.std(r2_list):.3f})")
-    log.info(f"平均调整后R2: {np.mean(adj_r2_list):.3f} (±{np.std(adj_r2_list):.3f})")
-    log.info(f"平均MSE: {np.mean(mse_list):.3f} (±{np.std(mse_list):.3f})")
-    log.info(f"平均MAE: {np.mean(mae_list):.3f} (±{np.std(mae_list):.3f})")
-    log.info(f"平均MAPE: {np.mean(mape_list):.3f}% (±{np.std(mape_list):.3f}%)")
-    log.info(f"平均RMSE: {np.mean(rmse_list):.3f} (±{np.std(rmse_list):.3f})")
+    # [Chinese text removed]Cross-validation Results
+    log.info("\n========[Chinese text removed]Cross-validation Results========")
+    log.info(f"[Chinese text removed]R2: {np.mean(r2_list):.3f} (±{np.std(r2_list):.3f})")
+    log.info(f"[Chinese text removed]R2: {np.mean(adj_r2_list):.3f} (±{np.std(adj_r2_list):.3f})")
+    log.info(f"[Chinese text removed]MSE: {np.mean(mse_list):.3f} (±{np.std(mse_list):.3f})")
+    log.info(f"[Chinese text removed]MAE: {np.mean(mae_list):.3f} (±{np.std(mae_list):.3f})")
+    log.info(f"[Chinese text removed]MAPE: {np.mean(mape_list):.3f}% (±{np.std(mape_list):.3f}%)")
+    log.info(f"[Chinese text removed]RMSE: {np.mean(rmse_list):.3f} (±{np.std(rmse_list):.3f})")
 
     rf.fit(X, y)
     test_preds = rf.predict(X_test)
@@ -180,28 +180,28 @@ def train_random_forest(organ_name):
     test_mape = mean_absolute_percentage_error(y_test, test_preds)
     test_rmse = np.sqrt(mean_squared_error(y_test, test_preds))
 
-    log.info(f"测试集 R2: {test_r2}, 调整后R2: {test_adj_r2}, MSE: {test_mse}, MAE: {test_mae}, MAPE: {test_mape}, RMSE: {test_rmse}")
+    log.info(f"[Chinese text removed] R2: {test_r2}, [Chinese text removed]R2: {test_adj_r2}, MSE: {test_mse}, MAE: {test_mae}, MAPE: {test_mape}, RMSE: {test_rmse}")
 
-    # 保存模型
+    # Save model
     model_save_path = f"{model_dir}/rf_model.joblib"
     joblib.dump(rf, model_save_path)
-    log.info(f"模型已保存至 {model_save_path}")
+    log.info(f"Model saved[Chinese text removed] {model_save_path}")
 
-    # 保存训练集预测结果
+    # [Chinese text removed]
     train_results = pd.DataFrame({
         'Actual': y,
         'Predicted': rf.predict(X)
     })
     train_results.to_csv(f'{result_dir}/rf_train_predictions.csv', index=False)
 
-    # 保存测试集预测结果
+    # [Chinese text removed]
     test_results = pd.DataFrame({
         'Actual': y_test,
         'Predicted': test_preds
     })
     test_results.to_csv(f'{result_dir}/rf_test_predictions.csv', index=False)
 
-    # 绘制训练集和测试集性能散点图
+    # [Chinese text removed]
     fig, ax = plt.subplots(1, 2, figsize=(16, 6))
 
     ax[0].scatter(y_train_all, y_train_pred_all, edgecolors=(0, 0, 0), color='blue')
@@ -218,7 +218,7 @@ def train_random_forest(organ_name):
 
     plt.show()
 
-    # 绘制测试数据的散点图
+    # [Chinese text removed]
     plt.figure(figsize=(10, 6))
     plt.scatter(y_test, test_preds, color='green', label='Test Data')
     plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], 'k--', lw=4)
@@ -229,7 +229,7 @@ def train_random_forest(organ_name):
     plt.grid(True)
     plt.show()
 
-    # 在测试集评估后添加
+    # [Chinese text removed]
     best_metrics = {
         'test_rmse': test_rmse,
         'test_r2': test_r2,
@@ -239,22 +239,22 @@ def train_random_forest(organ_name):
         'test_mse': test_mse
     }
 
-    log.info("\n========最佳模型在测试集上的表现========")
-    log.info(f"最佳RMSE: {test_rmse:.3f}")
-    log.info(f"最佳R2: {test_r2:.3f}")
-    log.info(f"最佳调整后R2: {test_adj_r2:.3f}")
-    log.info(f"最佳MAE: {test_mae:.3f}")
-    log.info(f"最佳MAPE: {test_mape:.3f}%")
-    log.info(f"最佳MSE: {test_mse:.3f}")
+    log.info("\n========[Chinese text removed]========")
+    log.info(f"[Chinese text removed]RMSE: {test_rmse:.3f}")
+    log.info(f"[Chinese text removed]R2: {test_r2:.3f}")
+    log.info(f"[Chinese text removed]R2: {test_adj_r2:.3f}")
+    log.info(f"[Chinese text removed]MAE: {test_mae:.3f}")
+    log.info(f"[Chinese text removed]MAPE: {test_mape:.3f}%")
+    log.info(f"[Chinese text removed]MSE: {test_mse:.3f}")
 
-    # 输出测试集结果
-    print("\n测试集结果:")
-    print(f"R2值: {test_r2:.3f}")
-    print(f"调整后R2值: {test_adj_r2:.3f}")
-    print(f"MSE值: {test_mse:.3f}")
-    print(f"MAE值: {test_mae:.3f}")
-    print(f"MAPE值: {test_mape:.3f}%")
-    print(f"RMSE值: {test_rmse:.3f}")
+    # [Chinese text removed]Test Set Results
+    print("\nTest Set Results:")
+    print(f"R2[Chinese text removed]: {test_r2:.3f}")
+    print(f"[Chinese text removed]R2[Chinese text removed]: {test_adj_r2:.3f}")
+    print(f"MSE[Chinese text removed]: {test_mse:.3f}")
+    print(f"MAE[Chinese text removed]: {test_mae:.3f}")
+    print(f"MAPE[Chinese text removed]: {test_mape:.3f}%")
+    print(f"RMSE[Chinese text removed]: {test_rmse:.3f}")
 
     return {
         'model': rf,
@@ -278,7 +278,7 @@ def train_random_forest(organ_name):
 
 if __name__ == '__main__':
     organ_name = 'brain'
-    merge_filepath = "../../data/数据表汇总.xlsx"
+    merge_filepath = "../../data/[Chinese text removed].xlsx"
     organ_names_list = ['blood', 'bone', 'brain', 'fat', 'heart',
                         'intestine', 'kidney', 'liver', 'lung', 'muscle',
                         'pancreas', 'spleen', 'stomach', 'uterus']
@@ -288,9 +288,9 @@ if __name__ == '__main__':
     overwrite = False
     FP = False
     if FP:
-        log.info("目标特征为：分子指纹")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
     else:
-        log.info("目标特征为：分子描述符")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
     check_data_exist(merge_filepath, organ_names_list, certain_time,
                      train_datasets_dir, test_datasets_dir,
                      FP=FP, overwrite=overwrite)

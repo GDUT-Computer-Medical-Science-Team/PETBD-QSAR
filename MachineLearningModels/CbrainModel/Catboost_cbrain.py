@@ -12,7 +12,7 @@ from utils.DataLogger import DataLogger
 from preprocess.MedicalDatasetsHandler import MedicalDatasetsHandler
 from tqdm import tqdm
 
-# 初始化结果保存目录
+# [Chinese text removed]
 cur_time = time.localtime()
 result_parent_dir = f"../../result/{time.strftime('%Y%m%d', cur_time)}"
 result_dir = f"{result_parent_dir}/{time.strftime('%H%M%S', cur_time)}"
@@ -23,7 +23,7 @@ log = DataLogger().getlog("run")
 def check_datasets_exist(parent_folder: str):
     if os.path.exists(parent_folder):
         if not os.path.isdir(parent_folder):
-            raise NotADirectoryError(f"错误：{parent_folder}不是目录")
+            raise NotADirectoryError(f"Error：{parent_folder}[Chinese text removed]")
         return any(file.endswith("_dataset.pt") for file in os.listdir(parent_folder))
     return False
 
@@ -37,11 +37,11 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
         flag = False
 
     if not overwrite and flag:
-        log.info(f"存在TensorDatasets数据，无须进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，[Chinese text removed]")
     else:
-        log.info(f"不存在TensorDatasets数据，开始进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，Starting[Chinese text removed]")
         if not os.path.exists(merge_filepath):
-            raise FileNotFoundError(f"数据表文件\"{merge_filepath}\"未找到")
+            raise FileNotFoundError(f"[Chinese text removed]\"{merge_filepath}\"[Chinese text removed]")
         md = MedicalDatasetsHandler()
         md.read_merged_datafile(merged_filepath=merge_filepath,
                                 organ_names=organ_names_list,
@@ -51,19 +51,19 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
                                                        double_index=False,
                                                        FP=FP,
                                                        overwrite=overwrite)
-        log.info(f"数据获取完成")
+        log.info(f"[Chinese text removed]Complete")
 
 def calculate_mape(y_true, y_pred):
-    epsilon = 1e-8  # 防止分母为0
+    epsilon = 1e-8  # [Chinese text removed]0
     return np.mean(np.abs((y_true - y_pred) / (y_true + epsilon))) * 100
 
 def adjusted_r2_score(r2, n, k):
     """
-    计算调整后的R方
-    :param r2: R方值
-    :param n: 样本数量
-    :param k: 自变量数量
-    :return: 调整后的R方值
+    [Chinese text removed]R[Chinese text removed]
+    :param r2: R[Chinese text removed]
+    :param n: samples[Chinese text removed]
+    :param k: [Chinese text removed]
+    :return: [Chinese text removed]R[Chinese text removed]
     """
     return 1 - (1 - r2) * (n - 1) / (n - k - 1)
 
@@ -99,12 +99,12 @@ def train_catboost(organ_name):
     model_dir = "model"
     os.makedirs(model_dir, exist_ok=True)
 
-    log.info("开始CatBoost模型的超参数优化")
+    log.info("StartingCatBoost[Chinese text removed]parameter[Chinese text removed]")
     study = optuna.create_study(direction='minimize')
     study.optimize(lambda trial: objective(trial, X, y), n_trials=50)
 
     best_params = study.best_params
-    log.info(f"最佳参数: {best_params}")
+    log.info(f"[Chinese text removed]parameter: {best_params}")
 
     cb = CatBoostRegressor(**best_params)
     cv = KFold(n_splits=10, shuffle=True)
@@ -143,7 +143,7 @@ def train_catboost(organ_name):
     avg_mape = np.mean(fold_mape)
     avg_rmse = np.mean(fold_rmse)
 
-    log.info(f"十折交叉验证平均MSE: {avg_mse}, 平均R2: {avg_r2}, 平均调整后R2: {avg_adj_r2}, 平均MAE: {avg_mae}, 平均MAPE: {avg_mape}, 平均RMSE: {avg_rmse}")
+    log.info(f"[Chinese text removed]Cross-validation[Chinese text removed]MSE: {avg_mse}, [Chinese text removed]R2: {avg_r2}, [Chinese text removed]R2: {avg_adj_r2}, [Chinese text removed]MAE: {avg_mae}, [Chinese text removed]MAPE: {avg_mape}, [Chinese text removed]RMSE: {avg_rmse}")
 
     test_preds = cb.predict(X_test)
     test_mse = mean_squared_error(y_test, test_preds)
@@ -153,9 +153,9 @@ def train_catboost(organ_name):
     test_mape = calculate_mape(y_test, test_preds)
     test_rmse = np.sqrt(test_mse)
 
-    log.info(f"测试集R2: {test_r2}, 调整后R2: {test_adj_r2}, MSE: {test_mse}, MAE: {test_mae}, MAPE: {test_mape}%, RMSE: {test_rmse}")
+    log.info(f"[Chinese text removed]R2: {test_r2}, [Chinese text removed]R2: {test_adj_r2}, MSE: {test_mse}, MAE: {test_mae}, MAPE: {test_mape}%, RMSE: {test_rmse}")
 
-    # 在测试集评估后添加
+    # [Chinese text removed]
     best_metrics = {
         'test_rmse': test_rmse,
         'test_r2': test_r2,
@@ -165,23 +165,23 @@ def train_catboost(organ_name):
         'test_mse': test_mse
     }
 
-    log.info("\n========在测试集上的表现========")
+    log.info("\n========[Chinese text removed]========")
     log.info(f"RMSE: {best_metrics['test_rmse']:.3f}")
     log.info(f"R2: {best_metrics['test_r2']:.3f}")
-    log.info(f"整后R2: {best_metrics['test_adj_r2']:.3f}")
+    log.info(f"[Chinese text removed]R2: {best_metrics['test_adj_r2']:.3f}")
     log.info(f"MAE: {best_metrics['test_mae']:.3f}")
     log.info(f"MAPE: {best_metrics['test_mape']:.3f}%")
     log.info(f"MSE: {best_metrics['test_mse']:.3f}")
 
 
-    # 保存模型
+    # Save model
     model_save_path = f"{model_dir}/catboost_model.cbm"
     cb.save_model(model_save_path)
-    log.info(f"模型已保存至 {model_save_path}")
+    log.info(f"Model saved[Chinese text removed] {model_save_path}")
 
 if __name__ == '__main__':
     organ_name = 'brain'
-    merge_filepath = "../../data/数据表汇总.xlsx"
+    merge_filepath = "../../data/[Chinese text removed].xlsx"
     organ_names_list = ['blood', 'bone', 'brain', 'fat', 'heart',
                         'intestine', 'kidney', 'liver', 'lung', 'muscle',
                         'pancreas', 'spleen', 'stomach', 'uterus']
@@ -192,9 +192,9 @@ if __name__ == '__main__':
     overwrite = False
     FP = True
     if FP:
-        log.info("目标特征为：分子指纹")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
     else:
-        log.info("目标特征为：分子描述符")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
     check_data_exist(merge_filepath, organ_names_list, certain_time,
                      train_datasets_dir, test_datasets_dir,
                      FP=FP, overwrite=overwrite)

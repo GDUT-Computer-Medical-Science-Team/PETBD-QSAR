@@ -13,7 +13,7 @@ import utils.datasets_loader as loader
 from preprocess.MedicalDatasetsHandler import MedicalDatasetsHandler
 from utils.DataLogger import DataLogger
 
-# 初始化结果保存目录
+# [Chinese text removed]
 cur_time = time.localtime()
 result_parent_dir = f"../../result/{time.strftime('%Y%m%d', cur_time)}"
 result_dir = f"{result_parent_dir}/{time.strftime('%H%M%S', cur_time)}"
@@ -25,14 +25,14 @@ log = DataLogger().getlog("run")
 
 def check_datasets_exist(parent_folder: str):
     if not os.path.isdir(parent_folder):
-        raise NotADirectoryError(f"错误：{parent_folder}不是目录")
+        raise NotADirectoryError(f"Error：{parent_folder}[Chinese text removed]")
     return any(file.endswith("_dataset.pt") for file in os.listdir(parent_folder))
 
 
 def check_data_exist(merge_filepath, organ_names_list, certain_time,
                      train_dir_path, test_dir_path, FP=False, overwrite=False):
     """
-    检查是否有数据，无数据则重新生成数据
+    [Chinese text removed]，[Chinese text removed]
     :return:
     """
     try:
@@ -42,17 +42,17 @@ def check_data_exist(merge_filepath, organ_names_list, certain_time,
         flag = False
 
     if not overwrite and flag:
-        log.info(f"存在TensorDatasets数据，无须进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，[Chinese text removed]")
     else:
-        log.info(f"不存在TensorDatasets数据，开始进行数据获取操作")
+        log.info(f"[Chinese text removed]TensorDatasets[Chinese text removed]，Starting[Chinese text removed]")
         if not os.path.exists(merge_filepath):
-            raise FileNotFoundError(f"数据表文件\"{merge_filepath}\"未找到")
+            raise FileNotFoundError(f"[Chinese text removed]\"{merge_filepath}\"[Chinese text removed]")
 
         md = MedicalDatasetsHandler()
         md.read_merged_datafile(merged_filepath=merge_filepath, organ_names=organ_names_list, certain_time=certain_time,
                                 overwrite=overwrite)
         md.transform_organ_time_data_to_tensor_dataset(test_size=0.1, double_index=False, FP=FP, overwrite=overwrite)
-        log.info(f"数据获取完成")
+        log.info(f"[Chinese text removed]Complete")
 
 
 def mean_absolute_percentage_error(y_true, y_pred):
@@ -63,10 +63,10 @@ def mean_absolute_percentage_error(y_true, y_pred):
 
 def adjusted_r2_score(r2, n, k):
     """
-    计算调整后的 R^2 值。
-    r2: 原始 R^2 值
-    n: 样本数量
-    k: 特征数量
+    [Chinese text removed] R^2 [Chinese text removed]。
+    r2: original R^2 [Chinese text removed]
+    n: samples[Chinese text removed]
+    k: features[Chinese text removed]
     """
     return 1 - (1 - r2) * ((n - 1) / (n - k - 1))
 
@@ -107,7 +107,7 @@ def objective(trial, X, y):
 
 if __name__ == '__main__':
     organ_name = 'brain'
-    merge_filepath = "../../data/数据表汇总.xlsx"
+    merge_filepath = "../../data/[Chinese text removed].xlsx"
     organ_names_list = ['blood', 'bone', 'brain', 'fat', 'heart', 'intestine', 'kidney', 'liver', 'lung', 'muscle',
                         'pancreas', 'spleen', 'stomach', 'uterus']
     certain_time = 60
@@ -118,24 +118,24 @@ if __name__ == '__main__':
 
 
     if FP:
-        log.info("目标特征为：分子指纹")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
     else:
-        log.info("目标特征为：分子描述符")
+        log.info("[Chinese text removed]features[Chinese text removed]：[Chinese text removed]")
 
     check_data_exist(merge_filepath, organ_names_list, certain_time, train_datasets_dir, test_datasets_dir, FP=FP,
                      overwrite=overwrite)
 
-    # 获取数据
+    # [Chinese text removed]
     X, y = loader.get_sklearn_data('../../data/train/train_organ_df.npy', organ_name)
 
-    # Optuna 超参数优化
+    # Optuna [Chinese text removed]parameter[Chinese text removed]
     study = optuna.create_study(direction='minimize')
     study.optimize(lambda trial: objective(trial, X, y), n_trials=50)
 
-    log.info(f"最优参数: {study.best_params}")
-    log.info(f"最优MSE: {study.best_value}")
+    log.info(f"Bestparameter: {study.best_params}")
+    log.info(f"BestMSE: {study.best_value}")
 
-    # 打印十折交叉验证的平均值
+    # [Chinese text removed]Cross-validation[Chinese text removed]
     mse_scores, r2_scores, mae_scores, rmse_scores, mape_scores = [], [], [], [], []
     for trial in study.trials:
         mse_scores.append(trial.value)
@@ -149,19 +149,19 @@ if __name__ == '__main__':
     avg_r2 = np.mean(r2_scores)
     avg_adjusted_r2 = adjusted_r2_score(avg_r2, n, k)
 
-    log.info("\n========十折交叉验证结果========")
-    log.info(f"平均MSE: {np.mean(mse_scores):.3f} (±{np.std(mse_scores):.3f})")
-    log.info(f"平均R2: {avg_r2:.3f} (±{np.std(r2_scores):.3f})")
-    log.info(f"平均调整后R2: {avg_adjusted_r2:.3f} (±{np.std(r2_scores):.3f})")
-    log.info(f"平均MAE: {np.mean(mae_scores):.3f} (±{np.std(mae_scores):.3f})")
-    log.info(f"平均RMSE: {np.mean(rmse_scores):.3f} (±{np.std(rmse_scores):.3f})")
-    log.info(f"平均MAPE: {np.mean(mape_scores):.3f}% (±{np.std(mape_scores):.3f}%)")
+    log.info("\n========[Chinese text removed]Cross-validation Results========")
+    log.info(f"[Chinese text removed]MSE: {np.mean(mse_scores):.3f} (±{np.std(mse_scores):.3f})")
+    log.info(f"[Chinese text removed]R2: {avg_r2:.3f} (±{np.std(r2_scores):.3f})")
+    log.info(f"[Chinese text removed]R2: {avg_adjusted_r2:.3f} (±{np.std(r2_scores):.3f})")
+    log.info(f"[Chinese text removed]MAE: {np.mean(mae_scores):.3f} (±{np.std(mae_scores):.3f})")
+    log.info(f"[Chinese text removed]RMSE: {np.mean(rmse_scores):.3f} (±{np.std(rmse_scores):.3f})")
+    log.info(f"[Chinese text removed]MAPE: {np.mean(mape_scores):.3f}% (±{np.std(mape_scores):.3f}%)")
 
-    # 获取所有trials中表现最好的模型
+    # [Chinese text removed]trials[Chinese text removed]
     best_trial = study.best_trial
     best_model = best_trial.user_attrs['best_model']
 
-    # 在测试集上评估最佳模型
+    # [Chinese text removed]
     X_test, y_test = loader.get_sklearn_data('../../data/test/test_organ_df.npy', organ_name)
     preds = best_model.predict(X_test)
 
@@ -172,24 +172,24 @@ if __name__ == '__main__':
     test_rmse = np.sqrt(test_mse)
     test_mape = mean_absolute_percentage_error(y_test, preds)
 
-    log.info("\n========最佳模型在测试集上的表现========")
-    log.info(f"最佳RMSE: {test_rmse:.3f}")
-    log.info(f"最佳R2: {test_r2:.3f}")
-    log.info(f"最佳调整后R2: {test_adjusted_r2:.3f}")
-    log.info(f"最佳MAE: {test_mae:.3f}")
-    log.info(f"最佳MAPE: {test_mape:.3f}%")
-    log.info(f"最佳MSE: {test_mse:.3f}")
+    log.info("\n========[Chinese text removed]========")
+    log.info(f"[Chinese text removed]RMSE: {test_rmse:.3f}")
+    log.info(f"[Chinese text removed]R2: {test_r2:.3f}")
+    log.info(f"[Chinese text removed]R2: {test_adjusted_r2:.3f}")
+    log.info(f"[Chinese text removed]MAE: {test_mae:.3f}")
+    log.info(f"[Chinese text removed]MAPE: {test_mape:.3f}%")
+    log.info(f"[Chinese text removed]MSE: {test_mse:.3f}")
 
-    # 输出测试集结果
-    print("\n测试集结果:")
-    print(f"R2值: {test_r2:.3f}")
-    print(f"调整后R2值: {test_adjusted_r2:.3f}")
-    print(f"MSE值: {test_mse:.3f}")
-    print(f"MAE值: {test_mae:.3f}")
-    print(f"MAPE值: {test_mape:.3f}%")
-    print(f"RMSE值: {test_rmse:.3f}")
+    # [Chinese text removed]Test Set Results
+    print("\nTest Set Results:")
+    print(f"R2[Chinese text removed]: {test_r2:.3f}")
+    print(f"[Chinese text removed]R2[Chinese text removed]: {test_adjusted_r2:.3f}")
+    print(f"MSE[Chinese text removed]: {test_mse:.3f}")
+    print(f"MAE[Chinese text removed]: {test_mae:.3f}")
+    print(f"MAPE[Chinese text removed]: {test_mape:.3f}%")
+    print(f"RMSE[Chinese text removed]: {test_rmse:.3f}")
 
-    # 在测试集评估后添加
+    # [Chinese text removed]
     best_metrics = {
         'test_rmse': test_rmse,
         'test_r2': test_r2,
@@ -199,8 +199,8 @@ if __name__ == '__main__':
         'test_mse': test_mse
     }
 
-    # 保存训练好的最佳模型
+    # [Chinese text removed]
     os.makedirs("model", exist_ok=True)
     model_save_path = "model/mlp_mo_model.joblib"
     joblib.dump(best_model, model_save_path)
-    log.info(f"模型已保存至 {model_save_path}")
+    log.info(f"Model saved[Chinese text removed] {model_save_path}")
