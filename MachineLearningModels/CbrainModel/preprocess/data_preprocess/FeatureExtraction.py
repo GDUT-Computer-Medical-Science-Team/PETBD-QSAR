@@ -15,19 +15,11 @@ logger = DataLogger().getlog("FeatureExtraction")
 
 class FeatureExtraction:
     """
-    用于筛选化合物特征（描述符）的类
     """
 
     def __init__(self, X, y, mode='regression', VT_threshold=0.02, RFE_features_to_select=50, UFE_percentile=80,
                  verbose=False):
         """
-        :param X: 输入的特征数据
-        :param y: 输入的标签数据
-        :param mode: 选择回归数据或者分类数据，可选项为：'regression', 'classification'
-        :param VT_threshold: VarianceThreshold的阈值
-        :param RFE_features_to_select: RFE筛选的最终特征数
-        :param UFE_percentile: UFE筛选的百分比
-        :param verbose: 是否输出信息
         """
         self.X = X
         if type(y) is pd.DataFrame:
@@ -82,14 +74,6 @@ class FeatureExtraction:
 
     def feature_extraction(self, VT=True, TBE=True, UFE=True, RFE=True, returnIndex=False, index_dtype=str):
         """
-        连续调用特征筛选方法筛选特征
-        :param VT: 是否启用VT方法
-        :param TBE: 是否启用TBE方法
-        :param UFE: 是否启用UFE方法
-        :param RFE: 是否启用RFE方法
-        :param returnIndex: 返回筛选完成的列索引而不是数据
-        :return: 完成筛选的特征数据或者列索引
-        :param index_dtype: 返回列索引的类型
         """
         X = self.X
         if VT:
@@ -114,10 +98,6 @@ class FeatureExtraction:
 
     def get_feature_column_index(self, X, origin_X, dtype=str) -> list:
         """
-        将提取的特征列的列名或列索引提取出来
-        :param X: 完成特征提取的矩阵
-        :param origin_X: 原始矩阵
-        :param dtype: 返回的索引类型，默认为str
         :return:
         """
         if type(X) is not pd.DataFrame:
@@ -130,7 +110,7 @@ class FeatureExtraction:
         for idx, col in X.iteritems():
             for origin_idx, origin_col in origin_X.iteritems():
                 if col.equals(origin_col):
-                    column_header.append(idx)  # 这里修改为添加特征矩阵的列名或索引
+                    column_header.append(idx)
                     break
 
         return column_header

@@ -20,69 +20,54 @@ from rdkit.Chem import AllChem, DataStructs
 from padelpy import padeldescriptor
 import tempfile
 
-# 添加项目路径到Python路径
 sys.path.append('../../')
 from preprocess.data_preprocess.FeatureExtraction import FeatureExtraction
 from preprocess.data_preprocess.data_preprocess_utils import calculate_Mordred_desc
 from utils.DataLogger import DataLogger
 
-# 创建必要的目录
 os.makedirs("../../data/logBB_data/log", exist_ok=True)
 os.makedirs("../../data/logBB_data", exist_ok=True)
 os.makedirs("./cbrainmodel", exist_ok=True)
 os.makedirs("./result", exist_ok=True)
 
-# 初始化日志
 log = DataLogger(log_file=f"../../data/logBB_data/log/{datetime.now().strftime('%Y%m%d')}.log").getlog("cbrain_xgboost_18F_training")
 
-# 允许的同位素列表（用于18F检测）
 ALLOWED_ISOTOPES = {"18F", "11C", "125I", "131I", "123I", "77Br", "76Br"}
 
 def extract_18F_simple(compound_index: str) -> Optional[str]:
     """
-    从化合物索引中提取同位素信息（修正版本）
-    简化为只识别18F，更直接高效
     """
     if not isinstance(compound_index, str):
         return None
     
     text = compound_index.strip()
     
-    # 检查是否包含18F
     if "18F" in text:
         return "18F"
     else:
-        return "non-18F"  # 修复：明确标识为非18F
+        return "non-18F"
 
 def balance_18F_dataset(df: pd.DataFrame, method: str = "oversample", seed: int = 42):
     """
-    基于18F标记平衡数据集 - 原始数据+稀少类别重采样策略
-    1. 保留所有原始数据
-    2. 只对稀少的类别（非18F）进行重采样补充
-    3. 合并原始数据与重采样的稀少类别数据
     """
     log.info(f"原始数据样本数: {len(df)}")
 
-    # 1. 保留完整的原始数据
     df_original = df.copy()
 
-    # 2. 提取同位素信息
     isotopes = [extract_18F_simple(x) for x in df["compound index"].fillna("")]
     df_work = df.copy()
     df_work["isotope"] = isotopes
 
-    # 只保留能够识别同位素的行用于分析
     df_isotope = df_work[df_work["isotope"].notna()].reset_index(drop=True)
 
     if len(df_isotope) == 0:
         log.warning("没有可识别的同位素样本，返回原始数据")
         return df_original
 
-    # 创建18F二进制标签
     df_isotope["label_18F"] = (df_isotope["isotope"] == "18F").astype(int)
 
-    pos = df_isotope[df_isotope["label_18F"] == 1]  # 18F样本
-    neg = df_isotope[df_isotope["label_18F"] == 0]  # 非18F样本
+    pos = df_isotope[df_isotope["label_18F"] == 1]
+    neg = df_isotope[df_isotope["label_18F"] == 0]
 
     n_pos, n_neg = len(pos), len(neg)
     log.info(f"同位素分布 - 18F样本: {n_pos}, 非18F样本: {n_neg}")
@@ -91,19 +76,15 @@ def balance_18F_dataset(df: pd.DataFrame, method: str = "oversample", seed: int 
         log.warning("某一类别样本数为0，返回原始数据")
         return df_original
 
-    # 3. 确定需要重采样的稀少类别
     if n_pos > n_neg:
-        # 非18F是稀少类别，需要重采样
         minority_samples = neg
         target_size = n_pos
         minority_type = "非18F"
     else:
-        # 18F是稀少类别，需要重采样
         minority_samples = pos
         target_size = n_neg
         minority_type = "18F"
 
-    # 计算需要额外生成的样本数
     current_size = len(minority_samples)
     extra_needed = target_size - current_size
 
@@ -111,17 +92,14 @@ def balance_18F_dataset(df: pd.DataFrame, method: str = "oversample", seed: int 
         log.info("数据已平衡，返回原始数据")
         return df_original
 
-    # 4. 对稀少类别进行重采样
     extra_samples = minority_samples.sample(n=extra_needed, replace=True, random_state=seed)
     extra_clean = extra_samples.drop(['isotope', 'label_18F'], axis=1, errors='ignore')
 
     log.info(f"为{minority_type}类别生成额外样本: {extra_needed}个")
 
-    # 5. 将原始数据与额外样本合并
     combined_df = pd.concat([df_original, extra_clean], ignore_index=True)
     combined_df = combined_df.sample(frac=1.0, random_state=seed).reset_index(drop=True)
 
-    # 添加同位素标签到最终数据集
     combined_isotopes = [extract_18F_simple(x) for x in combined_df["compound index"].fillna("")]
     combined_df["isotope"] = combined_isotopes
     combined_df["label_18F"] = (combined_df["isotope"] == "18F").astype(int)
@@ -134,7 +112,6 @@ def balance_18F_dataset(df: pd.DataFrame, method: str = "oversample", seed: int 
 
 def calculate_morgan_fingerprints(smiles_list, radius=2, n_bits=1024):
     """
-    计算分子的Morgan指纹
     """
     fingerprints = []
     for smi in smiles_list:
@@ -148,14 +125,12 @@ def calculate_morgan_fingerprints(smiles_list, radius=2, n_bits=1024):
         DataStructs.ConvertToNumpyArray(fp, arr)
         fingerprints.append(arr)
     
-    # 转换为DataFrame
     fp_df = pd.DataFrame(fingerprints)
     fp_df.columns = [f'Morgan_FP_{i}' for i in range(n_bits)]
     return fp_df
 
 def calculate_padel_fingerprints(smiles_list):
     """
-    计算分子的PaDEL指纹
     """
     with tempfile.NamedTemporaryFile(mode='w', suffix='.smi', delete=False) as temp_file:
         for smi in smiles_list:
@@ -193,19 +168,16 @@ def calculate_padel_fingerprints(smiles_list):
 
 def adjusted_r2_score(r2, n, k):
     """
-    计算调整后的R²值
     """
     return 1 - (1 - r2) * (n - 1) / (n - k - 1)
 
 if __name__ == '__main__':
     log.info("===============启动Cbrain数据集XGBoost 18F重采样训练===============")
     
-    # 文件路径配置 - 使用PTBD_v20240912数据集
     cbrain_data_file = "../../data/PTBD_v20240912.csv"
     cbrain_features_file = "../../data/logBB_data/cbrain_xgb_ptbd_18F_balanced_features.csv"
     feature_index_file = "../../data/logBB_data/cbrain_xgb_ptbd_18F_feature_index.txt"
 
-    # 模型参数
     smile_column_name = 'SMILES'
     pred_column_name = 'brain at60min'
     RFE_features_to_select = 50
@@ -213,7 +185,6 @@ if __name__ == '__main__':
     cv_times = 10
     seed = int(time())
 
-    # 读取PTBD_v20240912数据
     if not os.path.exists(cbrain_data_file):
         raise FileNotFoundError(f"缺失PTBD_v20240912数据集: {cbrain_data_file}")
 
@@ -221,37 +192,30 @@ if __name__ == '__main__':
     df = pd.read_csv(cbrain_data_file, encoding='utf-8')
     log.info(f"原始数据形状: {df.shape}")
 
-    # 删除brain at60min和SMILES缺失的行
     df = df.dropna(subset=[pred_column_name, smile_column_name])
     log.info(f"删除{pred_column_name}和{smile_column_name}缺失值后数据形状: {df.shape}")
     
-    # 进行18F重采样平衡
     log.info("开始18F重采样平衡处理")
     df_balanced = balance_18F_dataset(df, method="oversample", seed=seed)
     log.info(f"18F重采样后数据形状: {df_balanced.shape}")
     
-    # 特征提取或读取
     if os.path.exists(cbrain_features_file):
         log.info("存在特征文件，进行读取")
         features_df = pd.read_csv(cbrain_features_file, encoding='utf-8')
         
-        # 确保特征文件与平衡后的数据对应
         if len(features_df) != len(df_balanced):
             log.info("特征文件与平衡数据不匹配，重新生成特征")
-            # 删除旧的特征文件，重新生成
             os.remove(cbrain_features_file)
             if os.path.exists(feature_index_file):
                 os.remove(feature_index_file)
         else:
             y = features_df[pred_column_name]
             X = features_df.drop([smile_column_name, pred_column_name], axis=1)
-            # 如果有标签列,也要删除
             label_cols = ['isotope', 'label_18F', 'compound index']
             for col in label_cols:
                 if col in X.columns:
                     X = X.drop(col, axis=1)
     
-    # 如果特征文件不存在或需要重新生成
     if not os.path.exists(cbrain_features_file):
         log.info("特征文件不存在，开始特征生成工作")
         
@@ -264,14 +228,11 @@ if __name__ == '__main__':
         log.info("仅使用Mordred描述符")
         X = X_mordred
         
-        # 删除SMILES列如果存在
         if smile_column_name in X.columns:
             X = X.drop(smile_column_name, axis=1)
         
         log.info(f"特征矩阵形状: {X.shape}")
         
-        # 保存特征数据
-        # 确保df_balanced包含isotope和label_18F列
         if 'isotope' not in df_balanced.columns:
             isotopes = [extract_18F_simple(x) for x in df_balanced["compound index"].fillna("")]
             df_balanced["isotope"] = isotopes
@@ -285,17 +246,14 @@ if __name__ == '__main__':
         feature_data.to_csv(cbrain_features_file, encoding='utf-8', index=False)
         log.info(f"特征数据已保存到: {cbrain_features_file}")
     
-    # 确保所有特征都是数值型
     log.info("处理非数值特征")
     X = X.apply(pd.to_numeric, errors='coerce')
     X = X.fillna(0)
     
-    # 确保所有列名都是字符串类型
     X.columns = X.columns.astype(str)
     
     log.info(f"特征处理后矩阵形状: {X.shape}")
     
-    # 特征选择
     if not os.path.exists(feature_index_file):
         log.info("进行特征选择")
         log.info(f"特征选择前矩阵形状: {X.shape}")
@@ -324,27 +282,22 @@ if __name__ == '__main__':
         X = X.iloc[:, selected_indices]
         log.info(f"特征选择后矩阵形状: {X.shape}")
     
-    # 特征归一化
     log.info("特征归一化")
     scaler = MinMaxScaler()
     X_scaled = scaler.fit_transform(X)
     X = pd.DataFrame(X_scaled, columns=X.columns)
     
-    # 数据集划分
     log.info("数据集划分")
-    # 首先划分出测试集 (10%)
     X_train_val, X_test, y_train_val, y_test = train_test_split(
         X, y, test_size=0.1, random_state=42, stratify=df_balanced['label_18F']
     )
     log.info(f"训练验证集: {len(X_train_val)}个样本, 测试集: {len(X_test)}个样本")
     
-    # 从训练验证集中划分出验证集 (10%)
     X_train, X_val, y_train, y_val = train_test_split(
         X_train_val, y_train_val, test_size=0.1, random_state=42
     )
     log.info(f"训练集: {len(X_train)}个样本, 验证集: {len(X_val)}个样本")
     
-    # 重新归一化（使用训练+验证集拟合，测试集转换）
     scaler_final = MinMaxScaler()
     X_train_val_scaled = scaler_final.fit_transform(X_train_val)
     X_test_scaled = scaler_final.transform(X_test)
@@ -352,18 +305,15 @@ if __name__ == '__main__':
     X_train_val = pd.DataFrame(X_train_val_scaled, columns=X.columns)
     X_test = pd.DataFrame(X_test_scaled, columns=X.columns)
     
-    # 更新划分
     X_train, X_val, y_train, y_val = train_test_split(
         X_train_val, y_train_val, test_size=0.1, random_state=42
     )
     
-    # 重置索引
     y_train_val = y_train_val.reset_index(drop=True)
     y_train = y_train.reset_index(drop=True)
     y_val = y_val.reset_index(drop=True)
     y_test = y_test.reset_index(drop=True)
     
-    # 超参数优化
     log.info("开始XGBoost超参数优化")
     
     def objective(trial):
@@ -396,7 +346,6 @@ if __name__ == '__main__':
     log.info(f"最佳参数: {study.best_params}")
     log.info(f"最佳R²得分: {study.best_value}")
     
-    # 使用最佳参数进行交叉验证
     log.info(f"使用最佳参数进行{cv_times}折交叉验证")
     
     best_model = XGBRegressor(**study.best_params)
@@ -411,15 +360,12 @@ if __name__ == '__main__':
         y_fold_train = y_train_val.iloc[train_idx]
         y_fold_val = y_train_val.iloc[val_idx]
         
-        # 训练模型
         best_model.fit(X_fold_train, y_fold_train, 
                       eval_set=[(X_fold_val, y_fold_val)], 
                       early_stopping_rounds=100, verbose=False)
         
-        # 预测
         y_pred_fold = best_model.predict(X_fold_val)
         
-        # 计算指标
         rmse = np.sqrt(mean_squared_error(y_fold_val, y_pred_fold))
         mse = mean_squared_error(y_fold_val, y_pred_fold)
         mae = mean_absolute_error(y_fold_val, y_pred_fold)
@@ -432,7 +378,6 @@ if __name__ == '__main__':
         cv_scores['r2'].append(r2)
         cv_scores['adj_r2'].append(adj_r2)
     
-    # 输出交叉验证结果
     log.info("========交叉验证结果========")
     log.info(f"RMSE: {np.mean(cv_scores['rmse']):.3f}±{np.std(cv_scores['rmse']):.3f}")
     log.info(f"MSE: {np.mean(cv_scores['mse']):.3f}±{np.std(cv_scores['mse']):.3f}")
@@ -440,17 +385,14 @@ if __name__ == '__main__':
     log.info(f"R²: {np.mean(cv_scores['r2']):.3f}±{np.std(cv_scores['r2']):.3f}")
     log.info(f"Adjusted R²: {np.mean(cv_scores['adj_r2']):.3f}±{np.std(cv_scores['adj_r2']):.3f}")
     
-    # 最终模型训练和评估
     log.info("训练最终模型")
     final_model = XGBRegressor(**study.best_params)
     final_model.fit(X_train, y_train)
     
-    # 各数据集预测
     y_pred_train = final_model.predict(X_train)
     y_pred_val = final_model.predict(X_val)
     y_pred_test = final_model.predict(X_test)
     
-    # 计算各数据集指标
     def calculate_metrics(y_true, y_pred, n_features):
         mse = mean_squared_error(y_true, y_pred)
         rmse = np.sqrt(mse)
@@ -468,7 +410,6 @@ if __name__ == '__main__':
     val_metrics = calculate_metrics(y_val, y_pred_val, X_val.shape[1])
     test_metrics = calculate_metrics(y_test, y_pred_test, X_test.shape[1])
     
-    # 输出最终结果
     log.info("========最终测试集结果========")
     log.info(f"MSE: {test_metrics['mse']:.4f}")
     log.info(f"RMSE: {test_metrics['rmse']:.4f}")
@@ -477,19 +418,16 @@ if __name__ == '__main__':
     log.info(f"Adjusted R²: {test_metrics['adj_r2']:.4f}")
     log.info(f"MAPE: {test_metrics['mape']:.2f}%")
     
-    # 保存模型
     model_path = "./cbrainmodel/xgb_cbrain_18F_model.joblib"
     joblib.dump(final_model, model_path)
     log.info(f"模型已保存至: {model_path}")
     
-    # 保存预测结果
     results = pd.DataFrame({
         'True_Values': y_test,
         'Predicted_Values': y_pred_test
     })
     results.to_csv('./result/xgb_cbrain_18F_results.csv', index=False)
     
-    # 保存所有数据集的预测结果到单独的CSV文件
     train_predictions_df = pd.DataFrame({
         'True_Values': y_train.values,
         'Predicted_Values': y_pred_train,
@@ -511,20 +449,17 @@ if __name__ == '__main__':
     })
     test_predictions_df.to_csv('./result/xgb_cbrain_18F_test_predictions.csv', index=False)
     
-    # 保存合并的预测结果文件
     all_predictions_df = pd.concat([train_predictions_df, val_predictions_df, test_predictions_df], 
                                    ignore_index=True)
     all_predictions_df.to_csv('./result/xgb_cbrain_18F_all_predictions.csv', index=False)
     
     log.info("所有预测CSV文件已保存:")
     
-    # 绘制散点图
     plt.figure(figsize=(10, 8))
     plt.scatter(y_train, y_pred_train, alpha=0.5, label='Training Set', color='blue', s=20)
     plt.scatter(y_val, y_pred_val, alpha=0.7, label='Validation Set', color='green', s=20)
     plt.scatter(y_test, y_pred_test, alpha=0.8, label='Test Set', color='red', s=30)
     
-    # 绘制对角线
     all_min = min(min(y_train), min(y_val), min(y_test))
     all_max = max(max(y_train), max(y_val), max(y_test))
     plt.plot([all_min, all_max], [all_min, all_max], 'k--', lw=2, alpha=0.8)
@@ -534,7 +469,6 @@ if __name__ == '__main__':
     plt.title('XGBoost Cbrain 18F-Resampled Model: Predicted vs Experimental Brain Concentration')
     plt.legend()
     
-    # 添加R²信息
     plt.text(0.05, 0.95, f'Train R² = {train_metrics["r2"]:.3f}', 
              transform=plt.gca().transAxes, fontsize=10)
     plt.text(0.05, 0.90, f'Val R² = {val_metrics["r2"]:.3f}', 
@@ -546,7 +480,6 @@ if __name__ == '__main__':
     plt.savefig('./result/xgb_cbrain_18F_scatter.png', dpi=300, bbox_inches='tight')
     plt.close()
     
-    # 保存完整实验报告
     experiment_report = {
         'experiment_info': {
             'dataset': 'PTBD_v20240912.csv',

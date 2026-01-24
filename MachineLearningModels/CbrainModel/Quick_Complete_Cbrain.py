@@ -17,7 +17,6 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def calculate_morgan_fingerprints(smiles_list, n_bits=2048):
-    """计算Morgan分子指纹"""
     from rdkit import Chem
     from rdkit.Chem import AllChem
     
@@ -38,10 +37,8 @@ def adjusted_r2_score(r2, n, k):
     return 1 - (1 - r2) * (n - 1) / (n - k - 1)
 
 def train_model(model_name, model_class, params_func):
-    """训练单个模型"""
     print(f"\n=== 训练 {model_name} ===")
     
-    # 超参数优化
     def objective(trial):
         params = params_func(trial)
         model = model_class(**params)
@@ -59,12 +56,11 @@ def train_model(model_name, model_class, params_func):
         return r2_score(y_val, y_pred)
     
     study = optuna.create_study(direction='maximize', sampler=optuna.samplers.TPESampler(seed=42))
-    study.optimize(objective, n_trials=20)  # 减少试验次数加速
+    study.optimize(objective, n_trials=20)
     
     best_params = study.best_params
     print(f"最优参数: {best_params}")
     
-    # 训练最终模型
     model = model_class(**best_params)
     if model_name in ['MLP']:
         model.fit(X_train_scaled, y_train)
@@ -80,7 +76,6 @@ def train_model(model_name, model_class, params_func):
         val_pred = model.predict(X_val)
         test_pred = model.predict(X_test)
     
-    # 评估
     def evaluate_metrics(y_true, y_pred, X_shape):
         mse = mean_squared_error(y_true, y_pred)
         rmse = np.sqrt(mse)
@@ -98,7 +93,6 @@ def train_model(model_name, model_class, params_func):
     val_metrics = evaluate_metrics(y_val, val_pred, X_val.shape)
     test_metrics = evaluate_metrics(y_test, test_pred, X_test.shape)
     
-    # 交叉验证
     if model_name in ['MLP']:
         cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='r2')
         cv_rmse = np.sqrt(-cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='neg_mean_squared_error'))
@@ -106,7 +100,6 @@ def train_model(model_name, model_class, params_func):
         cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='r2')
         cv_rmse = np.sqrt(-cross_val_score(model, X_train, y_train, cv=5, scoring='neg_mean_squared_error'))
     
-    # 保存结果
     results = {
         "experiment_info": {
             "dataset": "OrganDataAt60min.csv",
@@ -133,7 +126,6 @@ def train_model(model_name, model_class, params_func):
         }
     }
     
-    # 保存文件
     result_file = f"./result/{model_name.lower()}_cbrain_18F_report.json"
     with open(result_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
@@ -151,11 +143,9 @@ def train_model(model_name, model_class, params_func):
 if __name__ == '__main__':
     print("=== 快速完成剩余Cbrain 18F重采样模型 ===")
     
-    # 创建目录
     os.makedirs("./cbrainmodel", exist_ok=True)
     os.makedirs("./result", exist_ok=True)
     
-    # 读取数据
     data_file = "../../data/logBB_data/OrganDataAt60min.csv"
     if not os.path.exists(data_file):
         print(f"数据文件不存在: {data_file}")
@@ -165,7 +155,6 @@ if __name__ == '__main__':
     df = pd.read_csv(data_file, encoding='utf-8')
     print(f"原始数据形状: {df.shape}")
     
-    # 数据预处理
     df = df.dropna(subset=['SMILES', 'brain mean60min'])
     smiles_list = df['SMILES'].tolist()
     target = df['brain mean60min'].values
@@ -175,24 +164,20 @@ if __name__ == '__main__':
     X_combined = morgan_features
     print(f"特征形状: {X_combined.shape}")
     
-    # 18F同位素检测和平衡
     compound_indices = df.get('compound index', df.index)
     has_18f = compound_indices.astype(str).str.contains('18F', na=False)
     
     print(f"18F化合物数量: {has_18f.sum()}, 非18F化合物数量: {(~has_18f).sum()}")
     
-    # 重采样平衡数据
     from imblearn.over_sampling import RandomOverSampler
     ros = RandomOverSampler(random_state=42)
     X_balanced, y_balanced = ros.fit_resample(X_combined, target)
     
     print(f"重采样后数据形状: {X_balanced.shape}, 目标形状: {y_balanced.shape}")
     
-    # 特征选择
     variance_selector = VarianceThreshold(threshold=0.01)
     X_var_selected = variance_selector.fit_transform(X_balanced)
     
-    # RFE特征选择 - 使用简单模型加速
     from sklearn.linear_model import LinearRegression
     base_lr = LinearRegression()
     rfe = RFE(estimator=base_lr, n_features_to_select=50, step=1)
@@ -200,11 +185,9 @@ if __name__ == '__main__':
     
     print(f"最终特征数量: {X_selected.shape[1]}")
     
-    # 数据分割
     X_train, X_temp, y_train, y_temp = train_test_split(X_selected, y_balanced, test_size=0.3, random_state=42)
     X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
     
-    # 数据标准化 (仅用于MLP)
     scaler = MinMaxScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_val_scaled = scaler.transform(X_val)
@@ -212,7 +195,6 @@ if __name__ == '__main__':
     
     print(f"训练集: {X_train.shape}, 验证集: {X_val.shape}, 测试集: {X_test.shape}")
     
-    # 定义模型参数
     def mlp_params(trial):
         n_layers = trial.suggest_int('n_layers', 1, 3)
         layers = []
@@ -263,10 +245,8 @@ if __name__ == '__main__':
         
         return params
     
-    # 训练所有模型
     results = []
     
-    # 检查哪些模型还没有完成
     models_to_run = []
     if not os.path.exists("./result/mlp_cbrain_18F_report.json"):
         models_to_run.append(('MLP', MLPRegressor, mlp_params))
@@ -279,7 +259,6 @@ if __name__ == '__main__':
     
     print(f"需要运行的模型: {[m[0] for m in models_to_run]}")
     
-    # 训练每个模型
     for model_name, model_class, params_func in models_to_run:
         try:
             r2_score = train_model(model_name, model_class, params_func)
