@@ -1,0 +1,82 @@
+{
+  "experiment_info": {
+    "dataset": "PTBD_v20240912.csv",
+    "training_method": "18F balanced resampling",
+    "features": "Molecular_fingerprints (PaDEL/Morgan)",
+    "n_samples_original": 570,
+    "n_samples_balanced_training": 842,
+    "n_features": 50,
+    "seed": 42
+  },
+  "random_forest": {
+    "best_params": {
+      "n_estimators": 641,
+      "max_depth": 17,
+      "min_samples_split": 6,
+      "min_samples_leaf": 1,
+      "max_features": "sqrt",
+      "bootstrap": false,
+      "random_state": 42
+    },
+    "train_metrics": {
+      "mse": 0.1682864281601697,
+      "rmse": 0.41022728841481243,
+      "mae": 0.2684938209026954,
+      "r2": 0.9241432824065938,
+      "mape": 1966981193076.0212,
+      "adj_r2": 0.9181229079944188
+    },
+    "validation_metrics": {
+      "mse": 0.5869818838957643,
+      "rmse": 0.7661474296085345,
+      "mae": 0.46710973854178184,
+      "r2": 0.6686009125691037,
+      "mape": 1095357986009.6971,
+      "adj_r2": 0.005802737707311101
+    },
+    "test_metrics": {
+      "mse": 0.6654223105798914,
+      "rmse": 0.8157342156486336,
+      "mae": 0.5265427900386583,
+      "r2": 0.7307917990153912,
+      "mape": 1.0518119032791007,
+      "adj_r2": 0.334897385802731
+    }
+  },
+  "xgboost": {
+    "best_params": {
+      "n_estimators": 143,
+      "max_depth": 12,
+      "learning_rate": 0.17715845046256115,
+      "subsample": 0.7164517067254124,
+      "colsample_bytree": 0.8863672537109388,
+      "reg_alpha": 0.3540463766200066,
+      "reg_lambda": 21.421175395681356,
+      "random_state": 42
+    },
+    "train_metrics": {
+      "mse": 0.13391871526909135,
+      "rmse": 0.36594906103048186,
+      "mae": 0.22290020130312127,
+      "r2": 0.9396348578093857,
+      "mape": 1596199333654.0454,
+      "adj_r2": 0.9348439735085433
+    },
+    "validation_metrics": {
+      "mse": 0.7420605398582565,
+      "rmse": 0.8614293586001446,
+      "mae": 0.501711661811722,
+      "r2": 0.581046378986418,
+      "mape": 887335475092.8141,
+      "adj_r2": -0.25686086304074607
+    },
+    "test_metrics": {
+      "mse": 0.6634986585220238,
+      "rmse": 0.814554269844572,
+      "mae": 0.5215702903963187,
+      "r2": 0.7315700460046868,
+      "mape": 1.186137587415207,
+      "adj_r2": 0.33682011365863795
+    }
+  }
+}
