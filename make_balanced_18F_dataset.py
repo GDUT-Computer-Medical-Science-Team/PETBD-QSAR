@@ -96,20 +96,20 @@ def main() -> None:
     parser.add_argument(
         "--csv",
         type=Path,
-        default=Path("dataset_PETBD") / "PETBD20240906.csv",
-        help="Input CSV path (default: dataset_PETBD/PETBD20240906.csv)",
+        default=Path("dataset_PETBD") / "PTBD_v20240912.csv",
+        help="Input CSV path (default: dataset_PETBD/PTBD_v20240912.csv)",
     )
     parser.add_argument(
         "--out",
         type=Path,
-        default=Path("result") / "PETBD20240906_balanced_18F.csv",
-        help="Output balanced CSV path (default: result/PETBD20240906_balanced_18F.csv)",
+        default=Path("result") / "PTBD_v20240912_balanced_18F.csv",
+        help="Output balanced CSV path (default: result/PTBD_v20240912_balanced_18F.csv)",
     )
     parser.add_argument(
         "--report",
         type=Path,
-        default=Path("result") / "PETBD20240906_balanced_18F_report.json",
-        help="Output JSON report path (default: result/PETBD20240906_balanced_18F_report.json)",
+        default=Path("result") / "PTBD_v20240912_balanced_18F_report.json",
+        help="Output JSON report path (default: result/PTBD_v20240912_balanced_18F_report.json)",
     )
     parser.add_argument(
         "--method",

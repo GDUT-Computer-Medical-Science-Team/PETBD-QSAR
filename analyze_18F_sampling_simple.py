@@ -40,7 +40,7 @@ def analyze_dataset():
     print("="*80)
     
     # 读取数据
-    df = pd.read_csv('dataset_PETBD/PETBD20240906.csv', encoding='utf-8')
+    df = pd.read_csv('dataset_PETBD/PTBD_v20240912.csv', encoding='utf-8')
     print(f"\noriginal数据集大小: {len(df)} 个samples")
     
     # 提取同位素信息

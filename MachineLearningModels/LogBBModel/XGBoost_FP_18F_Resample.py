@@ -155,7 +155,7 @@ def main():
     np.random.seed(42)
 
     log.info("Loading PETBD dataset")
-    df = pd.read_csv("../../data/PETBD20240906.csv", encoding='utf-8')
+    df = pd.read_csv("../../dataset_PETBD/PTBD_v20240912.csv", encoding='utf-8')
     log.info(f"Original data shape: {df.shape}")
 
     df = df.dropna(subset=['logBB'])

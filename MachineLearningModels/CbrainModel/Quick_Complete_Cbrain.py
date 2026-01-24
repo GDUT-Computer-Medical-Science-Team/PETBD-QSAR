@@ -156,7 +156,7 @@ if __name__ == '__main__':
     os.makedirs("./result", exist_ok=True)
     
     # 读取数据
-    data_file = "../../data/OrganDataAt60min.csv"
+    data_file = "../../data/logBB_data/OrganDataAt60min.csv"
     if not os.path.exists(data_file):
         print(f"数据文件不存在: {data_file}")
         sys.exit(1)

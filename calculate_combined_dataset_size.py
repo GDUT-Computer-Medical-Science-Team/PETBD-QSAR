@@ -24,7 +24,7 @@ def extract_isotope_strict(compound_index):
 print("\n1. LogBB (PETBD) 数据集分析:")
 print("-"*40)
 
-df_petbd = pd.read_csv('dataset_PETBD/PETBD20240906.csv', encoding='utf-8')
+df_petbd = pd.read_csv('dataset_PETBD/PTBD_v20240912.csv', encoding='utf-8')
 df_petbd_valid = df_petbd.dropna(subset=['logBB'])
 print(f"original有效samples数: {len(df_petbd_valid)}")
 
