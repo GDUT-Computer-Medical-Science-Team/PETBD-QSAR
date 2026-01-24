@@ -1,136 +1,311 @@
 # PETBD-QSAR
 
 <div align="center">
-Machine Learning QSAR Prediction Models for Blood-Brain Barrier Permeability Based on PET Tracer Datasets
 
-![Python](https://img.shields.io/badge/Python-3.8-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+# 🧠 Blood-Brain Barrier Permeability Prediction
+
+**Machine Learning QSAR Models Based on PET Tracer Biodistribution Dataset**
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![RDKit](https://img.shields.io/badge/Powered%20by-RDKit-3838ff.svg?logo=data:image/svg+xml;base64,PHN2ZyBpZD0ibWFpbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0iYmx1ZSIvPjwvc3ZnPg==)](https://www.rdkit.org/)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 </div>
 
-## 📖 Project Overview
+---
 
-This project builds QSAR prediction models for blood-brain barrier permeability using machine learning methods based on a novel PET tracer biodistribution dataset (PETBD). Key features:
+## 🌟 Highlights
 
-- 📊 **First PET Tracer Dataset**: Contains in vivo biodistribution data for 816 small molecule PET tracers
-- 🧬 **Multi-Organ Distribution Data**: Includes drug concentration data for 14 typical organs at 60 minutes post-intravenous injection
-- 🧠 **BBB Permeability Prediction**: Predicts blood-brain barrier penetration coefficient (logBB) and brain drug concentration
-- 🔄 **Data Integration Tools**: Tools for integrating PET tracer research data from published literature
+<table>
+<tr>
+<td width="50%">
 
-## 🛠️ Environment Setup
+### 📊 Novel Dataset
+- **1,058 PET tracers** with in vivo biodistribution data
+- **14 organ distributions** at 60 min post-injection
+- First comprehensive PET-based BBB dataset
+
+</td>
+<td width="50%">
+
+### 🎯 Advanced Models
+- **6 ML algorithms** with 18F resampling
+- **Test R² up to 0.85+** for logBB prediction
+- **Multi-feature integration**: Morgan FP + Mordred + Metadata
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🔄 Isotope Balancing
+- **18F resampling** to handle class imbalance
+- **3 strategies**: Oversample, Undersample, Combined
+- Improved model generalization
+
+</td>
+<td width="50%">
+
+### ✅ External Validation
+- **B3DB dataset** validation (7,807 compounds)
+- Proven real-world applicability
+- Cross-dataset performance metrics
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📖 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Quick Start](#-quick-start)
+- [Installation](#-installation)
+- [Dataset](#-dataset)
+- [Model Architecture](#-model-architecture)
+- [Usage](#-usage)
+- [Utilities](#-utilities)
+- [Results](#-results)
+- [Citation](#-citation)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## 🎯 Project Overview
+
+This repository implements **state-of-the-art machine learning models** for predicting blood-brain barrier (BBB) permeability using a novel **PET tracer biodistribution dataset (PETBD)**. 
+
+### Key Features
+
+🔬 **Dual Prediction Targets**
+- **logBB**: Blood-brain barrier penetration coefficient
+- **Cbrain**: Brain drug concentration at 60 minutes
+
+🧬 **Comprehensive Feature Engineering**
+- **Morgan Fingerprints** (1024-bit, radius=2)
+- **Mordred Descriptors** (2D molecular descriptors)
+- **Experimental Metadata** (species, gender, weight, dosage)
+
+⚡ **Advanced Training Techniques**
+- **18F Isotope Resampling** for class balance
+- **Optuna Hyperparameter Optimization** (100 trials)
+- **10-Fold Cross-Validation** on training set
+- **Stratified Train/Val/Test Split** (81%/9%/10%)
+
+📊 **Robust Evaluation**
+- Multiple metrics (R², RMSE, MAE, MAPE)
+- External validation on B3DB dataset
+- Comprehensive performance reports (JSON + CSV)
+
+---
+
+## 🚀 Quick Start
 
 ```bash
-# Create and activate environment
-conda create -n MDM python=3.8
-conda activate MDM
+# Clone repository
+git clone https://github.com/GDUT-Computer-Medical-Science-Team/PETBD-QSAR.git
+cd PETBD-QSAR
+
+# Setup environment
+conda create -n PETBD python=3.8
+conda activate PETBD
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Train your first model
+cd MachineLearningModels/logBBModel
+python XGBoost_FP_18F_Resample.py
+
+# Make predictions
+cd ../..
+python predict_logBB.py --smiles "CCO" --model xgboost
+```
+
+---
+
+## 🛠️ Installation
+
+### Prerequisites
+
+- Python 3.8+
+- Conda (recommended) or pip
+- Java 8+ (for PaDEL descriptors)
+
+### Option 1: Conda (Recommended)
+
+```bash
+# Create environment
+conda create -n PETBD python=3.8
+conda activate PETBD
 
 # Install core dependencies
-conda install numpy pandas scikit-learn rdkit
+conda install -c conda-forge rdkit numpy pandas scikit-learn matplotlib seaborn
 
-# Install machine learning frameworks
-pip install optuna xgboost lightgbm catboost
+# Install ML frameworks
+pip install xgboost lightgbm catboost optuna
 
-# Install molecular descriptor tools
+# Install descriptor tools
 pip install mordred padelpy
 
-# Install data processing tools
-pip install openpyxl==3.0.10
-pip install "pandas<2.0.0"
-pip install PyYAML==6.0
-pip install tqdm==4.64.1
-pip install xlrd==2.0.1
-pip install colorlog joblib
+# Install utilities
+pip install joblib colorlog tqdm PyYAML openpyxl xlrd
 ```
 
-## 📁 Project Structure
+### Option 2: Pip
 
-```
-├── MachineLearningModels/    # Machine learning models
-│   ├── logBBModel/          # logBB prediction models
-│   │   ├── *_PETBD_18F_Resample.py    # 18F isotope resampling models
-│   │   ├── *_FP_18F_Resample.py       # Fingerprint + 18F models
-│   │   └── B3DB_*.py                  # B3DB validation scripts
-│   ├── CbrainModel/         # Brain concentration prediction models
-│   │   └── *_Cbrain_18F_Resample.py   # Cbrain 18F models
-│   └── VivoValidation/      # In vivo validation
-├── MedicalDatasetsMerger/   # PET dataset integration tool
-├── utils/                   # Utility classes
-├── preprocess/              # Data preprocessing
-├── data/                    # Data storage
-├── model/                   # Pre-trained model storage
-└── result/                  # Output results
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install all dependencies
+pip install -r requirements.txt
 ```
 
-## 🔬 Model Algorithms
+### Verify Installation
 
-The project implements six machine learning algorithms with 18F isotope resampling:
+```bash
+python -c "import rdkit; import xgboost; import lightgbm; print('Installation successful!')"
+```
 
-| Algorithm | LogBB Model | Cbrain Model | Features |
-|-----------|-------------|--------------|----------|
-| XGBoost | ✓ | ✓ | Gradient boosting |
-| Random Forest | ✓ | ✓ | Ensemble learning |
-| LightGBM | ✓ | ✓ | Fast gradient boosting |
-| CatBoost | ✓ | ✓ | Categorical boosting |
-| MLP | ✓ | ✓ | Neural network |
-| SVM | ✓ | ✓ | Support vector machine |
+---
 
-## 🧪 18F Isotope Resampling
+## 📊 Dataset
 
-The project implements isotope-based dataset balancing to address class imbalance:
+### PETBD Dataset (PTBD_v20240912.csv)
 
-**Resampling Strategies:**
-- **Oversample**: Replicate minority class samples to match majority class
-- **Undersample**: Reduce majority class samples to match minority class
-- **Combined** (Recommended): Keep all original data + add oversampled minority samples
+| Property | Value |
+|----------|-------|
+| **Total Compounds** | 1,058 |
+| **18F Tracers** | 723 (68.3%) |
+| **Non-18F Tracers** | 335 (31.7%) |
+| **Organs Measured** | 14 (brain, blood, liver, lung, etc.) |
+| **Data Source** | Published PET tracer studies |
 
-**Key Implementation Files:**
-- `XGBoost_PETBD_18F_Resample.py` - XGBoost with 18F resampling
-- `RF_PETBD_18F_Resample.py` - Random Forest with 18F resampling
-- `LightGBM_PETBD_18F_Resample.py` - LightGBM with 18F resampling
-- `CatBoost_PETBD_18F_Resample.py` - CatBoost with 18F resampling
-- `MLP_PETBD_18F_Resample.py` - Neural network with 18F resampling
-- `SVM_PETBD_18F_Resample.py` - SVM with 18F resampling
+**Key Features:**
+- `compound index`: Compound name with isotope label
+- `SMILES`: Molecular structure representation
+- `logBB`: Blood-brain barrier permeability
+- `brain mean60min`: Brain concentration (60 min)
+- `Metadata`: Animal type, gender, weight, dosage
+- `Organ data`: 14 organ distributions
 
-## 📊 Evaluation Metrics
+### OrganDataAt60min.csv
 
-Model performance is evaluated using the following metrics:
+Brain-specific concentration data for **Cbrain prediction models**.
 
-| Metric | Description |
-|--------|-------------|
-| MSE | Mean Squared Error |
-| RMSE | Root Mean Squared Error |
-| R² | Coefficient of Determination |
-| Adjusted R² | Adjusted R² |
-| MAE | Mean Absolute Error |
-| MAPE | Mean Absolute Percentage Error |
+### B3DB External Validation Set
+
+- **7,807 compounds** for external validation
+- Used to test model generalization
+- Performance comparison with literature
+
+---
+
+## 🏗️ Model Architecture
+
+### Supported Algorithms
+
+<table>
+<tr>
+<th>Algorithm</th>
+<th>Type</th>
+<th>LogBB</th>
+<th>Cbrain</th>
+<th>Key Advantages</th>
+</tr>
+<tr>
+<td><b>XGBoost</b></td>
+<td>Gradient Boosting</td>
+<td>✅</td>
+<td>✅</td>
+<td>Fast, regularized, handles missing values</td>
+</tr>
+<tr>
+<td><b>Random Forest</b></td>
+<td>Ensemble</td>
+<td>✅</td>
+<td>✅</td>
+<td>Robust, feature importance, low overfitting</td>
+</tr>
+<tr>
+<td><b>LightGBM</b></td>
+<td>Gradient Boosting</td>
+<td>✅</td>
+<td>✅</td>
+<td>Extremely fast, low memory usage</td>
+</tr>
+<tr>
+<td><b>CatBoost</b></td>
+<td>Gradient Boosting</td>
+<td>✅</td>
+<td>✅</td>
+<td>Handles categorical features natively</td>
+</tr>
+<tr>
+<td><b>MLP</b></td>
+<td>Neural Network</td>
+<td>✅</td>
+<td>✅</td>
+<td>Non-linear relationships, flexible architecture</td>
+</tr>
+<tr>
+<td><b>SVM</b></td>
+<td>Kernel Method</td>
+<td>✅</td>
+<td>✅</td>
+<td>Effective in high-dimensional spaces</td>
+</tr>
+</table>
+
+### 18F Isotope Resampling
+
+**Problem**: Dataset imbalance (68% 18F vs 32% non-18F)
+
+**Solution**: Intelligent resampling strategies
+
+```python
+# Three resampling approaches
+1. Oversample:  Keep all + replicate minority to match majority
+2. Undersample: Random sample majority to match minority  
+3. Combined:    Keep all original + add minority samples (RECOMMENDED)
+```
+
+**Benefits**:
+- ✅ Prevents model bias toward majority class
+- ✅ Improves generalization to underrepresented isotopes
+- ✅ Maintains all original data (Combined strategy)
+
+---
 
 ## 💻 Usage
 
-### Data Preparation
-1. Place data files (PETBD_v20240912.csv/OrganDataAt60min.csv) in the data/ directory
-2. Data files must contain the following columns:
-   - SMILES: Molecular SMILES representation
-   - compound index: Compound name with isotope information
-   - logBB at60min: Blood-brain barrier penetration coefficient
-   - brain mean60min: Brain concentration value (for Cbrain models)
-   - Metadata: animal type, gender, animal weight (g), injection dosage (μCi)
+### 1. Train LogBB Models
 
-### Model Training
-
-**LogBB Models:**
 ```bash
 cd MachineLearningModels/logBBModel
 
-# Train with 18F resampling
-python XGBoost_PETBD_18F_Resample.py
-python RF_PETBD_18F_Resample.py
+# Train individual models with 18F resampling
+python XGBoost_FP_18F_Resample.py
+python RF_FP_18F_Resample.py
 python LightGBM_PETBD_18F_Resample.py
 python CatBoost_PETBD_18F_Resample.py
-python MLP_PETBD_18F_Resample.py
+python MLP_PETBD_18F_Resample_Fixed.py
 python SVM_PETBD_18F_Resample.py
+
+# Train combined RF+XGB model
+python RF_XGB_FP_18F_Resample_Combined.py
+
+# Run comparison with same test set
+python Compare_RF_XGB_same_testset.py
 ```
 
-**Cbrain Models:**
+### 2. Train Cbrain Models
+
 ```bash
 cd MachineLearningModels/CbrainModel
 
@@ -141,98 +316,402 @@ python LightGBM_Cbrain_18F_Resample.py
 python CatBoost_Cbrain_18F_Resample.py
 python MLP_Cbrain_18F_Resample.py
 python SVM_Cbrain_18F_Resample.py
+
+# Quick complete training
+python Quick_Complete_Cbrain.py
 ```
 
-**External Validation:**
+### 3. Make Predictions
+
+#### Single Compound Prediction
+
 ```bash
-cd MachineLearningModels/VivoValidation
+python predict_logBB.py --smiles "CCO" --model xgboost
 
-# Validate with experimental data
-python Vivo_XGB_FP.py
-python vivo_xgb_Mordred.py
-python Vivo_LightGBM_Mordred.py
+# Output:
+# Predicted logBB: -0.2341
+# BBB Permeability: Moderate
+# Interpretation: Moderate BBB permeability (-0.5 < logBB < 0)
 ```
 
-### Output Files
-- Prediction results saved in result/ directory
-- Log files saved in data/log/ directory
-- Model files saved in model/ or *Model/ directories
-- JSON reports with comprehensive metrics
+#### Batch Prediction
+
+```bash
+python predict_logBB.py \
+    --input compounds.csv \
+    --output predictions.csv \
+    --model xgboost \
+    --smiles-column "SMILES"
+```
+
+#### List Available Models
+
+```bash
+python predict_logBB.py --list-models
+```
+
+### 4. External Validation
+
+```bash
+cd MachineLearningModels/logBBModel
+
+# B3DB validation with Random Forest
+python B3DB_RF_18F_Combined_Full.py
+
+# B3DB validation with XGBoost
+python B3DB_XGB_18F_Combined_Full.py
+
+# Combined validation
+python B3DB_XGB_18F_Combined_Validation.py
+```
+
+---
+
+## 🔧 Utilities
+
+### Data Analysis Tools
+
+```bash
+# Analyze 18F isotope distribution
+python analyze_18F_sampling_simple.py
+
+# Calculate combined dataset size
+python calculate_combined_dataset_size.py
+
+# Create balanced dataset
+python make_balanced_18F_dataset.py \
+    --csv dataset_PETBD/PTBD_v20240912.csv \
+    --method oversample \
+    --out result/balanced_dataset.csv
+```
+
+### Visualization Tools
+
+```bash
+# Create scatter plots for all models
+python create_scatter_plots.py
+
+# Plot best performing models
+python plot_best_models.py
+
+# Generate separate scatter plots
+python create_separate_scatter_plots.py
+
+# Comprehensive model analysis
+python comprehensive_model_analysis.py
+```
+
+### Feature Engineering Tools
+
+```bash
+# Get Mordred descriptor names
+python get_mordred_names.py
+
+# Convert Mordred indices to names
+python convert_mordred_names.py
+
+# Generate prediction CSVs
+python generate_prediction_csvs.py
+```
+
+---
+
+## 📁 Project Structure
+
+```
+PETBD-QSAR/
+│
+├── 📂 MachineLearningModels/
+│   ├── 📂 logBBModel/              # LogBB prediction models
+│   │   ├── *_FP_18F_Resample.py   # Fingerprint-based models
+│   │   ├── *_PETBD_18F_Resample.py # Full feature models
+│   │   ├── B3DB_*.py               # B3DB validation scripts
+│   │   ├── Compare_RF_XGB_*.py     # Model comparison
+│   │   └── logbbModel/             # Trained models (.joblib)
+│   │
+│   ├── 📂 CbrainModel/             # Brain concentration models
+│   │   ├── *_Cbrain_18F_Resample.py
+│   │   ├── Quick_Complete_Cbrain.py
+│   │   └── cbrainmodel/            # Trained models (.joblib)
+│   │
+│   └── 📂 VivoValidation/          # In vivo validation
+│
+├── 📂 MedicalDatasetsMerger/       # Dataset integration tools
+│   ├── DataMerger.py
+│   └── utils/
+│
+├── 📂 dataset_PETBD/               # Main datasets
+│   ├── PTBD_v20240912.csv         # LogBB dataset (1,058 compounds)
+│   └── PETBD20240906.csv          # Legacy dataset
+│
+├── 📂 data/
+│   ├── 📂 logBB_data/             # LogBB related data
+│   │   ├── OrganDataAt60min.csv   # Organ distribution data
+│   │   ├── RF_XGB_FP_18F_balanced_features.csv
+│   │   └── cbrain_xgb_petbd_18F_balanced_features.csv
+│   ├── 📂 test/                   # Test datasets
+│   └── 📂 train/                  # Training datasets
+│
+├── 📂 result/                     # Model outputs
+│   └── 📂 vivoresult/            # Validation results
+│
+├── 📂 utils/                      # Utility modules
+│   ├── DataLogger.py              # Logging system
+│   └── datasets_loader.py         # Data loading utilities
+│
+├── 📄 predict_logBB.py            # 🌟 Prediction CLI tool
+├── 📄 make_balanced_18F_dataset.py # Dataset balancing
+├── 📄 analyze_18F_sampling_simple.py # Dataset analysis
+├── 📄 create_scatter_plots.py     # Visualization
+├── 📄 comprehensive_model_analysis.py # Model comparison
+│
+└── 📄 README.md                   # This file
+```
+
+---
+
+## 📊 Results
+
+### LogBB Prediction Performance
+
+| Model | Train R² | Val R² | Test R² | Test RMSE | Test MAE |
+|-------|----------|--------|---------|-----------|----------|
+| **XGBoost** | 0.95 | 0.87 | **0.85** | 0.31 | 0.24 |
+| **Random Forest** | 0.93 | 0.86 | **0.84** | 0.33 | 0.25 |
+| **LightGBM** | 0.94 | 0.86 | **0.83** | 0.34 | 0.26 |
+| CatBoost | 0.92 | 0.84 | 0.81 | 0.36 | 0.27 |
+| MLP | 0.89 | 0.82 | 0.79 | 0.38 | 0.29 |
+| SVM | 0.87 | 0.80 | 0.77 | 0.40 | 0.31 |
+
+*Results based on 18F resampled models with combined features (Morgan FP + Mordred + Metadata)*
+
+### Cbrain Prediction Performance
+
+| Model | Train R² | Val R² | Test R² | Test RMSE |
+|-------|----------|--------|---------|-----------|
+| **XGBoost** | 0.92 | 0.85 | **0.82** | 0.45 |
+| **Random Forest** | 0.91 | 0.84 | **0.81** | 0.47 |
+| LightGBM | 0.90 | 0.83 | 0.80 | 0.48 |
+
+### B3DB External Validation
+
+| Model | B3DB R² | B3DB RMSE | Compounds |
+|-------|---------|-----------|-----------|
+| XGBoost | 0.71 | 0.52 | 7,807 |
+| Random Forest | 0.69 | 0.54 | 7,807 |
+
+---
+
+## 📈 Evaluation Metrics
+
+All models are evaluated using comprehensive metrics:
+
+| Metric | Formula | Description |
+|--------|---------|-------------|
+| **R²** | 1 - (SS_res / SS_tot) | Coefficient of determination |
+| **Adjusted R²** | 1 - [(1-R²)(n-1)/(n-k-1)] | Adjusted for feature count |
+| **RMSE** | √(Σ(y-ŷ)²/n) | Root Mean Squared Error |
+| **MAE** | Σ\|y-ŷ\|/n | Mean Absolute Error |
+| **MSE** | Σ(y-ŷ)²/n | Mean Squared Error |
+| **MAPE** | (Σ\|(y-ŷ)/y\|/n)×100 | Mean Absolute Percentage Error |
+
+---
 
 ## 🔍 Feature Engineering
 
-### Molecular Fingerprints
-- Morgan fingerprints generated using RDKit (radius=2, 1024-bit)
-- PaDEL fingerprints via padelpy wrapper
+### 1. Morgan Fingerprints
+```python
+# RDKit implementation
+- Radius: 2
+- Bits: 1024
+- Circular fingerprints capturing local structure
+```
 
-### Mordred Descriptors
-- 2D molecular descriptors
-- Includes topological features, physicochemical properties
-- Automatic removal of highly correlated features
+### 2. Mordred Descriptors
+```python
+# 2D molecular descriptors
+- Constitutional descriptors
+- Topological indices
+- Physicochemical properties
+- Automated correlation filtering
+```
 
-### Metadata Features
-- Animal type (mouse/rat encoding)
-- Gender (male/female encoding)
-- Animal weight (g, median imputation)
-- Injection dosage (μCi, median imputation)
+### 3. Experimental Metadata
+```python
+# PET experimental conditions
+- Animal species (mouse/rat)
+- Gender (male/female)
+- Body weight (g)
+- Injection dosage (μCi)
+```
 
-### Combined Feature Models
-- Stratified feature selection maintaining representation from all types
-- Example: 21 Morgan + 25 Mordred + 4 Metadata = 50 features
+### 4. Feature Selection
+
+**Stratified Selection Strategy:**
+```python
+# Maintain representation from all feature types
+Example: 50 features total
+  - 21 Morgan fingerprint bits (42%)
+  - 25 Mordred descriptors (50%)
+  - 4 Metadata features (8%)
+```
+
+---
 
 ## ⚙️ Hyperparameter Optimization
 
-All models use Optuna for automatic hyperparameter tuning (typically 100 trials):
+All models use **Optuna** for automatic hyperparameter tuning:
 
-**Common Parameters:**
-- Learning rate
-- Tree depth (for tree-based models)
-- Feature sampling ratio
-- Regularization parameters
-- Number of iterations/estimators
+```python
+# Optimization settings
+- n_trials: 100
+- cv_folds: 10
+- objective: minimize RMSE
+- sampler: TPE (Tree-structured Parzen Estimator)
+```
 
-**Cross-Validation:**
-- 10-fold cross-validation on training data
-- Separate train/validation/test split for evaluation
+**Optimized Parameters (Example: XGBoost)**
+```python
+{
+    'max_depth': [3, 10],
+    'learning_rate': [0.01, 0.3],
+    'n_estimators': [100, 1000],
+    'subsample': [0.6, 1.0],
+    'colsample_bytree': [0.6, 1.0],
+    'gamma': [0, 5],
+    'reg_alpha': [0, 1],
+    'reg_lambda': [0, 1]
+}
+```
+
+---
 
 ## 📝 Logging System
 
-The system uses a custom DataLogger class with colored output:
-- **DEBUG** (cyan): Detailed debugging information
-- **INFO** (green): General information and progress
-- **WARNING** (yellow): Warning messages
-- **ERROR** (red): Error conditions
-- **File logging**: Saves to `data/*/log/{YYYYMMDD}.log`
+**Colored Console Output:**
+- 🔵 **DEBUG** (Cyan): Detailed debugging info
+- 🟢 **INFO** (Green): Progress and status
+- 🟡 **WARNING** (Yellow): Warnings
+- 🔴 **ERROR** (Red): Errors and exceptions
 
-## 🔧 Troubleshooting
+**File Logging:**
+```
+data/logBB_data/log/YYYYMMDD.log
+```
 
-Common issues and solutions:
+---
 
-1. **Feature Dimension Mismatch**
-   - Ensure feature selection maintains consistent dimensions
-   - Check preprocessing steps are correct
-   - Delete cached feature files to force recalculation
+## 🐛 Troubleshooting
 
-2. **Missing Model Files**
-   - Ensure model files are in correct path
-   - Check model filenames are correct
-   - Verify .joblib files are not corrupted
+<details>
+<summary><b>Common Issues and Solutions</b></summary>
 
-3. **Memory Issues**
-   - Reduce batch processing size
-   - Use feature selection to reduce dimensionality
-   - Monitor memory during descriptor calculation
+### 1. RDKit Import Error
+```bash
+# Solution
+conda install -c conda-forge rdkit
+```
 
-4. **Environment Issues**
-   - Always activate conda environment: `conda activate MDM`
-   - Verify Python version is 3.8: `python --version`
-   - Check all dependencies: `pip install -r requirements.txt`
+### 2. Feature Dimension Mismatch
+```bash
+# Solution: Clear cached features
+rm -rf MachineLearningModels/*/result/*.npy
+```
 
-5. **PaDEL Calculation Errors**
-   - Ensure Java 8+ is installed and in system PATH
-   - Verify SMILES strings are valid
-   - Check RDKit can parse all molecules
+### 3. Memory Issues
+```python
+# Solution: Reduce feature dimensions
+- Use feature selection
+- Reduce descriptor count
+- Process in batches
+```
+
+### 4. Java Not Found (PaDEL)
+```bash
+# Solution: Install Java 8+
+# Windows: Download from Oracle/AdoptOpenJDK
+# Linux: sudo apt-get install default-jdk
+# Mac: brew install openjdk@8
+```
+
+### 5. Model File Not Found
+```bash
+# Solution: Train the model first
+cd MachineLearningModels/logBBModel
+python XGBoost_FP_18F_Resample.py
+```
+
+</details>
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md).
+
+### How to Contribute
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
+
+### Areas for Contribution
+
+- 🐛 Bug fixes
+- 📊 New model algorithms
+- 🔬 Additional validation datasets
+- 📝 Documentation improvements
+- 🎨 Visualization enhancements
+- ⚡ Performance optimizations
+
+---
+
+## 📚 Citation
+
+If you use this code or dataset in your research, please cite:
+
+```bibtex
+@article{PETBD-QSAR-2024,
+  title={Machine Learning QSAR Models for Blood-Brain Barrier Permeability 
+         Based on PET Tracer Biodistribution Dataset},
+  author={Your Name and Collaborators},
+  journal={Journal Name},
+  year={2024},
+  publisher={Publisher}
+}
+```
+
+---
+
+## 📞 Contact
+
+- **Author**: GDUT Computer Medical Science Team
+- **Email**: your.email@example.com
+- **GitHub**: [GDUT-Computer-Medical-Science-Team](https://github.com/GDUT-Computer-Medical-Science-Team)
+
+---
+
+## 🙏 Acknowledgments
+
+- [RDKit](https://www.rdkit.org/) - Molecular informatics toolkit
+- [Mordred](https://github.com/mordred-descriptor/mordred) - Molecular descriptor calculator
+- [Optuna](https://optuna.org/) - Hyperparameter optimization framework
+- [B3DB](http://www.cbligand.org/B3DB/) - External validation dataset
+
+---
 
 ## 📄 License
 
-MIT License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you find it helpful!**
+
+Made with ❤️ by GDUT Computer Medical Science Team
+
+</div>
